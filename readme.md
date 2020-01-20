@@ -10,7 +10,7 @@
 ## Download and Install
 
 1. ``` git clone https://github.com/audhchh21/baiyok2.git ```
-2. Create file ``` .env ``` insite to project and copy 
+2. Create file ``` .env ``` in folder project and copy code to file ``` .env ```
 
     ```.env
     APP_NAME=Laravel
