@@ -9,4 +9,4 @@
 
 ## Download and Install
 
-- 1. ``` git clone https://github.com/audhchh21/baiyok2.git ```
+1. ``` git clone https://github.com/audhchh21/baiyok2.git ```
