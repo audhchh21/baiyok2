@@ -15,7 +15,12 @@ class CreateInspectionsTable extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('plan_id')->nullable();
+            $table->dateTime('date')->nullable();
+            $table->string('status')->default('0');
             $table->timestamps();
+
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
         });
     }
 

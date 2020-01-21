@@ -15,7 +15,10 @@ class CreateDistrictsTable extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name')->unique()->nullable();
+            $table->unsignedBigInteger('province_id')->nullable();
+
+            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,7 @@ class CreateFoodtestkitsTable extends Migration
     {
         Schema::create('foodtestkits', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name')->unique()->nullable();
         });
     }
 

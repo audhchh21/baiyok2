@@ -7,4 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Inspection extends Model
 {
     //
+    protected $table = 'inspections';
+
+    //
+    protected $primaryKey = 'id';
+
+    //
+    protected $fillable = [
+        'plan_id',
+        'date',
+        'status'
+    ];
 }

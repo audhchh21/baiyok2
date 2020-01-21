@@ -15,7 +15,11 @@ class CreateSubdistrictsTable extends Migration
     {
         Schema::create('subdistricts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name')->unique()->nullable();
+            $table->integer('zip_code')->nullable();
+            $table->unsignedBigInteger('district_id')->nullable();
+
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
         });
     }
 

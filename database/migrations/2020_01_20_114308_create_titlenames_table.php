@@ -15,7 +15,7 @@ class CreateTitlenamesTable extends Migration
     {
         Schema::create('titlenames', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->string('name')->unique()->nullable();
         });
     }
 

@@ -1,11 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.guest')
+
+@section('titlepage', 'เข้าสู่ระบบ')
+
+@push('style')
+
+@endpush
+
+@push('javascript')
+
+@endpush
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('Reset Password')}}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">

@@ -1,4 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.guest')
+
+@section('titlepage', 'เข้าสู่ระบบ')
+
+@push('style')
+
+@endpush
+
+@push('javascript')
+
+@endpush
 
 @section('content')
 <div class="container">

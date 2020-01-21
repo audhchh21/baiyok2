@@ -2,71 +2,78 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use App\User;
+use App\Titlename;
+use App\Office;
+
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $titlename = Titlename::all();
+        $office = Office::all();
+        return view('auth.register',[
+            'titlenames' => $titlename,
+            'offices' => $office
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    protected function validator(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        return Validator::make($data, [
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'size:10'],
         ]);
     }
+
+    public function register(Request $request)
+    {
+        $password = Hash::make($request->password);
+
+        $user = new User;
+        $user->email = $request->email;
+        $user->password = $password;
+        $user->f_name = $request->f_name;
+        $user->l_name = $request->l_name;
+        $user->phone = $request->phone;
+        $user->office_id = $request->office_id;
+        $user->type = 'User';
+        $user->status  = '0';
+        $user->save();
+
+        //login as well.
+        Auth::login($user,true);
+    }
+
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //         'titlename_id' => $data['titlename_id'],
+    //         'f_name' => $data['f_name'],
+    //         'l_name' => $data['l_name'],
+    //         'phone' => $data['phone'],
+    //         'office_id' => $data['office_id'],
+    //         'type' => 'User',
+    //         'Status' => '0'
+    //     ]);
+    // }
 }
