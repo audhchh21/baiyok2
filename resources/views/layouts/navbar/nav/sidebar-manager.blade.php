@@ -14,45 +14,15 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('manager.dashboard') }}">
                     <i class="material-icons">edit</i>
-                    <span>Blog Dashboard</span>
+                    <span>{{ __('กราฟ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">vertical_split</i>
-                    <span>Blog Posts</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">note_add</i>
-                    <span>Add New Post</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">view_module</i>
-                    <span>Forms &amp; Components</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">table_chart</i>
-                    <span>Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">person</i>
-                    <span>User Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="material-icons">error</i>
-                    <span>Errors</span>
+                <a class="nav-link " href="{{ route('manager.profile') }}">
+                    <i class="material-icons">edit</i>
+                    <span>{{ __('โปรไฟล์ผู้ใช้') }}</span>
                 </a>
             </li>
         </ul>

@@ -14,37 +14,37 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.dashboard') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('กราฟ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.titlename') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('คำนำหน้าชื่อ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.province') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('จัดการจังหวัด') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.office') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('หน่วยงาน') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.user') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('จัดการบัญชีผู้ใช่') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('admin.profile') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('โปรไฟล์ผู้ใช้') }}</span>
                 </a>

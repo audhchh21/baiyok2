@@ -14,49 +14,49 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.dashboard') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('กราฟ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.shop') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ข้อมูลร้านค้า') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.foodsample') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ข้อมูลชุดทดสอบ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.foodsamplesource') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ข้อมูลตัวอย่างอาหาร') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.foodtestkit') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.plan') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('แผนงานตรวจสอบสารปนเปิ้อน') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.inspection') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ผลการตรวจสอบสารปนเปิ้อน') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{ route('member.profile') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('โปรไฟล์ผู้ใช้') }}</span>
                 </a>
