@@ -10,13 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    //
+    // Table
     protected $table = 'users';
 
-    //
+    // PrimaryKey
     protected $primaryKey = 'id';
 
-    //
+    // fill structure
     protected $fillable = [
         'email',
         'password',
@@ -29,13 +29,31 @@ class User extends Authenticatable
         'status'
     ];
 
-    //
+    // Hidden Password
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    //
+    // email_verified_at
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Fullname User
+    public function getFullnameAttribute()
+    {
+        return $this->titlenames->name.''.$this->f_name.' '.$this->l_name;
+    }
+
+    // Join Table Titlename
+    public function titlenames()
+    {
+        return $this->belongsTo('App\Titlename', 'office_id', 'id');
+    }
+
+    // Join Table Office
+    public function offices()
+    {
+        return $this->belongsTo('App\Office', 'office_id', 'id');
+    }
 }

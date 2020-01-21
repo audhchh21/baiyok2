@@ -14,11 +14,12 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <a href="{{ route('login') }}" class="btn btn-sm btn-dark mb-3"><i class="fas fa-angle-double-left"></i> {{  __('ย้อนกลับ')   }}</a>
             <div class="card pt-3 mb-5">
                 <div class="card-header border-top h3 text-center">{{ __('ลงทะเบียน') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ url('register') }}">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-xl-12">

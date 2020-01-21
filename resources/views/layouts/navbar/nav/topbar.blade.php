@@ -39,9 +39,9 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-nowrap pt-4 pl-5 pr-5" data-toggle="dropdown" href="" role="button"
-                    aria-haspopup="true" aria-expanded="false">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                <a class="nav-link dropdown-toggle text-nowrap pt-4 pl-5 pr-5" data-toggle="dropdown" href=""
+                    role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="d-none d-md-inline-block">{{ Auth::user()->Fullname }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
                     <a class="dropdown-item" href="">
@@ -51,8 +51,12 @@
                     <a class="dropdown-item" href="">
                         <i class="material-icons">note_add</i> Add New Post</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="">
-                        <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                    <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">
+                        <i class="material-icons text-danger">&#xE879;</i> {{ __('ออกจากระบบ') }} </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </li>
         </ul>

@@ -23,7 +23,13 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Main Sidebar -->
-            @include('layouts.navbar.nav.sidebar')
+            @if (Auth::user()->type === 'Admin')
+                @include('layouts.navbar.nav.sidebar-admin')
+            @elseif(Auth::user()->type === 'Manager')
+                @include('layouts.navbar.nav.sidebar-manager')
+            @elseif(Auth::user()->type === 'User')
+                @include('layouts.navbar.nav.sidebar-member')
+            @endif
             <!-- End Main Sidebar -->
             <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
                 @include('layouts.navbar.nav.topbar')

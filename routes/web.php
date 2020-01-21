@@ -5,30 +5,30 @@
 
 Route::get('/', function () {
     return redirect()->route('login');
-});
+})->middleware('CheckLogin');
 
 /**
 * Admin Route
 */
 
-Route::group(['prefix' => 'admin','middleware' => ['auth']], function () {
-
+Route::group(['prefix' => 'admin','middleware' => ['auth', 'AdminLogin']], function () {
+    Route::get('dashboard', 'HomeController@adminDashboard')->name('admin.dashboard');
 });
 
 /**
 * Manager Route
 */
 
-Route::group(['prefix' => 'manager','middleware' => ['auth']], function () {
-
+Route::group(['prefix' => 'manager','middleware' => ['auth', 'ManagerLogin']], function () {
+    Route::get('dashboard', 'HomeController@managerDashboard')->name('manager.dashboard');
 });
 
 /**
 * Member Route
 */
 
-Route::group(['prefix' => 'member','middleware' => ['auth']], function () {
-
+Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], function () {
+    Route::get('dashboard', 'HomeController@memberDashboard')->name('member.dashboard');
 });
 
 /**

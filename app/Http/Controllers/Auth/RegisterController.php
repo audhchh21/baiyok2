@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 use App\User;
 use App\Titlename;
 use App\Office;
+
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -60,6 +63,8 @@ class RegisterController extends Controller
 
         //login as well.
         Auth::login($user,true);
+
+        return redirect()->route('home')->with('status', 'ส่งอีเมล์สำเสร็จ!!');
     }
 
     // protected function create(array $data)

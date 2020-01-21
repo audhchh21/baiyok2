@@ -14,8 +14,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <a href="{{ route('login') }}" class="btn btn-sm btn-dark mb-3"><i class="fas fa-angle-double-left"></i> {{  __('ย้อนกลับ')   }}</a>
             <div class="card">
-                <div class="card-header">{{ __('ลืมรหัสผ่าน') }}</div>
+                <div class="card-header text-center h3">{{ __('ลืมรหัสผ่าน') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
