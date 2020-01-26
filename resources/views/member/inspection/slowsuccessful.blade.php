@@ -14,7 +14,8 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.navbar.header')
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขหน่วยงาน', 'subtitle' => 'แก้ไขหน่วยงาน'])
+
     <!-- End Page Header -->
 
     <!-- Start Content -->

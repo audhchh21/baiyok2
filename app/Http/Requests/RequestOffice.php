@@ -15,6 +15,12 @@ class RequestOffice extends FormRequest
     {
         return [
             //
+            'name' => 'required',
+            'address' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'subdistrict' => 'required',
+            'zipcode' => 'required',
         ];
     }
 
@@ -22,6 +28,13 @@ class RequestOffice extends FormRequest
     {
         return [
             //
+            'name.required' => 'กรุณาใส่าชื่อหน่วยงาน',
+            'address.required' => 'กรุณาใส่ที่อยู่หน่ยวงาน',
+            'province.required' => 'กรุณาเลือกจังหวัด',
+            'district.required' => 'กรุณาเลือกอำเภอ',
+            'subdistrict.required' => 'กรุณาเลือกตำบล',
+            'zipcode.required' => 'กรุณาเลือกรหัสไปรษณีย์',
+            '' => '',
         ];
     }
 }

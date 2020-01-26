@@ -39,17 +39,13 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-nowrap pt-4 pl-5 pr-5" data-toggle="dropdown" href=""
+                <a class="nav-link dropdown-toggle text-nowrap pt-4 pl-5 pr-5 mr-2" data-toggle="dropdown" href=""
                     role="button" aria-haspopup="true" aria-expanded="false">
                     <span class="d-none d-md-inline-block">{{ Auth::user()->Fullname }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="">
-                        <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="">
-                        <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="">
-                        <i class="material-icons">note_add</i> Add New Post</a>
+                    <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                        <i class="material-icons">&#xE7FD;</i> {{ __('โปรไฟล์ของฉัน') }}</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">

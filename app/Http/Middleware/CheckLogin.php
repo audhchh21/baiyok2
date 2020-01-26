@@ -18,19 +18,23 @@ class CheckLogin
     {
         if(Auth::check() == true)
         {
-            $user = Auth::user()->type;
-            if($user === 'Admin')
+            if(Auth::user()->status == '1')
             {
-                return redirect()->route('admin.dashboard');
+                $user = Auth::user()->type;
+                if($user === 'Admin')
+                {
+                    return redirect()->route('admin.dashboard');
+                }
+                else if($user === 'Manager')
+                {
+                    return redirect()->route('manager.dashboard');
+                }
+                else if($user === 'User')
+                {
+                    return redirect()->route('member.dashboard');
+                }
             }
-            else if($user === 'Manager')
-            {
-                return redirect()->route('manager.dashboard');
-            }
-            else if($user === 'User')
-            {
-                return redirect()->route('member.dashboard');
-            }
+            return redirect()->route('unlogin');
         }
         return $next($request);
     }

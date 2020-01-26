@@ -14,7 +14,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.navbar.header')
+    @include('layouts.pageheader.title', ['title' => 'กราฟ', 'subtitle' => 'กราฟทั้งหมด'])
     <!-- End Page Header -->
 
     <!-- Start Content -->

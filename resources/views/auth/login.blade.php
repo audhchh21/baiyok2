@@ -11,11 +11,11 @@
 @endpush
 
 @section('content')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card pt-3 mb-5">
-                <div class="card-header border-top h3 text-center">{{ __('เข้าสู่ระบบ') }}</div>
+        <div class="col-md-6">
+            <div class="card shadow pt-3 mb-5">
+                <div class="card-header border-top h3 text-center text-white bg-success">{{ __('เข้าสู่ระบบ') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -55,12 +55,12 @@
                                 </button>
                             </div>
                             <div class="col-6 col-md-4 offset-md-2">
-                                <a class="btn btn-light btn-block h-100" href="{{ route('register') }}">
+                                <a class="btn btn-transparent btn-block h-100" href="{{ route('register') }}">
                                     {{ __('ลงทะเบียนใช้งาน') }}
                                 </a>
                             </div>
                             <div class="col-6 col-md-4">
-                                <a class="btn btn-light btn-block h-100" href="{{ route('password.request') }}">
+                                <a class="btn btn-transparent btn-block h-100" href="{{ route('password.request') }}">
                                     {{ __('ลืมรหัสผ่าน') }}
                                 </a>
                             </div>

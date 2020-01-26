@@ -20,4 +20,10 @@ class Subdistrict extends Model
     ];
 
     public $timestamps = false;
+
+    //
+    public function districts()
+    {
+        return $this->belongsTo('App\District', 'district_id');
+    }
 }

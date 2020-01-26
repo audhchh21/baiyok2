@@ -15,6 +15,7 @@ class RequestDistrict extends FormRequest
     {
         return [
             //
+            'name' => 'required',
         ];
     }
 
@@ -22,6 +23,7 @@ class RequestDistrict extends FormRequest
     {
         return [
             //
+            'name.required' => 'กรุณาใส่ชื่ออำเภอ',
         ];
     }
 }

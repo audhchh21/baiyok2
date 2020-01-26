@@ -20,4 +20,10 @@ class District extends Model
 
     //
     public $timestamps = false;
+
+    //
+    public function provinces()
+    {
+        return $this->belongsTo('App\Province', 'province_id');
+    }
 }

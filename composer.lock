@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2381c4d7cfd03cd38a7dc3c9cdd7d1b0",
+    "content-hash": "7e78ea44bf8fbfffb4ffdbf9b87c3b06",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -501,6 +501,58 @@
                 "trusted proxy"
             ],
             "time": "2019-12-20T13:11:11+00:00"
+        },
+        {
+            "name": "fx3costa/laravelchartjs",
+            "version": "2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxcosta/laravel-chartjs.git",
+                "reference": "942df19ad2ae9d2ebd822c19447472710c6c1612"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/942df19ad2ae9d2ebd822c19447472710c6c1612",
+                "reference": "942df19ad2ae9d2ebd822c19447472710c6c1612",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1|^6.0",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fx3costa\\LaravelChartJs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix",
+                    "email": "fx3costa@gmail.com"
+                }
+            ],
+            "description": "Simple package to facilitate and automate the use of charts in Laravel 5.x using Chartjs v2 library",
+            "keywords": [
+                "chart",
+                "chartjs",
+                "fx3costa",
+                "graphics",
+                "laravel5",
+                "reports"
+            ],
+            "time": "2019-10-10T18:18:10+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

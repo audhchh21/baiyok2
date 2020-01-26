@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestUser extends FormRequest
+class RequestUserEdit extends FormRequest
 {
     public function authorize()
     {
@@ -16,8 +16,6 @@ class RequestUser extends FormRequest
         return [
             //
             'email' => 'required',
-            'password' => 'required|confirmed|min:6',
-            'password_confirmation' => 'min:6',
             'titlename' => 'required',
             'f_name' => 'required',
             'l_name' => 'required',
@@ -31,10 +29,6 @@ class RequestUser extends FormRequest
         return [
             //
             'email.required' => 'กรุณาใส่อีเมล',
-            'password.required' => 'กรุณาใส่รหัสผ่าน',
-            'password.confirmed' => 'รหัสผ่านไม่ตรงกัน',
-            'password.min' => 'กรุณาใส่รหัสผ่านมากกว่า 6 ตัว',
-            'password_confirmation.min' => 'กรุณาใส่รหัสผ่านมากกว่า 6 ตัว',
             'titlename.required' => 'กรุณาเลือกคำนำหน้าชื่อ',
             'f_name.required' => 'กรุณาใส่ชื่อ',
             'l_name.required' => 'กรุณาใส่นามสกุล',

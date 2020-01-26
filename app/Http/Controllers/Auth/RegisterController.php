@@ -53,6 +53,7 @@ class RegisterController extends Controller
         $user = new User;
         $user->email = $request->email;
         $user->password = $password;
+        $user->titlename_id = $request->titlename;
         $user->f_name = $request->f_name;
         $user->l_name = $request->l_name;
         $user->phone = $request->phone;
@@ -62,23 +63,8 @@ class RegisterController extends Controller
         $user->save();
 
         //login as well.
-        Auth::login($user,true);
+        // Auth::login($user, false);
 
-        return redirect()->route('home')->with('status', 'ส่งอีเมล์สำเสร็จ!!');
+        return redirect()->route('register')->with('status', 'สมัครสมาชิกเรียบร้อย!!');
     }
-
-    // protected function create(array $data)
-    // {
-    //     return User::create([
-    //         'email' => $data['email'],
-    //         'password' => Hash::make($data['password']),
-    //         'titlename_id' => $data['titlename_id'],
-    //         'f_name' => $data['f_name'],
-    //         'l_name' => $data['l_name'],
-    //         'phone' => $data['phone'],
-    //         'office_id' => $data['office_id'],
-    //         'type' => 'User',
-    //         'Status' => '0'
-    //     ]);
-    // }
 }
