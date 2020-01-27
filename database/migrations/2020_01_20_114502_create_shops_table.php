@@ -17,7 +17,8 @@ class CreateShopsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->unsignedBigInteger('titlename_id')->nullable();
-            $table->string('owner')->nullable();
+            $table->string('f_name')->nullable();
+            $table->string('l_name')->nullable();
             $table->string('address')->nullable();
             $table->unsignedBigInteger('province')->nullable();
             $table->unsignedBigInteger('district')->nullable();

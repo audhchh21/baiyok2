@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js h-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="no-js h-100" lang="th">
 
 @include('layouts.content.header')
 

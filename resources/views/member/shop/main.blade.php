@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
-@section('titlepage', 'หน่วยงาน')
+@section('titlepage', 'ร้านค้า')
 
 @push('style')
-{{--Css Datatable bootstrap4 --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<style type="text/css">
+    .tb-td {
+        vertical-align: middle !important;
+    }
+
+</style>
 @endpush
 
 @push('javascript')
@@ -33,7 +38,7 @@
             }
         });
         $('[data-toggle="tooltip"]').tooltip();
-        $('#tb-office').DataTable();
+        $('#tb-shop').DataTable();
     })
 
 </script>
@@ -43,14 +48,15 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.navbar.nav.title', ['title' => 'หน่วยงาน', 'subtitle' => 'หน่วยงานทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'ร้านค้า', 'subtitle' => 'ร้านค้าทั้งหมด'])
+
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row">
         <div class="col">
             <div class="text-right">
-                <a href="{{ route('admin.office.create') }}" class="btn btn-info"><i
+                <a href="{{ route('member.shop.create') }}" class="btn btn-info"><i
                         class="fas fa-plus-circle"></i>{{ __(' เพิ่มหน่วยงาน')   }}</a>
                 <hr>
             </div>
@@ -69,33 +75,35 @@
                 </button>
             </div>
             @endif
-            <table class="table table-hover table-bordered" id="tb-office">
+            <table id="tb-shop" class="table table-hover table-bordered">
                 <thead class="bg-white">
                     <tr>
-                        <th class="col-1 text-center">{{ __('ลำดับ') }}</th>
-                        <th class="col-4 text-left">{{ __('คำนำหน้าชื่อ') }}</th>
-                        <th class="col-5 text-left">{{ __('ที่อยู่หน่วยงาน') }}</th>
-                        <th class="col-2 text-right">{{ __('การจัดการ') }}</th>
+                        <th class="text-center col-1">{{ __('ลำดับ') }}</th>
+                        <th class="text-left col-2">{{ __('ชื่อร้านค้า') }}</th>
+                        <th class="text-left col-2">{{ __('ชื่อเจ้าของร้าน') }}</th>
+                        <th class="text-left col-4">{{ __('ที่อยู่ร้าน') }}</th>
+                        <th class="text-right col-2">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($offices as $office)
+                    @forelse ($shops as $shop)
                     <tr>
-                        <td class="col-1 text-center">{{ $count++ }}</td>
-                        <td class="col-4 text-left">{{ $office->name }}</td>
-                        <td class="col-5 text-left">{{ $office->Fulladdress }}</td>
-                        <td class="col-2 text-right">
-                            <a href="{{ route('admin.office.edit', ['id'=>$office->id]) }}" class="btn btn-warning"
+                        <td class="text-center tb-td col-1">{{ $count++ }}</td>
+                        <td class="text-left tb-td col-2">{{ $shop->name }}</td>
+                        <td class="text-left tb-td col-2">{{ $shop->Fullname }}</td>
+                        <td class="text-left tb-td col-4">{{ $shop->Fulladdress }}</td>
+                        <td class="text-right tb-td col-2">
+                            <a href="{{ route('member.shop.edit', ['id'=>$shop->id]) }}" class="btn btn-warning"
                                 data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('admin.office.delete', ['id'=>$office->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $office->name }} ใช่ หรือ ไม่')"
+                            <a href="{{ route('member.shop.delete', ['id'=>$shop->id]) }}" class="btn btn-danger"
+                                onclick="return confirm('คุณต้องการลบ {{ $shop->name }} ใช่ หรือ ไม่')"
                                 data-toggle="tooltip" data-placement="top" title="ลบ"><i
                                     class="far fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="3" class="text-center h3">{{ __('ไม่มีรายการ') }}</td>
+                        <td colspan="5"><span class="text-center h3">{{ __('ไม่มีร้านค้า') }}</span></td>
                     </tr>
                     @endforelse
                 </tbody>

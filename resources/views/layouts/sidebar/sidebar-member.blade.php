@@ -27,19 +27,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('member.foodsample') }}">
+                <a class="nav-link " href="{{ route('member.foodtestkit') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ข้อมูลชุดทดสอบ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('member.foodsamplesource') }}">
+                <a class="nav-link " href="{{ route('member.foodsample') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ข้อมูลตัวอย่างอาหาร') }}</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('member.foodtestkit') }}">
+                <a class="nav-link " href="{{ route('member.foodsamplesource') }}">
                     <i class="material-icons">edit</i>
                     <span>{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</span>
                 </a>

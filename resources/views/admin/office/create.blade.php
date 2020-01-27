@@ -3,7 +3,6 @@
 @section('titlepage', 'เพิ่มหน่วยงาน')
 
 @push('style')
-
 {{-- css select2 --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css">
 {{-- Select2 Bootstrap4 --}}
@@ -22,7 +21,6 @@
         $('#subdistrict').select2()
         $('#zipcode').select2()
     })
-
 </script>
 @endpush
 

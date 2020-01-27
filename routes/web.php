@@ -100,33 +100,55 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     Route::group(['prefix' => 'foodsample'], function () {
         Route::get('', 'FoodsampleController@foodsampleMain')->name('member.foodsample');
         Route::get('edit/{id}', 'FoodsampleController@foodsampleEdit')->name('member.foodsample.edit');
+        Route::post('store', 'FoodsampleController@foodsampleStore')->name('member.foodsample.store');
+        Route::post('update/{id}', 'FoodsampleController@foodsampleUpdate')->name('member.foodsample.update');
+        Route::get('delete/{id}', 'FoodsampleController@foodsampleDelete')->name('member.foodsample.delete');
     });
     Route::group(['prefix' => 'foodsamplesource'], function () {
         Route::get('', 'FoodsamplesourceController@foodsamplesourceMain')->name('member.foodsamplesource');
         Route::get('edit/{id}', 'FoodsamplesourceController@foodsamplesourceEdit')->name('member.foodsamplesource.edit');
+        Route::post('store', 'FoodsamplesourceController@foodsamplesourceStore')->name('member.foodsamplesource.store');
+        Route::post('update/{id}', 'FoodsamplesourceController@foodsamplesourceUpdate')->name('member.foodsamplesource.update');
+        Route::get('delete/{id}', 'FoodsamplesourceController@foodsamplesourceDelete')->name('member.foodsamplesource.delete');
     });
     Route::group(['prefix' => 'foodtestkit'], function () {
         Route::get('', 'FoodtestkitController@foodtestkitMain')->name('member.foodtestkit');
         Route::get('edit/{id}', 'FoodtestkitController@foodtestkitEdit')->name('member.foodtestkit.edit');
+        Route::post('store', 'FoodtestkitController@foodtestkitStore')->name('member.foodtestkit.store');
+        Route::post('update/{id}', 'FoodtestkitController@foodtestkitUpdate')->name('member.foodtestkit.update');
+        Route::get('delete/{id}', 'FoodtestkitController@foodtestkitDelete')->name('member.foodtestkit.delete');
     });
     Route::group(['prefix' => 'inspection'], function () {
         Route::get('', 'InspectionController@inspectionAll')->name('member.inspection');
         Route::get('create', 'InspectionController@inspectionCreate')->name('member.inspection.create');
         Route::get('edit/{id}', 'InspectionController@inspectionEdit')->name('member.inspection.edit');
+        Route::post('store', 'InspectionController@inspectionStore')->name('member.inspection.store');
+        Route::post('update/{id}', 'InspectionController@inspectionUpdate')->name('member.inspection.update');
+        Route::get('delete/{id}', 'InspectionController@inspectionDelete')->name('member.inspection.delete');
     });
     Route::group(['prefix' => 'plan'], function () {
         Route::get('', 'PlanController@planMain')->name('member.plan');
         Route::get('create', 'PlanController@planCreate')->name('member.plan.create');
         Route::get('edit/{id}', 'PlanController@planEdit')->name('member.plan.edit');
+        Route::post('store', 'PlanController@planStore')->name('member.plan.store');
+        Route::post('update/{id}', 'PlanController@planUpdate')->name('member.plan.update');
+        Route::get('delete/{id}', 'PlanController@planDelete')->name('member.plan.delete');
     });
     Route::group(['prefix' => 'profile'], function () {
         Route::get('', 'ProfileController@profileMain')->name('member.profile');
         Route::get('edit/{id}', 'ProfileController@profileEdit')->name('member.profile.edit');
+        Route::post('store', 'ProfileController@profileStore')->name('member.profile.store');
+        Route::post('update/{id}', 'ProfileController@profileUpdate')->name('member.profile.update');
+        Route::get('delete/{id}', 'ProfileController@profileDelete')->name('member.profile.delete');
     });
     Route::group(['prefix' => 'shop'], function () {
         Route::get('', 'ShopController@shopMain')->name('member.shop');
         Route::get('create', 'ShopController@shopCreate')->name('member.shop.create');
         Route::get('edit/{id}', 'ShopController@shopEdit')->name('member.shop.edit');
+        Route::post('store', 'ShopController@shopStore')->name('member.shop.store');
+        Route::post('update/{id}', 'ShopController@shopUpdate')->name('member.shop.update');
+        Route::get('delete/{id}', 'ShopController@shopDelete')->name('member.shop.delete');
+
     });
     // New Route Group
     // Route::group(['prefix' => ''], function () {
