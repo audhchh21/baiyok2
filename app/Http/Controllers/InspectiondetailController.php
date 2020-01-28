@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Plan;
 
 class InspectiondetailController extends Controller
 {
     //
-    public function inspectiondetailCreate()
+    public function inspectiondetailCheck($id)
     {
-
+        $plan = Plan::findOrFail($id);
+        return view('member.inspectiondetail.check', [
+            'plan'=>$plan
+        ]);
     }
 
     //

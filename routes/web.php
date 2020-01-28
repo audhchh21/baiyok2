@@ -126,6 +126,12 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
         Route::post('update/{id}', 'InspectionController@inspectionUpdate')->name('member.inspection.update');
         Route::get('delete/{id}', 'InspectionController@inspectionDelete')->name('member.inspection.delete');
     });
+    Route::group(['prefix' => 'inspectiondetail'], function () {
+        Route::get('{id}/check', 'InspectiondetailController@inspectiondetailCheck')->name('member.inspectiondetail.check');
+        Route::get('edit', 'InspectiondetailController@inspectiondetailEdit')->name('member.inspectiondetail.edit');
+        Route::get('confirm', 'InspectiondetailController@inspectiondetailConfirm')->name('member.inspectiondetail.confirm');
+        Route::post('update', 'InspectiondetailController@inspectiondetailUpdate')->name('member.inspectiondetail.update');
+    });
     Route::group(['prefix' => 'plan'], function () {
         Route::get('', 'PlanController@planMain')->name('member.plan');
         Route::get('create', 'PlanController@planCreate')->name('member.plan.create');

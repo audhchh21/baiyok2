@@ -151,7 +151,7 @@
                         <td class="text-left tb-td">{{ $plan->by_user->Fullname }}</td>
                         <td class="text-center tb-td">{{ $plan->Fulltime }}</td>
                         <td class="text-right tb-td">
-                            <a href="{{ url('/') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top"
+                            <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top"
                                 title="ตรวจแผนงาน"><i class="far fa-edit"></i></a>
                             <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-warning"
                                 data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
