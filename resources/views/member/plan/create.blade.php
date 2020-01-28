@@ -19,8 +19,8 @@
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
-        $('#start-plan').datepicker({language:'th-th',format:'dd/mm/yyyy'})
-        $('#end-plan').datepicker({language:'th-th',format:'dd/mm/yyyy'})
+        $('#plan_start').datepicker({language:'th-th',format:'yyyy-mm-dd'})
+        $('#plan_end').datepicker({language:'th-th',format:'yyyy-mm-dd'})
         $('#user').select2()
         $('#shop').select2()
     })
@@ -62,20 +62,20 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="start-plan" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="start-plan" name="start-plan" value="{{ old('start-plan') ?? null }}" placeholder="">
+                        <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? date('Y-m-d') }}" placeholder="">
                     </div>
                     <div class="form-group col">
-                        <label for="end-plan" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="end-plan" name="end-plan" value="{{ old('end-plan') ?? null }}" placeholder="">
+                        <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? date('Y-m-d') }}" placeholder="">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="user" class="h3">{{ __('ผู้ไปตรวจสอบ') }}<span class="text-danger">*</span></label>
+                        <label for="user" class="h3">{{ __('ผู้ตรวจสอบวิเคราะห์') }}<span class="text-danger">*</span></label>
                         <select class="form-control form-control-lg" name="user" id="user">
                             @forelse ($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->Fullname }}</option>
+                            <option {{ $user->id == Auth::user()->id ? ' selected':''}} value="{{ $user->id }}">{{ $user->Fullname }}</option>
                             @empty
                             <option>{{ __('ไม่มีผู้ใช้งาน') }}</option>
                             @endforelse
@@ -99,7 +99,7 @@
                         <label for="office" class="h3">{{ __('หน่วยงาน') }}</label>
                         <select class="form-control form-control-lg" name="office" id="office" readonly>
                             @forelse ($offices as $office)
-                            <option value="{{ $office->id }}">{{ $office->name }}</option>
+                            <option {{ $office->id == Auth::user()->office_id ? ' selected':''}} value="{{  $office->id   }}" >{{ $office->name }}</option>
                             @empty
                             <option>{{ __('ไม่มีร้านค้า') }}</option>
                             @endforelse

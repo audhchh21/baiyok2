@@ -14,6 +14,7 @@ class Plan extends Model
 
     //
     protected $fillable = [
+        'user_id',
         'createby_user_id',
         'to_user_id',
         'shop_id',

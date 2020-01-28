@@ -43,9 +43,16 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-plan').DataTable();
-        $('#start-plan').datepicker({language:'th-th',format:'dd/mm/yyyy'})
-        $('#end-plan').datepicker({language:'th-th',format:'dd/mm/yyyy'})
+        $('#start-plan').datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy'
+        })
+        $('#end-plan').datepicker({
+            language: 'th-th',
+            format: 'dd/mm/yyyy'
+        })
     })
+
 </script>
 @endpush
 
@@ -82,31 +89,39 @@
             @endif
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-xl-5">
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="form-row">
-                            <div class="form-group col-3">
-                                <label for="start-plan">{{ __('') }}</label>
-                                <input type="text" class="form-control" id="start-plan" name="start" value="" placeholder="" required >
+                            <div class="form-group col-3 mb-0">
+                                <label for="start-plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="start-plan" name="start"
+                                    value="{{ old('start') ?? date('Y-m-d') }}" placeholder="" required>
                             </div>
-                            <div class="form-group col-3">
-                                <label for="end-plan">{{ __('') }}</label>
-                                <input type="text" class="form-control" id="end-plan" name="end" value="" placeholder="" required>
+                            <div class="form-group col-3 mb-0">
+                                <label for="end-plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="end-plan" name="end"
+                                    value="{{ old('start') ?? date('Y-m-d') }}" placeholder="" required>
                             </div>
-                            <div class="form-group col-2">
-                                <label for="end-plan">{{ __('') }}</label>
-                                <input type="text" class="form-control" id="end-plan" name="end" value="" placeholder="" required>
+                            <div class="form-group col-2 mb-0">
+                                <label for="end-plan">{{ __('สถานะแผนงาน') }}</label>
+                                {!! Form::select('',
+                                ['s1'=>'แสดงทั้งหมด','s2'=>'ตรวจแล้ว','s3'=>'ยังไม่ได้ตรวจ','s4'=>'ตรวจล่าช้า',], null,
+                                ['id'=>'', 'class'=>'form-control']) !!}
                             </div>
-                            <div class="form-group col-2">
-                                <label for="end-plan">{{ __('') }}</label>
-                                <input type="text" class="form-control" id="end-plan" name="end" value="" placeholder="" required>
+                            <div class="form-group col-2 mb-0">
+                                <label for="end-plan">{{ __('การแสดงผล') }}</label>
+                                {!! Form::select('', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], null, ['id'=>'',
+                                'class'=>'form-control']) !!}
                             </div>
-                            <div class="form-group col-2">
-                                <label for="end-plan"></label>
-                                <input type="text" class="form-control" id="end-plan" name="end" value="" placeholder="" required>
+                            <div class="form-group col-2 mb-0">
+                                <div class="text-center">
+                                    <a href="" class="btn btn-sm btn-block btn-success">{{ __('แสดงผล') }}</a>
+                                    <button type="reset"
+                                        class="btn btn-sm btn-block btn-danger">{{ __('ล้างค่า') }}</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -136,10 +151,12 @@
                         <td class="text-left tb-td">{{ $plan->by_user->Fullname }}</td>
                         <td class="text-center tb-td">{{ $plan->Fulltime }}</td>
                         <td class="text-right tb-td">
+                            <a href="{{ url('/') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top"
+                                title="ตรวจแผนงาน"><i class="far fa-edit"></i></a>
                             <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-warning"
                                 data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
                             <a href="{{ route('member.plan.delete', ['id'=>$plan->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $plan->name }} ใช่ หรือ ไม่')"
+                                onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')"
                                 data-toggle="tooltip" data-placement="top" title="ลบ"><i
                                     class="far fa-trash-alt"></i></a>
                         </td>

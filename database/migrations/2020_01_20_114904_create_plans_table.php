@@ -15,6 +15,7 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('createby_user_id')->nullable();
             $table->unsignedBigInteger('to_user_id')->nullable();
             $table->unsignedBigInteger('shop_id')->nullable();
@@ -23,6 +24,7 @@ class CreatePlansTable extends Migration
             $table->string('status')->default('0');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('createby_user_id')->references('id')->on('users');
             $table->foreign('to_user_id')->references('id')->on('users');
             $table->foreign('shop_id')->references('id')->on('shops');
