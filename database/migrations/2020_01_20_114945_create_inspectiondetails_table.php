@@ -20,7 +20,7 @@ class CreateInspectiondetailsTable extends Migration
             $table->unsignedBigInteger('foodsamplesource_id')->nullable();
             $table->unsignedBigInteger('foodtestkit_id')->nullable();
             $table->integer('inspection_result')->nullable();
-            $table->text('actuation_after')->nullable()->default('ไม่มีหมายเหตุ');
+            $table->string('actuation_after')->nullable()->default('ไม่มีหมายเหตุ');
             $table->string('inspection_image')->nullable()->default('no-image.png');
             $table->timestamps();
 

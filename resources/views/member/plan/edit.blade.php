@@ -36,7 +36,7 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row">
+    <div class="row mb-3">
         <div class="col">
             <div class="text-left">
                 <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
@@ -97,11 +97,11 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="office" class="h3">{{ __('หน่วยงาน') }}</label>
-                        <select class="form-control form-control-lg" name="office" id="office" readonly>
+                        <select class="form-control form-control-lg" name="office" id="office" disabled>
                             @forelse ($offices as $office)
                             <option {{ $office->id == Auth::user()->office_id ? ' selected':''}} value="{{  $office->id   }}" >{{ $office->name }}</option>
                             @empty
-                            <option>{{ __('ไม่มีร้านค้า') }}</option>
+                            <option>{{ __('ไม่มีหน่วยงาน') }}</option>
                             @endforelse
                         </select>
                     </div>

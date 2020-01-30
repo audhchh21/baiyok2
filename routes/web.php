@@ -128,9 +128,9 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     });
     Route::group(['prefix' => 'inspectiondetail'], function () {
         Route::get('{id}/check', 'InspectiondetailController@inspectiondetailCheck')->name('member.inspectiondetail.check');
-        Route::get('edit', 'InspectiondetailController@inspectiondetailEdit')->name('member.inspectiondetail.edit');
-        Route::get('confirm', 'InspectiondetailController@inspectiondetailConfirm')->name('member.inspectiondetail.confirm');
-        Route::post('update', 'InspectiondetailController@inspectiondetailUpdate')->name('member.inspectiondetail.update');
+        Route::get('{id}/edit', 'InspectiondetailController@inspectiondetailEdit')->name('member.inspectiondetail.edit');
+        Route::post('{id}/confirm', 'InspectiondetailController@inspectiondetailConfirm')->name('member.inspectiondetail.confirm');
+        Route::post('{id}/update', 'InspectiondetailController@inspectiondetailUpdate')->name('member.inspectiondetail.update');
     });
     Route::group(['prefix' => 'plan'], function () {
         Route::get('', 'PlanController@planMain')->name('member.plan');
