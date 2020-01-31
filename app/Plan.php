@@ -46,4 +46,10 @@ class Plan extends Model
     {
         return $this->belongsTo('App\Shop', 'shop_id', 'id');
     }
+
+    //
+    public function inspection()
+    {
+        return $this->hasOne('App\Inspection', 'plan_id', 'id');
+    }
 }

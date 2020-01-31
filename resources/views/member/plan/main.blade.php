@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titlepage', 'หน้าแรก')
+@section('titlepage', 'แผนงาน')
 
 @push('style')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
@@ -60,7 +60,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขหน่วยงาน', 'subtitle' => 'แก้ไขหน่วยงาน'])
+    @include('layouts.pageheader.title', ['title' => 'แผนงาน', 'subtitle' => 'แผนงานทั้งหมด'])
 
     <!-- End Page Header -->
 
@@ -150,15 +150,31 @@
                         <td class="text-left tb-td">{{ $plan->to_user->Fullname }}</td>
                         <td class="text-left tb-td">{{ $plan->by_user->Fullname }}</td>
                         <td class="text-center tb-td">{{ $plan->Fulltime }}</td>
-                        <td class="text-right tb-td">
-                            <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-dark" data-toggle="tooltip" data-placement="top"
-                                title="ตรวจแผนงาน"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-warning"
-                                data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('member.plan.delete', ['id'=>$plan->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')"
-                                data-toggle="tooltip" data-placement="top" title="ลบ"><i
-                                    class="far fa-trash-alt"></i></a>
+                        <td class="text-center tb-td col-1">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('member.inspectiondetail.check', ['id'=>$plan->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ตรวจแผนงาน">
+                                    <span class="text-dark pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('ตรวจแผนงาน') }}
+                                </a>
+                                <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                    <span class="text-warning pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                </a>
+                                <a href="{{ route('member.plan.delete', ['id'=>$plan->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ลบ"
+                                    onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')">
+                                    <span class="text-danger pr-1">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty

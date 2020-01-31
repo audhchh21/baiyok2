@@ -120,6 +120,10 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     });
     Route::group(['prefix' => 'inspection'], function () {
         Route::get('', 'InspectionController@inspectionAll')->name('member.inspection');
+        Route::get('detail/{id}', 'InspectionController@inspectionDetail')->name('member.inspection.detail');
+        Route::get('successful', 'InspectionController@inspectionSuccessful')->name('member.inspection.successful');
+        Route::get('slowsuccessful', 'InspectionController@inspectionSlowsuccessful')->name('member.inspection.slowsuccessful');
+        Route::get('unsuccessful', 'InspectionController@inspectionUnsuccessful')->name('member.inspection.unsuccessful');
         Route::get('create', 'InspectionController@inspectionCreate')->name('member.inspection.create');
         Route::get('edit/{id}', 'InspectionController@inspectionEdit')->name('member.inspection.edit');
         Route::post('store', 'InspectionController@inspectionStore')->name('member.inspection.store');

@@ -50,11 +50,20 @@
                     <span>{{ __('แผนงานตรวจสอบสารปนเปิ้อน') }}</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('member.inspection') }}">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                    aria-expanded="false">
                     <i class="material-icons">edit</i>
                     <span>{{ __('ผลการตรวจสอบสารปนเปิ้อน') }}</span>
                 </a>
+                <div class="dropdown-menu dropdown-menu-small"
+                    style="display: none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-5px, 52px, 0px);"
+                    x-placement="bottom-start">
+                    <a class="dropdown-item " href="{{ route('member.inspection') }}">{{ __('ผลการตรวจสอบสารปนเปิ้อน ทั้งหมด') }}</a>
+                    <a class="dropdown-item " href="{{ route('member.inspection.successful') }}">{{ __('ผลการตรวจสอบสารปนเปิ้อน สำเร็จ') }}</a>
+                    <a class="dropdown-item " href="{{ route('member.inspection.slowsuccessful') }}">{{ __('ผลการตรวจสอบสารปนเปิ้อน ล่าช้า') }}</a>
+                    <a class="dropdown-item " href="{{ route('member.inspection.unsuccessful') }}">{{ __('ผลการตรวจสอบสารปนเปิ้อน ไม่ได้ตรวจ') }}</a>
+                </div>
             </li>
         </ul>
     </div>

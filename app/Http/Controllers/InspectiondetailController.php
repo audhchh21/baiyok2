@@ -13,7 +13,7 @@ use App\Foodtestkit;
 
 class InspectiondetailController extends Controller
 {
-    //
+    // function หน้าสร้างแผนงานใหม่
     public function inspectiondetailCheck($id)
     {
         $plan = Plan::findOrFail($id);
@@ -28,13 +28,13 @@ class InspectiondetailController extends Controller
         return view('member.inspectiondetail.check', [
             'plan'=>$plan,
             'foodsample' => $foodsample,
-            'foodsamplesoure' => $foodsamplesource,
+            'foodsamplesource' => $foodsamplesource,
             'foodtestkit' => $foodtestkit,
             'check' => $check
         ]);
     }
 
-    //
+    // function หน้าแก้ไขแผนงาน
     public function inspectiondetailEdit($id)
     {
         $plan = Plan::findOrFail($id);
@@ -49,85 +49,91 @@ class InspectiondetailController extends Controller
         return view('member.inspectiondetail.check', [
             'plan'=>$plan,
             'foodsample' => $foodsample,
-            'foodsamplesoure' => $foodsamplesource,
+            'foodsamplesource' => $foodsamplesource,
             'foodtestkit' => $foodtestkit,
             'check' => $check
         ]);
     }
 
-    //
+    // function บันทึกแผนงาน
     public function inspectiondetailConfirm(Request $request, $id)
     {
-        // dd($request->all());
         $plan = Plan::findOrFail($id);
-        $plan['plan_id'] = $plan->id;
-        $plan['date'] = now();
-        $plan['status'] = '1';
-
         try{
-            $inspection = Inspection::cerate($plan);
+            $inspection = Inspection::create([
+                'plan_id' => $plan->id,
+                'date' => date('Y-m-d H:i:s'),
+                'status' => '1'
+            ]);
         } catch ( \Exception $e) {
-            dd($e->getMessage());
-            return redirect()->route('')->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
-            exit();
+            return redirect()->route('member.inspectiondetail.check', ['id' => $inspection->id])->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
         }
-        
         $detail['foodsample'] = $request->foodsample;
         $detail['foodsamplesource'] = $request->foodsamplesource;
         $detail['foodtestkit'] = $request->foodtestkit;
         $detail['status'] = $request->status;
         $detail['detail'] = $request->detail;
-        $detail['image'] = $request->uploadimage;
-
-        for($count = 0; $count < count(); $count++)
+        for($count = 0; $count < count($detail['foodsample']); $count++)
         {
-            $inspectiondetail['inspection_id'] = $inspection->id;
-            $inspectiondetail['foodsample_id'] = $detail['foodsample'][$count];
-            $inspectiondetail['foodsamplesource_id'] = $detail['foodsamplesource'][$count];
-            $inspectiondetail['foodtestkit_id'] = $detail['foodtestkit'][$count];
-            $inspectiondetail['inspection_result'] = $detail['status'][$count];
-            $inspectiondetail['actuation_after'] = $detail['detail'][$count];
-            $inspectiondetail['inspection_image'] = $detail['image'][$count];
-            try{
-                $inspectiondetail = Inspectiondetail::create($inspectiondetail);
+            // แปลง statu
+            $statusCheck = $detail['status'][$count];
+            if($statusCheck == 's1'){
+                $status = 1;
+            }elseif($statusCheck == 's2'){
+                $status = 2;
+            }elseif($statusCheck == 's3'){
+                $status = 3;
+            }
+            // อัพโหลดรูป
+            try {
+                $image = $request->file('uploadimage')[$count];
+
+                $name = time().'_'.$image->getClientOriginalName();
+                try {
+                    $image->move(public_path('images/uploads'), $name);
+                } catch (\Exception $e) {
+                    dd($e->getMessage());
+                }
+                $fileImage = str_replace(' ', '_', $name);
             } catch ( \Exception $e) {
-                dd($e->getMessage());
-                return redirect()->route('')->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
-                exit();
+                $fileImage = 'no-image.png';
+            }
+            // เพิ่มแผนงาน
+            try {
+                $inspectiondetail = Inspectiondetail::create([
+                    'inspection_id' => $inspection->id,
+                    'foodsample_id' => $detail['foodsample'][$count],
+                    'foodsamplesource_id' => $detail['foodsamplesource'][$count],
+                    'foodtestkit_id' => $detail['foodtestkit'][$count],
+                    'inspection_result' => $status,
+                    'actuation_after' => $detail['detail'][$count],
+                    'inspection_image' => $fileImage,
+                ]);
+            } catch ( \Exception $e) {
+                return redirect()->route('member.inspectiondetail.check', ['id' => $inspection->id])->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
             }
         }
-
-        // check date 
-        if($plan->plan_end > $plan['date'])
-        {
+        // ตรวจสอบวันที่บันทึกแผนงาน
+        if($plan->plan_end > $inspection->date){
             $plan->status = '1';
-        }
-        else if($plan->start < $plan['date'])
-        {
+        }else if($plan->start < $inspection->date){
             $plan->status = '2';
         }
 
         try{
             $plan->save();
         } catch ( \Exception $e) {
-            // dd($e->getMessage());
-            return redirect()->route('')->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
+            return redirect()->route('member.inspectiondetail.check', ['id' => $inspection->id])->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
         }
-        return redirect()->route('')->with('status', 'บันทึกแผนงานเรียบร้อย!!');
-        
+        // บันทึกแผนงานสำเร็จ
+        return redirect()->route('member.plan')->with('status', 'บันทึกแผนงานเรียบร้อย!!');
     }
 
-    //
+    // function แก้ไขแผนงาน
     public function inspectiondetailUpdate(Request $request, $id)
     {
-        dd($request->all());   
+        dd($request->all());
     }
 
-    //
-    private function uploadImage($file, $path)
-    {
-        $input['file'] = $file;
-        $input['path'] = $path;
-        return response()->json($input, 200);
-    }
+
 }

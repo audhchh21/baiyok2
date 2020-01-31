@@ -81,8 +81,8 @@
                         <th class="text-center col-1">{{ __('ลำดับ') }}</th>
                         <th class="text-left col-2">{{ __('ชื่อร้านค้า') }}</th>
                         <th class="text-left col-2">{{ __('ชื่อเจ้าของร้าน') }}</th>
-                        <th class="text-left col-4">{{ __('ที่อยู่ร้าน') }}</th>
-                        <th class="text-right col-2">{{ __('การจัดการ') }}</th>
+                        <th class="text-left col-5">{{ __('ที่อยู่ร้าน') }}</th>
+                        <th class="text-center col-1">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,14 +91,25 @@
                         <td class="text-center tb-td col-1">{{ $count++ }}</td>
                         <td class="text-left tb-td col-2">{{ $shop->name }}</td>
                         <td class="text-left tb-td col-2">{{ $shop->Fullname }}</td>
-                        <td class="text-left tb-td col-4">{{ $shop->Fulladdress }}</td>
-                        <td class="text-right tb-td col-2">
-                            <a href="{{ route('member.shop.edit', ['id'=>$shop->id]) }}" class="btn btn-warning"
-                                data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('member.shop.delete', ['id'=>$shop->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $shop->name }} ใช่ หรือ ไม่')"
-                                data-toggle="tooltip" data-placement="top" title="ลบ"><i
-                                    class="far fa-trash-alt"></i></a>
+                        <td class="text-left tb-td col-5">{{ $shop->Fulladdress }}</td>
+                        <td class="text-center tb-td col-1">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('member.shop.edit', ['id'=>$shop->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                    <span class="text-warning pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                </a>
+                                <a href="{{ route('member.shop.delete', ['id'=>$shop->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ลบ"
+                                    onclick="return confirm('คุณต้องการลบ {{ $shop->name }} ใช่ หรือ ไม่')">
+                                    <span class="text-danger pr-1">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty

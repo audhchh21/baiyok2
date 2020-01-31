@@ -16,7 +16,9 @@ class PlanController extends Controller
     //
     public function planMain()
     {
-        $plans = Plan::all()->where('user_id', Auth::user()->id);
+        $plans = Plan::all()
+        ->where('user_id', Auth::user()->id)
+        ->where('status', '0');
         return view('member.plan.main', [
             'count' => 1,
             'plans' => $plans
@@ -69,7 +71,7 @@ class PlanController extends Controller
             // dd($e->getMessage());
             return redirect()->route('member.plan.create')->with('error', 'เกิดข้อผิดพลาด! ไม่สามารถเพิ่มแผนงานได้!!');
         }
-        return redirect()->route('member.plan.create')->with('status', 'เพิ่มแผนงานเสร็จเรียบร้อย!!');
+        return redirect()->route('member.plan')->with('status', 'เพิ่มแผนงานเสร็จเรียบร้อย!!');
 
     }
 
@@ -94,7 +96,7 @@ class PlanController extends Controller
             // dd($e->getMessage());
             return redirect()->route('member.plan.create')->with('error', 'เกิดข้อผิดพลาด! ไม่สามารถแก้ไขแผนงานได้!!');
         }
-        return redirect()->route('member.plan.create')->with('status', 'แก้ไขแผนงานเสร็จเรียบร้อย!!');
+        return redirect()->route('member.plan')->with('status', 'แก้ไขแผนงานเสร็จเรียบร้อย!!');
     }
 
     //

@@ -18,4 +18,10 @@ class Inspection extends Model
         'date',
         'status'
     ];
+
+    //
+    public function plan()
+    {
+        return $this->belongsTo('App\Plan', 'plan_id');
+    }
 }

@@ -83,13 +83,24 @@
                     <tr>
                         <td class="text-center col-1 tb-td">{{ $count++ }}</td>
                         <td class="text-left col-9 tb-td">{{ $foodsamplesource->name }}</td>
-                        <td class="text-right col-2 tb-td">
-                            <a href="{{ route('member.foodsamplesource.edit', ['id' => $foodsamplesource->id]) }}" class="btn btn-warning"
-                                data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('member.foodsamplesource.delete', ['id'=>$foodsamplesource->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $foodsamplesource->name }} ใช่ หรือ ไม่')"
-                                data-toggle="tooltip" data-placement="top" title="ลบ"><i
-                                    class="far fa-trash-alt"></i></a>
+                        <td class="text-center tb-td col-1">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('member.foodsamplesource.edit', ['id'=>$foodsamplesource->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                    <span class="text-warning pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                </a>
+                                <a href="{{ route('member.foodsamplesource.delete', ['id'=>$foodsamplesource->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ลบ"
+                                    onclick="return confirm('คุณต้องการลบ {{ $foodsamplesource->name }} ใช่ หรือ ไม่')">
+                                    <span class="text-danger pr-1">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty
