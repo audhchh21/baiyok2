@@ -26,7 +26,7 @@
                     {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    <input type="file" class="form-control-file border" id="customfile" name="uploadimage[]">
+                    <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
                     {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control']) }}
@@ -70,7 +70,7 @@
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -139,7 +139,7 @@
                             <th class="text-left col-12 col-lg-2">{{ __('หมายเหตุ') }}</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="bg-white"></tbody>
                 </table>
                 <hr>
                 <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('ตรวจบันทึก') }}</button>

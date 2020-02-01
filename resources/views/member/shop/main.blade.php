@@ -53,7 +53,7 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col">
             <div class="text-right">
                 <a href="{{ route('member.shop.create') }}" class="btn btn-info"><i
@@ -85,7 +85,7 @@
                         <th class="text-center col-1">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($shops as $shop)
                     <tr>
                         <td class="text-center tb-td col-1">{{ $count++ }}</td>

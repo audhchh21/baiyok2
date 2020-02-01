@@ -30,7 +30,7 @@ class FoodsamplesourceController extends Controller
     //
     public function foodsamplesourceStore(Request $request)
     {
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         try {
             $foodsamplesource = Foodsamplesource::create($input);
         } catch (\Exception $e) {
@@ -43,7 +43,7 @@ class FoodsamplesourceController extends Controller
     public function foodsamplesourceUpdate(Request $request, $id)
     {
         $foodsamplesource = Foodsamplesource::findOrFail($id);
-        $foodsamplesource->name = $request->name;
+        $foodsamplesource->name = str_replace(' ', '', $request->name);
         try {
             $foodsamplesource->save();
         } catch (\Exception $e) {

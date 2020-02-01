@@ -37,7 +37,7 @@ class TitlenameController extends Controller
     //
     public function titlenameStore(RequestTitlename $request)
     {
-        $input['name'] = $request->titlename;
+        $input['name'] = str_replace(' ', '', $request->titlename);
         try {
             $titlename = Titlename::create($input);
         } catch ( \Exception $e ) {
@@ -52,7 +52,7 @@ class TitlenameController extends Controller
         $titlename = Titlename::findOrFail($id);
 
         $def_title = $titlename->name;
-        $titlename->name = $request->titlename;
+        $titlename->name = str_replace(' ', '', $request->titlename);
 
         try {
             $titlename->save();

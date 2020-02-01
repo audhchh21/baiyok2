@@ -41,7 +41,7 @@ class SubdistrictController extends Controller
     //
     public function subdistrictStore(RequestSubdistrict $request)
     {
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         $input['zip_code'] = $request->zipcode;
         $input['district_id'] = $request->district;
         try {
@@ -56,7 +56,7 @@ class SubdistrictController extends Controller
     public function subdistrictUpdate(RequestSubdistrict $request, $id)
     {
         $subdistrict = Subdistrict::findOrFail($id);
-        $subdistrict->name = $request->name;
+        $subdistrict->name = str_replace(' ', '', $request->name);
         $subdistrict->zip_code = $request->zipcode;
         $subdistrict->district_id = $request->district;
         try {

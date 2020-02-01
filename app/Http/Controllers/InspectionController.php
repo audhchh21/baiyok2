@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Inspection;
 use App\Plan;
+use App\Inspection;
+use App\inspectiondetail;
+use App\Foodsample;
+use App\Foodsamplesource;
+use App\Foodtestkit;
+
 class InspectionController extends Controller
 {
     //
@@ -58,7 +63,6 @@ class InspectionController extends Controller
     public function inspectionDetail($id)
     {
         $inspection = Inspection::findOrFail($id);
-        dd($inspection);
         return view('member.inspection.detail', [
             'inspection' => $inspection
         ]);
@@ -68,9 +72,20 @@ class InspectionController extends Controller
     public function inspectionEdit($id)
     {
         $inspection = Inspection::findOrFail($id);
-        dd($inspection);
+        $foodsample = Foodsample::pluck('name', 'id');
+        $foodsamplesource = Foodsamplesource::pluck('name', 'id');
+        $foodtestkit = Foodtestkit::pluck('name', 'id');
+        $check = [
+            's1' => 'ไม่พบ',
+            's2' => 'พบปลอดภัย',
+            's3' => 'พบไม่ปลอดภัย',
+        ];
         return view('member.inspection.edit', [
-            'inspection' => $inspection
+            'inspection' => $inspection,
+            'foodsample' => $foodsample,
+            'foodsamplesource' => $foodsamplesource,
+            'foodtestkit' => $foodtestkit,
+            'check' => $check
         ]);
     }
 

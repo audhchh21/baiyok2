@@ -31,7 +31,7 @@ class ProvinceController extends Controller
     //
     public function provinceStore(RequestProvince $request)
     {
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
 
         try {
             $province = Province::create($input);
@@ -46,7 +46,7 @@ class ProvinceController extends Controller
     {
         $province = Province::findOrFail($id);
         $def_title = $province->name;
-        $province->name = $request->name;
+        $province->name = str_replace(' ', '', $request->name);
         try {
             $province->save();
         } catch (\Exception $e) {

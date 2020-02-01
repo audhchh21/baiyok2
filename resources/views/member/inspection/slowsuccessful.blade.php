@@ -56,7 +56,7 @@
     <div class="row mb-5">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -113,7 +113,7 @@
                                 <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ตรวจแผนงาน">
                                     <span class="text-dark pr-1">
-                                        <i class="far fa-edit"></i>
+                                        <i class="fas fa-check-square"></i>
                                     </span>
                                     {{ __('ตรวจแผนงาน') }}
                                 </a>

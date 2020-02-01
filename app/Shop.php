@@ -30,7 +30,7 @@ class Shop extends Model
     // Fullname Address
     public function getFulladdressAttribute()
     {
-        return $this->address.' '.$this->provinces->name.' '.$this->districts->name.' '.$this->subdistricts->name.' '.$this->subdistricts->zip_code;
+        return $this->address.' ตำบล'.$this->subdistricts->name.' อำเภอ'.$this->districts->name.' จังหวัด'.$this->provinces->name.' '.$this->subdistricts->zip_code;
     }
 
     // Fullname User

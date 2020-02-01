@@ -87,14 +87,14 @@ class InspectiondetailController extends Controller
             // อัพโหลดรูป
             try {
                 $image = $request->file('uploadimage')[$count];
-
                 $name = time().'_'.$image->getClientOriginalName();
+                $fileImage = str_replace(' ', '_', $name);
                 try {
-                    $image->move(public_path('images/uploads'), $name);
+                    $image->move(public_path('images/uploads'), $fileImage);
                 } catch (\Exception $e) {
                     dd($e->getMessage());
                 }
-                $fileImage = str_replace(' ', '_', $name);
+
             } catch ( \Exception $e) {
                 $fileImage = 'no-image.png';
             }

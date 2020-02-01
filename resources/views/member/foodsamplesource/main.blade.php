@@ -53,7 +53,7 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-xl-8 border-right">
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -78,7 +78,7 @@
                         <th class="text-right col-2">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($foodsamplesources as $foodsamplesource)
                     <tr>
                         <td class="text-center col-1 tb-td">{{ $count++ }}</td>

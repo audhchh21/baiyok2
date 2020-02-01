@@ -51,7 +51,7 @@ class FoodsampleController extends Controller
     public function foodsampleStore(Request $request)
     {
         // dd($request->all());
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         $input['category'] = $request->category;
 
         try {
@@ -67,7 +67,7 @@ class FoodsampleController extends Controller
     {
         // dd($request->all());
         $foodsample = Foodsample::findOrFail($id);
-        $foodsample->name = $request->name;
+        $foodsample->name = str_replace(' ', '', $request->name);
         $foodsample->category = $request->category;
         try {
             $foodsample->save();

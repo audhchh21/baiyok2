@@ -62,7 +62,7 @@ class ShopController extends Controller
     public function shopStore(Request $request)
     {
         // dd($request->all());
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         $input['titlename_id'] = $request->titlename;
         $input['f_name'] = $request->f_name;
         $input['l_name'] = $request->l_name;
@@ -85,7 +85,7 @@ class ShopController extends Controller
     {
         // dd($request->all());
         $shop = Shop::findOrFail($id);
-        $shop->name = $request->name;
+        $shop->name = str_replace(' ', '', $request->name);
         $shop->titlename_id = $request->titlename;
         $shop->f_name = $request->f_name;
         $shop->l_name = $request->l_name;

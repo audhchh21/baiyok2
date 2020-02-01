@@ -24,4 +24,10 @@ class Inspection extends Model
     {
         return $this->belongsTo('App\Plan', 'plan_id');
     }
+
+    //
+    public function inspectiondetails()
+    {
+        return $this->hasMany('App\Inspectiondetail', 'inspection_id');
+    }
 }

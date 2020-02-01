@@ -20,4 +20,22 @@ class Inspectiondetail extends Model
         'actuation_after',
         'inspection_image',
     ];
+
+    //
+    public function foodsample()
+    {
+        return $this->belongsTo('App\Foodsample', 'foodsample_id');
+    }
+
+    //
+    public function foodsamplesource()
+    {
+        return $this->belongsTo('App\Foodsamplesource', 'foodsamplesource_id');
+    }
+
+    //
+    public function foodtestkit()
+    {
+        return $this->belongsTo('App\Foodtestkit', 'foodtestkit_id');
+    }
 }

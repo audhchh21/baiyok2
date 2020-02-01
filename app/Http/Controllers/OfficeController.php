@@ -57,7 +57,7 @@ class OfficeController extends Controller
     //
     public function officeStore(RequestOffice $request)
     {
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         $input['address'] = $request->address;
         $input['province'] = $request->province;
         $input['district'] = $request->district;
@@ -75,7 +75,7 @@ class OfficeController extends Controller
     public function officeUpdate(RequestOffice $request, $id)
     {
         $office = Office::findOrFail($id);
-        $office->name = $request->name;
+        $office->name = str_replace(' ', '', $request->name);
         $office->address = $request->address;
         $office->province = $request->province;
         $office->district = $request->district;

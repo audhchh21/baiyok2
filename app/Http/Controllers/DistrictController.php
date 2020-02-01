@@ -36,7 +36,7 @@ class DistrictController extends Controller
     //
     public function districtStore(RequestDistrict $request)
     {
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
         $input['province_id'] = $request->province;
         try {
             $district = District::create($input);
@@ -50,7 +50,7 @@ class DistrictController extends Controller
     public function districtUpdate(RequestDistrict $request, $id)
     {
         $district = District::findOrFail($id);
-        $district->name = $request->name;
+        $district->name = str_replace(' ', '', $request->name);
         $district->province_id = $request->province;
         try {
             $district->save();

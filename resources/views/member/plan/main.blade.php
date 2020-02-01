@@ -129,7 +129,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-5">
         <div class="col-12 col-xl-12">
             <table id="tb-plan" class="table table-hover table-bordered">
                 <thead class="bg-white">
@@ -142,7 +142,7 @@
                         <th class="text-right">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($plans as $plan)
                     <tr>
                         <td class="text-center tb-td">{{ $count++ }}</td>
@@ -155,7 +155,7 @@
                                 <a href="{{ route('member.inspectiondetail.check', ['id'=>$plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ตรวจแผนงาน">
                                     <span class="text-dark pr-1">
-                                        <i class="far fa-edit"></i>
+                                        <i class="fas fa-check-square"></i>
                                     </span>
                                     {{ __('ตรวจแผนงาน') }}
                                 </a>

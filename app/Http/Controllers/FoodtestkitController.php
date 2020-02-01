@@ -31,7 +31,7 @@ class FoodtestkitController extends Controller
     public function foodtestkitStore(Request $request)
     {
         // dd($request->all());
-        $input['name'] = $request->name;
+        $input['name'] = str_replace(' ', '', $request->name);
 
         try {
             $foodtestkit = Foodtestkit::create($input);
@@ -46,7 +46,7 @@ class FoodtestkitController extends Controller
     {
         // dd($request->all());
         $foodtestkit = Foodtestkit::findOrFail($id);
-        $foodtestkit->name = $request->name;
+        $foodtestkit->name = str_replace(' ', '', $request->name);
         try {
             $foodtestkit->save();
         } catch (\Exception $e) {
