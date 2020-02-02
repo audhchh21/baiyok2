@@ -57,7 +57,7 @@
     <div class="row mb-5">
         <div class="col">
             <div class="text-left">
-                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -76,7 +76,7 @@
                 </button>
             </div>
             @endif
-            <a href="{{ route('pdf.plan') }}">pdf</a>
+            <a href="{{ route('pdf.plan') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('PDF') }}</a>
             <div class="text-right pb-2">
                 <span class="badge badge-info"><i class="far fa-calendar fa-sm pr-1"></i>{{ __('ยังไม่ได้ทำการบันทึก') }}</span>
                 <span class="badge badge-info"><i class="far fa-calendar-check fa-sm pr-1"></i>{{ __('ทำการบันทึกเรียบร้อย') }}</span>
@@ -114,11 +114,11 @@
                             <div class="btn-group btn-group-sm">
                                 @if ($plan->status == '0' && $plan->to_user_id == Auth::user()->id)
                                 <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-white"
-                                    data-toggle="tooltip" data-placement="top" title="ตรวจแผนงาน">
+                                    data-toggle="tooltip" data-placement="top" title="บันทึกผลตรวจ">
                                     <span class="text-dark pr-1">
                                         <i class="fas fa-check-square"></i>
                                     </span>
-                                    {{ __('ตรวจแผนงาน') }}
+                                    {{ __('บันทึกผลตรวจ') }}
                                 </a>
                                 <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
@@ -140,20 +140,26 @@
                                 <a href="{{ route('member.inspection.detail', ['id' => $plan->inspection->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="รายละเอียด">
                                     <span class="text-success pr-1">
                                         <i class="fas fa-info-circle"></i>
-                                    </span> {{ __('รายละเอียด') }} </a>
+                                    </span>
+                                    {{ __('รายละเอียด') }}
+                                </a>
                                 @endif
                                 @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == Auth::user()->id)
                                 <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
-                                    </span> {{ __('แก้ไข') }} </a>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                 </a>
                                 @endif
                                 @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id == Auth::user()->id)
                                 <a href="{{ route('member.inspection.delete', ['id' => $plan->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="ลบ"
                                     onclick="return confirm('คุณต้องการลบแผนงานตรวจสอบ {{ $plan->shops->name }} ใช่ หรือ ไม่')">
                                     <span class="text-danger pr-1">
                                         <i class="far fa-trash-alt"></i>
-                                    </span> {{ __('ลบ') }} </a>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
                                 @endif
                             </div>
                         </td>

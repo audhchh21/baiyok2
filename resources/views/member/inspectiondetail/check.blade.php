@@ -14,6 +14,7 @@
 @push('javascript')
 <script>
     $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
         var html = `
             <tr>
                 <td class="text-left col-12 col-lg-2 tb-td">
@@ -32,7 +33,7 @@
                     {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    <input type="text" class="form-control" id="" name="detail[]"  placeholder="หมายเหตุ">
+                    <input type="text" class="form-control" id="" name="detail[]"  placeholder="กรณีตรวจผลสารปนเปื้อน">
                 </td>
             </tr>
             `
@@ -70,7 +71,7 @@
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -136,7 +137,7 @@
                             <th class="text-left col-12 col-lg-2">{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('รูป') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('ผลการตรวจสอบ') }}</th>
-                            <th class="text-left col-12 col-lg-2">{{ __('หมายเหตุ') }}</th>
+                            <th class="text-left col-12 col-lg-2">{{ __('แนวทางการจัดการ') }}</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white"></tbody>

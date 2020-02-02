@@ -19,6 +19,7 @@
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
+        $('[data-toggle="tooltip"]').tooltip();
         $('#plan_start').datepicker({language:'th-th',format:'yyyy-mm-dd'})
         $('#plan_end').datepicker({language:'th-th',format:'yyyy-mm-dd'})
         $('#user').select2()
@@ -39,7 +40,7 @@
     <div class="row mb-3">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('member.plan') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

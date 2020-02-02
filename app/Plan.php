@@ -26,7 +26,7 @@ class Plan extends Model
     // Fullname User
     public function getFulltimeAttribute()
     {
-        return $this->plan_start.' ถึง '.$this->plan_end;
+        return substr($this->plan_start, 0, 10).' ถึง '.substr($this->plan_end, 0, 10);
     }
 
     //

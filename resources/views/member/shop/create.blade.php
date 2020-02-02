@@ -16,6 +16,7 @@
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
+        $('[data-toggle="tooltip"]').tooltip();
         $('#province').select2()
         $('#district').select2()
         $('#subdistrict').select2()
@@ -37,7 +38,7 @@
     <div class="row">
         <div class="col-12 col-xl-12 mb-3">
             <div class="text-left">
-                <a href="{{ route('member.shop') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('member.shop') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าร้านค้า"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

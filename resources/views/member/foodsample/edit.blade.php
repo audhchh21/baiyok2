@@ -7,7 +7,11 @@
 @endpush
 
 @push('javascript')
-
+<script>
+$(document).ready( function() {
+    $('[data-toggle="tooltip"]').tooltip();
+})
+</script>
 @endpush
 
 @section('content')
@@ -20,7 +24,7 @@
 
     <!-- Start Content -->
     <div class="text-left">
-        <a href="{{ route('member.foodsample') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+        <a href="{{ route('member.foodsample') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าตัวอย่างอาหาร"><i class="fas fa-angle-double-left"></i>
             {{ __('ย้อนกลับ')   }}</a>
         <hr>
     </div>

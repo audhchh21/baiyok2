@@ -39,7 +39,7 @@
     <div class="row mb-3">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

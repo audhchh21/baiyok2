@@ -1,83 +1,51 @@
-<!doctype html>
-<html>
+@extends('layouts.pdf')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style>
-            @font-face {
-                font-family: 'THSarabunNew';
-                font-style: normal;
-                font-weight: normal;
-                src: url("{{ asset('fonts/THSarabunNew.ttf') }}") format('truetype');
-            }
-
-            @font-face {
-                font-family: 'THSarabunNew';
-                font-style: normal;
-                font-weight: bold;
-                src: url("{{ asset('fonts/THSarabunNew Bold.ttf') }}") format('truetype');
-            }
-
-            @font-face {
-                font-family: 'THSarabunNew';
-                font-style: italic;
-                font-weight: normal;
-                src: url("{{ asset('fonts/THSarabunNew Italic.ttf') }}") format('truetype');
-            }
-
-            @font-face {
-                font-family: 'THSarabunNew';
-                font-style: italic;
-                font-weight: bold;
-                src: url("{{ asset('fonts/THSarabunNew BoldItalic.ttf') }}") format('truetype');
-            }
-
-            body {
-                font-family: "THSarabunNew";
-                font-size: 16px;
-            }
-
-            @page {
-                size: A4;
-                padding: 15px;
-            }
-
-            @media print {
-
-                html,
-                body {
-                    width: 210mm;
-                    height: 297mm;
-                    /*font-size : 16px;*/
-                }
-            }
-
-        </style>
-</head>
-
-<body>
+@section('content')
+<header>
+    <img src="images/web/logopdf.png" class="img-fluid mt-2" alt="" style="width:125px;height:125px;">
+    <div class="text-center mt-5" style="font-size:28px">
+        {{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}
+    </div>
+</header>
+<footer class="text-right">
+    <span>{{ 'วันที่ออกรายงาน '.now() }}</span>
+    <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname }}</span>
+</footer>
+<main>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row pt-5">
             <div class="col">
-                <table>
+                <div class="text-center" style="font-size:32px">
+                    {{ __('รายงานแผนงานการตรวจสอบสารปนเปื้อนในอาหาร') }}
+                </div>
+                <table class="table table-sm table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th class="text-left col-3 tb-td">{{ __('ร้านค้า') }}</th>
+                            <th class="text-left col-2 tb-td">{{ __('ผู้กำหนดแผนงาน') }}</th>
+                            <th class="text-left col-2 tb-td">{{ __('ผู้ตรวจ') }}</th>
+                            <th class="text-center col-3 tb-td">{{ __('ระยะเวลาการตรวจ') }}</th>
+                            <th class="text-center col-2 tb-td">{{ __('สถานะแผนงาน') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($plans as $plan)
                         <tr>
-                            <td>{{ $plan }}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="text-left col-3 tb-td"><span class="pl-2">{{ $plan->Shops->name }}</span></td>
+                            <td class="text-left col-2 tb-td"><span class="pl-2">{{ $plan->to_user->Fullname }}</span>
+                            </td>
+                            <td class="text-left col-2 tb-td"><span class="pl-2">{{ $plan->by_user->Fullname }}</span>
+                            </td>
+                            <td class="text-center col-3 tb-td"><span class="pl-2">{{ $plan->Fulltime }}</span></td>
+                            <td class="text-center col-2 tb-td">
+                                @if ($plan->status == '0')
+                                <span class="pl-2">{{ __('ยังไม่ได้ทำการบันทึก') }}</span>
+                                @elseif($plan->status == '1')
+                                <span class="pl-2">{{ __('ทำการบันทึกเรียบร้อย') }}</span>
+                                @elseif($plan->status == '2')
+                                <span class="pl-2">{{ __('ทำการบันทึกล่าช้า') }}</span>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -85,9 +53,5 @@
             </div>
         </div>
     </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+</main>
+@endsection
