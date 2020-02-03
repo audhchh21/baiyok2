@@ -87,7 +87,7 @@
                         <th class="col-1 text-center">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($users as $user)
                     <tr>
                         <td class="col-1 text-center tb-td">{{ $count++ }}</td>
@@ -113,13 +113,24 @@
                             <span class="badge badge-pill badge-danger pl-3 pr-3 pt-2 pb-2">{{ __('ยกเลิกสิทธิ์') }}</span>
                             @endif
                         </td>
-                        <td class="col-1 text-center tb-td">
-                            <a href="{{ route('admin.user.edit', ['id'=>$user->id]) }}" class="btn btn-warning"
-                                data-toggle="tooltip" data-placement="top" title="แก้ไข"><i class="far fa-edit"></i></a>
-                            <a href="{{ route('admin.user.delete', ['id'=>$user->id]) }}" class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $user->name }} ใช่ หรือ ไม่')"
-                                data-toggle="tooltip" data-placement="top" title="ลบ"><i
-                                    class="far fa-trash-alt"></i></a>
+                        <td class="text-center tb-td col-1">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('admin.user.edit', ['id'=>$user->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                    <span class="text-warning pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                </a>
+                                <a href="{{ route('admin.user.delete', ['id'=>$user->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ลบ"
+                                    onclick="return confirm('คุณต้องการลบ {{ $user->name }} ใช่ หรือ ไม่')">
+                                    <span class="text-danger pr-1">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty

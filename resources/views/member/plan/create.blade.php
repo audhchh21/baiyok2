@@ -14,8 +14,8 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 {{-- javascript select2 --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );

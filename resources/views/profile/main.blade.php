@@ -18,12 +18,22 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-xl-12">
             <div class="text-right">
+                @if (Auth::user()->type == 'Admin')
                 <a href="{{ route('admin.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
                 <a href="{{ route('admin.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
-                <a href="{{ route('admin.profile.password') }}" class="btn btn-outline-dark"> {{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                <a href="{{ route('admin.profile.password') }}" class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @elseif(Auth::user()->type == 'Manager')
+                <a href="{{ route('manager.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
+                <a href="{{ route('manager.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
+                <a href="{{ route('manager.profile.password') }}" class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @elseif(Auth::user()->type == 'User')
+                <a href="{{ route('member.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
+                <a href="{{ route('member.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
+                <a href="{{ route('member.profile.password') }}" class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @endif
                 <hr>
             </div>
             <table class="table table-borderless">

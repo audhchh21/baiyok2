@@ -76,7 +76,7 @@
                 </button>
             </div>
             @endif
-            <a href="{{ route('pdf.plan') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('PDF') }}</a>
+            <a href="{{ route('pdf.plan.all') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('PDF') }}</a>
             <div class="text-right pb-2">
                 <span class="badge badge-info"><i class="far fa-calendar fa-sm pr-1"></i>{{ __('ยังไม่ได้ทำการบันทึก') }}</span>
                 <span class="badge badge-info"><i class="far fa-calendar-check fa-sm pr-1"></i>{{ __('ทำการบันทึกเรียบร้อย') }}</span>

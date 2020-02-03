@@ -13,13 +13,59 @@ class PDFController extends Controller
     public function planAll()
     {
         $data = Plan::all();
-        // $pdf = PDF::loadView('pdf.member_plan', ['plans' => $data])
-        // ->setPaper('a4', 'landscape');
         $pdf = \App::make('dompdf.wrapper');
-        /* Careful: use "enable_php" option only with local html & script tags you control.
-        used with remote html or scripts is a major security problem (remote php injection) */
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.member_plan', ['plans' => $data])->setPaper('a4', 'landscape');;
+        $pdf->loadView('pdf.member_plan_all', ['plans' => $data])->setPaper('a4', 'landscape');;
         return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+    }
+
+    //
+    public function planSuccess()
+    {
+        $data = Plan::all()->where('status', '1');
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('pdf.member_plan_success', ['plans' => $data])->setPaper('a4', 'landscape');;
+        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+    }
+
+    //
+    public function planSlowsuccess()
+    {
+        $data = Plan::all()->where('status', '2');
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('pdf.member_plan_slowsuccess', ['plans' => $data])->setPaper('a4', 'landscape');;
+        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+    }
+
+    //
+    public function planUnsuccess()
+    {
+        $data = Plan::all()->where('status', '0');
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('pdf.member_plan_unsuccess', ['plans' => $data])->setPaper('a4', 'landscape');;
+        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+    }
+
+    //
+    public function resultProvince()
+    {
+        $data = Plan::all()->where('status', '0');
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('pdf.member_plan_unsuccess', ['plans' => $data])->setPaper('a4', 'landscape');;
+        return $pdf->stream('รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร.pdf');
+    }
+
+    //
+    public function resultDistrict()
+    {
+        $data = Plan::all()->where('status', '0');
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->loadView('pdf.member_plan_unsuccess', ['plans' => $data])->setPaper('a4', 'landscape');;
+        return $pdf->stream('รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร.pdf');
     }
 }

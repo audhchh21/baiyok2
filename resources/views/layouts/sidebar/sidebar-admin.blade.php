@@ -18,7 +18,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.dashboard') }}">
-                    <i class="material-icons">edit</i>
+                    <i class="fas fa-chart-line"></i>
                     <span>{{ __('กราฟ') }}</span>
                 </a>
             </li>

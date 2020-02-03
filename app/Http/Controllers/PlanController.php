@@ -43,7 +43,7 @@ class PlanController extends Controller
     {
         $plan = Plan::findOrFail($id);
         $offices = Office::all();
-        $users = User::all();
+        $users = User::where('office_id', Auth::user()->office_id)->get();
         $shops = Shop::all();
         return view('member.plan.edit', [
             'plan' => $plan,

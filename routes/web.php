@@ -84,7 +84,15 @@ Route::group(['prefix' => 'manager','middleware' => ['auth', 'ManagerLogin']], f
     Route::get('dashboard', 'HomeController@managerDashboard')->name('manager.dashboard');
     Route::group(['prefix' => 'profile'], function () {
         Route::get('', 'ProfileController@profileMain')->name('manager.profile');
-        Route::get('', 'ProfileController@profileEdit')->name('manager.profile.edit');
+        Route::get('edit', 'ProfileController@profileEdit')->name('manager.profile.edit');
+        Route::get('password', 'ProfileController@profilePassword')->name('manager.profile.password');
+        Route::post('update/{id}', 'ProfileController@profileUpdate')->name('manager.profile.update');
+        Route::post('password/re', 'ProfileController@profilePasswordReset')->name('manager.profile.password.update');
+    });
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('', 'HomeController@managerPDF')->name('manager.pdf');
+        Route::get('result/province', 'PDFController@resultProvince')->name('manager.result.province');
+        Route::get('result/district', 'PDFController@resultDistrict')->name('manager.result.district');
     });
     // New Route Group
     // Route::group(['prefix' => ''], function () {
@@ -146,10 +154,10 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     });
     Route::group(['prefix' => 'profile'], function () {
         Route::get('', 'ProfileController@profileMain')->name('member.profile');
-        Route::get('edit/{id}', 'ProfileController@profileEdit')->name('member.profile.edit');
-        Route::post('store', 'ProfileController@profileStore')->name('member.profile.store');
+        Route::get('edit', 'ProfileController@profileEdit')->name('member.profile.edit');
+        Route::get('password', 'ProfileController@profilePassword')->name('member.profile.password');
         Route::post('update/{id}', 'ProfileController@profileUpdate')->name('member.profile.update');
-        Route::get('delete/{id}', 'ProfileController@profileDelete')->name('member.profile.delete');
+        Route::post('password/re', 'ProfileController@profilePasswordReset')->name('member.profile.password.update');
     });
     Route::group(['prefix' => 'shop'], function () {
         Route::get('', 'ShopController@shopMain')->name('member.shop');
@@ -161,7 +169,10 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
 
     });
     Route::group(['prefix' => 'pdf'], function () {
-        Route::get('planall', 'PDFController@planAll')->name('pdf.plan');
+        Route::get('plan/all', 'PDFController@planAll')->name('pdf.plan.all');
+        Route::get('plan/success', 'PDFController@planSuccess')->name('pdf.plan.success');
+        Route::get('plan/slowsuccess', 'PDFController@planSlowsuccess')->name('pdf.plan.slowsuccess');
+        Route::get('plan/unsuccess', 'PDFController@planUnsuccess')->name('pdf.plan.unsuccess');
     });
 });
 

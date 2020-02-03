@@ -179,7 +179,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center tb-td"><span class="h3">{{ __('ไม่มีแผนงาน') }}</span></td>
+                        <td colspan="6" class="text-center tb-td"><span class="h3">{{ __('ไม่มีแผนงานตรวจสอบ') }}</span></td>
                     </tr>
                     @endforelse
                 </tbody>

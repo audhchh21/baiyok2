@@ -18,13 +18,25 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12 col-xl-12">
             <div class="text-right">
+                @if (Auth::user()->type == 'Admin')
                 <a href="{{ route('admin.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
                 <a href="{{ route('admin.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
-                <a href="{{ route('admin.profile.password') }}" class="btn btn-outline-dark">
-                    {{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                <a href="{{ route('admin.profile.password') }}"
+                    class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @elseif(Auth::user()->type == 'Manager')
+                <a href="{{ route('manager.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
+                <a href="{{ route('manager.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
+                <a href="{{ route('manager.profile.password') }}"
+                    class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @elseif(Auth::user()->type == 'User')
+                <a href="{{ route('member.profile') }}" class="btn btn-outline-dark"> {{ __('โปรไฟล์') }}</a>
+                <a href="{{ route('member.profile.edit') }}" class="btn btn-outline-dark"> {{ __('แก้ไข') }}</a>
+                <a href="{{ route('member.profile.password') }}"
+                    class="btn btn-outline-dark">{{ __('เปลี่ยนรหัสผ่าน') }}</a>
+                @endif
                 <hr>
             </div>
             @if (session('status'))
@@ -42,7 +54,14 @@
                 </button>
             </div>
             @endif
-            <form action="{{ route('admin.profile.update', ['id' => $user->id]) }}" method="post">
+            <form @if (Auth::user()->type == 'Admin')
+                action="{{ route('admin.profile.update', ['id' => $user->id]) }}"
+                @elseif(Auth::user()->type == 'Manager')
+                action="{{ route('manager.profile.update', ['id' => $user->id]) }}"
+                @elseif(Auth::user()->type == 'User')
+                action="{{ route('member.profile.update', ['id' => $user->id]) }}"
+                @endif
+                method="post">
                 @csrf
                 <table class="table table-borderless">
                     <tbody>
@@ -78,7 +97,8 @@
                         <tr>
                             <td class="text-left col-12 col-xl-3">{{ __('หน่วยงานที่สังกัด') }}</td>
                             <td class="text-left col-12 col-xl-9">
-                                {!! Form::select('office', $office, old('office') ?? $user->office_id, ['id' => 'office', 'class' => 'form-control']) !!}
+                                {!! Form::select('office', $office, old('office') ?? $user->office_id, ['id' =>
+                                'office', 'class' => 'form-control']) !!}
                             </td>
                         </tr>
                     </tbody>

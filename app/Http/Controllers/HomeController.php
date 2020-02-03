@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
+use Auth;
+
 use App\User;
+use App\Plan;
 use App\Office;
+use App\Foodsample;
+use App\Foodsamplesource;
+use App\Foodtestkit;
+use App\Inspectiondetail;
 
 class HomeController extends Controller
 {
@@ -14,6 +21,8 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
+
+    // ADMIN
 
     public function adminDashboard()
     {
@@ -78,14 +87,132 @@ class HomeController extends Controller
         return $chartjs;
     }
 
+    // MANAGER
+
     public function managerDashboard()
     {
-        return view('manager.dashboard');
+        $user = Auth::user();
+        $plans = Plan::all();
+
+        $ymd = date('Y-m-d');
+        $date_start = date("Y-m-d", strtotime("first day of this month"));
+        $date_end = date("Y-m-d", strtotime("last day of this month"));
+        $dayend = date('t',strtotime('today'));
+        for($day_start = 1; $day_start <= $dayend; $day_start++){
+            $lable[$day_start-1] = 'วันที่ '.$day_start;
+            if($date_start <= $ymd && $date_start <= $ymd)
+            {
+                $b_date = date_create($date_start);
+                $planall[$day_start-1] = $plans
+                ->whereBetween('created_at', [
+                    date_format($b_date, 'Y-m-d 00:00:00'),
+                    date_format($b_date, 'Y-m-d 23:59:59')
+                    ])
+                ->count();
+                $plansuccess[$day_start-1] = $plans
+                ->whereBetween('created_at', [
+                    date_format($b_date, 'Y-m-d 00:00:00'),
+                    date_format($b_date, 'Y-m-d 23:59:59')
+                    ])
+                ->where('status', '1')
+                ->count();
+                $planslowsuccess[$day_start-1] = $plans
+                ->whereBetween('created_at', [
+                    date_format($b_date, 'Y-m-d 00:00:00'),
+                    date_format($b_date, 'Y-m-d 23:59:59')
+                    ])
+                ->where('status', '2')
+                ->count();
+                $planunsuccess[$day_start-1] = $plans
+                ->whereBetween('created_at', [
+                    date_format($b_date, 'Y-m-d 00:00:00'),
+                    date_format($b_date, 'Y-m-d 23:59:59')
+                    ])
+                ->where('status', '0')
+                ->count();
+            }
+            else
+            {
+                $planall[$day_start-1] = 0;
+                $plansuccess[$day_start-1] = 0;
+                $planslowsuccess[$day_start-1] = 0;
+                $planunsuccess[$day_start-1] = 0;
+            }
+            $date_start = date ("Y-m-d", strtotime("+1 day", strtotime($date_start)));
+        }
+
+        $dashboard_plan = app()->chartjs
+        ->name('barChartTest')
+        ->type('bar')
+        ->size(['width' => 0, 'height' => 400])
+        ->labels($lable)
+        ->datasets([
+            [
+                "label" => "แผนงานทั้งหมด",
+                'backgroundColor' => '#000000',
+                'data' => $planall
+            ],
+            [
+                "label" => "แผนงานตรวจสอบเรียบร้อย",
+                'backgroundColor' => '#006600',
+                'data' => $plansuccess
+            ],
+            [
+                "label" => "แผนงานตรวจสอบล่าช้า",
+                'backgroundColor' => '#FF9900',
+                'data' => $planslowsuccess
+            ],
+            [
+                "label" => "แผนงานที่ยังไม่ได้ตรวจสอบ",
+                'backgroundColor' => '#CC0000',
+                'data' => $planunsuccess
+            ]
+        ])
+        ->options([]);
+
+        $plan_all = $plans->count();
+        $plan_today = $plans
+        ->whereBetween('created_at', [
+            date('Y-m-d 00:00:00'),
+            date('Y-m-d 23:59:59')
+            ])
+        ->count();
+        $plan_check = $plans->whereIn('status', ['1','2'])->count();
+        $plan_un = $plans->where('status', '0')->count();
+        return view('manager.dashboard', [
+            'plan_all' => $plan_all,
+            'plan_today' => $plan_today,
+            'plan_check' => $plan_check,
+            'plan_un' => $plan_un,
+            'dashboardplan' => $dashboard_plan
+        ]);
     }
+
+    public function managerPDF()
+    {
+        return view('manager.pdf.main');
+    }
+
+
+    // MAMBER
 
     public function memberDashboard()
     {
-        return view('member.dashboard');
+        $user = Auth::user();
+        $plan = Plan::all();
+        $plan_all = $plan->count();
+        $plan_today = $plan->whereBetween('created_at', [date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->count();
+        $plan_check = $plan->where('status', '0')->where('to_user_id', $user->id)->count();
+        $user_count = $this->getUser()->where('office_id', $user->office_id)->count();
+        $plans = $plan->where('status', '0')->where('to_user_id', $user->id);
+        // dd($user_count);
+        return view('member.dashboard', [
+            'plan_all' => $plan_all,
+            'plan_today' => $plan_today,
+            'plan_check' => $plan_check,
+            'user_count' => $user_count,
+            'plans' => $plans
+        ]);
     }
 
     private function getUser()

@@ -77,20 +77,29 @@
                         <th class="col-2 text-right">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($subdistricts as $subdistrict)
                     <tr>
                         <td class="col-1 text-center tb-td">{{ $count++ }}</td>
-                        <td class="col-9 text-left tb-td">{{ $subdistrict->name }}</td>
-                        <td class="col-2 text-right tb-td">
-                            <a href="{{ route('admin.subdistrict.edit', ['id'=>$subdistrict->id]) }}"
-                                class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="แก้ไข"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="{{ route('admin.subdistrict.delete', ['id'=>$subdistrict->id]) }}"
-                                class="btn btn-danger"
-                                onclick="return confirm('คุณต้องการลบ {{ $subdistrict->name }} ใช่ หรือ ไม่')"
-                                data-toggle="tooltip" data-placement="top" title="ลบ"><i
-                                    class="far fa-trash-alt"></i></a>
+                        <td class="col-9 text-left tb-td"><span data-toggle="tooltip" data-placement="right" title="อำเภอ {{ $subdistrict->districts->name }} จังหวัด {{ $subdistrict->districts->provinces->name }} ">{{  $subdistrict->name   }}</span></td>
+                        <td class="text-center tb-td col-1">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ route('admin.subdistrict.edit', ['id'=>$subdistrict->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                    <span class="text-warning pr-1">
+                                        <i class="far fa-edit"></i>
+                                    </span>
+                                    {{ __('แก้ไข') }}
+                                </a>
+                                <a href="{{ route('admin.subdistrict.delete', ['id'=>$subdistrict->id]) }}" class="btn btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ลบ"
+                                    onclick="return confirm('คุณต้องการลบ {{ $subdistrict->name }} ใช่ หรือ ไม่')">
+                                    <span class="text-danger pr-1">
+                                        <i class="far fa-trash-alt"></i>
+                                    </span>
+                                    {{ __('ลบ') }}
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @empty

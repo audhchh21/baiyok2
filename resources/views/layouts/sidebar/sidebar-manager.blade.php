@@ -16,8 +16,14 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('manager.dashboard') }}">
-                    <i class="material-icons">edit</i>
+                    <i class="fas fa-chart-line"></i>
                     <span>{{ __('กราฟ') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('manager.pdf') }}">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>{{ __('ออกรายงาน') }}</span>
                 </a>
             </li>
         </ul>

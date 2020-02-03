@@ -53,7 +53,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
-                    <i class="fas fa-stream"></i>
+                    <i class="fas fa-list-ol"></i>
                     <span>{{ __('ผลการตรวจสอบสารปนเปิ้อน') }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small"

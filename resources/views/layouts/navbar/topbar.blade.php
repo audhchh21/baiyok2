@@ -7,10 +7,11 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="nav-link-icon__wrapper">
                         <i class="material-icons">&#xE7F4;</i>
-                        <span class="badge badge-pill badge-danger">2</span>
+                        <span class="badge badge-pill badge-danger">0</span>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                    @if (false)
                     <a class="dropdown-item" href="">
                         <div class="notification__icon-wrapper">
                             <div class="notification__icon">
@@ -35,7 +36,8 @@
                                 <span class="text-danger text-semibold">5.52%</span>. It could have been worse!</p>
                         </div>
                     </a>
-                    <a class="dropdown-item notification__all text-center" href=""> View all Notifications </a>
+                    @endif
+                    <a class="dropdown-item notification__all text-center" href=""> {{ __('แสดงทั้งหมด') }} </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -44,8 +46,20 @@
                     <span class="d-none d-md-inline-block">{{ Auth::user()->Fullname }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-small">
+                    @if (Auth::user()->type == 'Admin')
                     <a class="dropdown-item" href="{{ route('admin.profile') }}">
-                        <i class="material-icons">&#xE7FD;</i> {{ __('โปรไฟล์ของฉัน') }}</a>
+                        <i class="material-icons">&#xE7FD;</i> {{ __('โปรไฟล์ของฉัน') }}
+                    </a>
+                    @elseif(Auth::user()->type == 'Manager')
+                    <a class="dropdown-item" href="{{ route('manager.profile') }}">
+                        <i class="material-icons">&#xE7FD;</i> {{ __('โปรไฟล์ของฉัน') }}
+                    </a>
+                    @elseif(Auth::user()->type == 'User')
+                    <a class="dropdown-item" href="{{ route('member.profile') }}">
+                        <i class="material-icons">&#xE7FD;</i> {{ __('โปรไฟล์ของฉัน') }}
+                    </a>
+                    @endif
+
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">

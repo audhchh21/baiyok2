@@ -23,7 +23,7 @@
                         <tr>
                             <th class="text-left col-3 tb-td">{{ __('ร้านค้า') }}</th>
                             <th class="text-left col-2 tb-td">{{ __('ผู้กำหนดแผนงาน') }}</th>
-                            <th class="text-left col-2 tb-td">{{ __('ผู้ตรวจ') }}</th>
+                            <th class="text-left col-2 tb-td">{{ __('ผู้ตรวจวิเคราะห์') }}</th>
                             <th class="text-center col-3 tb-td">{{ __('ระยะเวลาการตรวจ') }}</th>
                             <th class="text-center col-2 tb-td">{{ __('สถานะแผนงาน') }}</th>
                         </tr>

@@ -18,13 +18,13 @@
         var html = `
             <tr>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control']) }}
+                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control']) }}
+                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control']) }}
+                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
                     <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">

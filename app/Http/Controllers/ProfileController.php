@@ -58,9 +58,21 @@ class ProfileController extends Controller
             $user->save();
         } catch (\Exception $e) {
             // dd($e->getMessage());
-            return redirect()->route('admin.profile.edit')->with('error', 'แก้ไขข้อมูลส่วนตัวไม่สำเสร็จ!!');
+            if($user->type == 'Admin'){
+                return redirect()->route('admin.profile.edit')->with('error', 'แก้ไขข้อมูลส่วนตัวไม่สำเสร็จ!!');
+            }elseif($user->type == 'Manager'){
+                return redirect()->route('manager.profile.edit')->with('error', 'แก้ไขข้อมูลส่วนตัวไม่สำเสร็จ!!');
+            }elseif($user->type == 'User'){
+                return redirect()->route('member.profile.edit')->with('error', 'แก้ไขข้อมูลส่วนตัวไม่สำเสร็จ!!');
+            }
         }
-        return redirect()->route('admin.profile.edit')->with('status', 'แก้ไขข้อมูลเรียบร้อย!!');
+        if($user->type == 'Admin'){
+            return redirect()->route('admin.profile.edit')->with('status', 'แก้ไขข้อมูลเรียบร้อย!!');
+        }elseif($user->type == 'Manager'){
+            return redirect()->route('manager.profile.edit')->with('status', 'แก้ไขข้อมูลเรียบร้อย!!');
+        }elseif($user->type == 'User'){
+            return redirect()->route('member.profile.edit')->with('status', 'แก้ไขข้อมูลเรียบร้อย!!');
+        }
     }
 
     //
@@ -72,9 +84,21 @@ class ProfileController extends Controller
             $password = User::findOrFail(Auth::user()->id);
             $password->password = Hash::make($request->new_password);
             $password->save();
-            return redirect()->route('admin.profile.password')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
+            if($user->type == 'Admin'){
+                return redirect()->route('admin.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
+            }elseif($user->type == 'Manager'){
+                return redirect()->route('manager.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
+            }elseif($user->type == 'User'){
+                return redirect()->route('member.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
+            }
         }else{
-            return redirect()->route('admin.profile.password')->with('error', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
+            if($user->type == 'Admin'){
+                return redirect()->route('admin.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
+            }elseif($user->type == 'Manager'){
+                return redirect()->route('manager.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
+            }elseif($user->type == 'User'){
+                return redirect()->route('member.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
+            }
         }
     }
 }
