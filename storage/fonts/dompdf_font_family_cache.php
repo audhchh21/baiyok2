@@ -78,7 +78,7 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'thsarabunnew' => array(
-    'normal' => $fontDir . '/THSarabunNew',
+    'normal' => $fontDir . '/thsarabunnew-normal_90a71a4517b7a868c97a81596d1908b2',
     'bold' => $fontDir . '/THSarabunNew',
     'italic' => $fontDir . '/THSarabunNew',
     'bold_italic' => $fontDir . '/THSarabunNew',

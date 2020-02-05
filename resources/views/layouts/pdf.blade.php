@@ -2,9 +2,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         @font-face {
             font-family: 'THSarabunNew';
@@ -35,23 +32,27 @@
         }
 
         @page {
+            size: landscape;
+            margin: 5px;
             size: 'A4';
-            padding: 10px;
-            margin: 10px 0px 0px 0px;
+            padding-bottom: 40px;
+            margin: 10px 14px 0px 14px;
         }
 
         @media print {
+
             html,
             body {
-                width: 210mm;
-                height: 297mm;
+                /* width: 210mm;
+                height: 297mm; */
+                width: 100%;
+                height: 100%;
             }
         }
 
         body {
             font-family: 'THSarabunNew' !important;
             font-size: 16px;
-
         }
 
         header {
@@ -59,7 +60,7 @@
             top: 0px;
             left: 0px;
             right: 0px;
-            height: 200px;
+            height: 230px;
             text-align: center;
             line-height: 1.5px;
         }
@@ -71,41 +72,44 @@
             left: 0px;
             right: 0px;
             height: 28px;
-            background-color: #06693a;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #000000;
         }
 
         main {
             position: relative;
-            top:200px;
+            top:230px;
             left: 0px;
             right: 0px;
+            width: 100%;
+            height: 90%;
         }
 
-        .tb-td {
+        table{
+            border-collapse: collapse !important;
+        }
+
+        td,th {
             vertical-align: middle !important;
         }
 
-        .page-number:before {
-            color: #ffffff;
-            content: "Page " counter(page);
-        }
+
     </style>
 </head>
 
 <body>
     @yield('content')
-    <script type="text/php">
+    @php
         if (isset($pdf)) {
             $text = "หน้า {PAGE_NUM} / {PAGE_COUNT}";
             $size = 12;
             $font = $fontMetrics->getFont("Verdana");
             $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
             $x = ($pdf->get_width() - $width) / 2;
-            $y = $pdf->get_height() - 25;
-            $color = array(255,255,255);
+            $y = $pdf->get_height()-100;
+            $color = array(0,0,0);
             $pdf->page_text($x, $y, $text, $font, $size, $color);
         }
-    </script>
+    @endphp
 </body>
 </html>
