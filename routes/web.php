@@ -177,6 +177,15 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
 });
 
 /**
+ *  API
+ */
+Route::group(['prefix' => 'api'], function () {
+    Route::get('province', 'API\CityController@getProvince')->name('api.province');
+    Route::get('district', 'API\CityController@getDistrict')->name('api.district');
+    Route::get('subdistrict', 'API\CityController@getSubdistrict')->name('api.subdistrict');
+});
+
+/**
  * Login Route
  */
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

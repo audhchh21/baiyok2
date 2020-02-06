@@ -161,16 +161,8 @@
                 </div>
                 <div class="card-footer border-top">
                     <div class="row">
-                        {{-- <div class="col">
-                            <select class="custom-select custom-select-sm" style="max-width: 130px;">
-                                <option selected="">{{ __('') }}</option>
-                        <option value="1">{{ __('') }}</option>
-                        <option value="2">{{ __('') }}</option>
-                        <option value="3">{{ __('') }}</option>
-                        </select>
-                    </div> --}}
                     <div class="col text-right view-report">
-                        <a href="#" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
+                        <a href="{{ route('admin.office') }}" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
                     </div>
                 </div>
             </div>
@@ -186,16 +178,8 @@
             </div>
             <div class="card-footer border-top">
                 <div class="row">
-                    {{-- <div class="col">
-                            <select class="custom-select custom-select-sm" style="max-width: 130px;">
-                                <option selected="">{{ __('') }}</option>
-                    <option value="1">{{ __('') }}</option>
-                    <option value="2">{{ __('') }}</option>
-                    <option value="3">{{ __('') }}</option>
-                    </select>
-                </div> --}}
                 <div class="col text-right view-report">
-                    <a href="#" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
+                    <a href="{{ route('admin.user') }}" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
                 </div>
             </div>
         </div>

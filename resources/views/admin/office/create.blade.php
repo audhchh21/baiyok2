@@ -15,11 +15,52 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(() => {
-        $.fn.select2.defaults.set( "theme", "bootstrap" );
+        $.fn.select2.defaults.set( "theme", "bootstrap" )
         $('#province').select2()
         $('#district').select2()
         $('#subdistrict').select2()
         $('#zipcode').select2()
+
+        var val_province = $('#province').val()
+        var opt_province = '<option value="selected">----- เลือก จังหวัด -----</option>';
+        $.ajax({
+                url : '{{ route("api.province") }}',
+                type: 'get',
+                data:({}),
+                dataType:'json',
+                success: function(result) {
+                    // console.log(result)
+                    $.each(result, function (count, value) {
+                        // console.log(value);
+                        opt_province += '<option value="' + value['id'] + '">' + value['name'] + '</option>'
+                    })
+                    $('#province').html(opt_province)
+                }
+            })
+
+        $('#province').on('select2:select', function() {
+
+            var opt_district = '<option value="selected">----- เลือก อำเภอ -----</option>';
+
+            // console.log(value)
+
+            $.ajax({
+                url : '{{ route("api.district") }}',
+                type: 'get',
+                data:({
+                    'id': val_province
+                }),
+                dataType:'json',
+                success: function(result) {
+                    // console.log(result)
+                    $.each(result, function (count, value) {
+                        // console.log(value);
+                        opt_district += '<option value="' + value['id'] + '">' + value['name'] + '</option>'
+                    })
+                    $('#district').html(opt_district)
+                }
+            })
+        })
     })
 </script>
 @endpush
@@ -84,7 +125,7 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-3">
                         <label for="province" class="h3">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('province', $provinces, null, ['id' => 'province', 'class' => 'form-control
+                        {!! Form::select('province', $provinces, null, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('province') ? ' is-invalid' : '' )]) !!}
                         @error('province')
                         <div class="invalid-feedback">
@@ -94,7 +135,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('district', $districts, null, ['id' => 'district', 'class' => 'form-control
+                        {!! Form::select('district', $districts, null, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('district') ? ' is-invalid' : '' )]) !!}
                         @error('district')
                         <div class="invalid-feedback">
@@ -104,7 +145,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="subdistrict" class="h3">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('subdistrict', $subdistricts, null, ['id' => 'subdistrict', 'class' =>
+                        {!! Form::select('subdistrict', $subdistricts, null, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
                         'form-control form-control-lg'.( $errors->has('subdistrict') ? ' is-invalid' : '' )]) !!}
                         @error('subdistrict')
                         <div class="invalid-feedback">
@@ -115,7 +156,7 @@
                     <div class="form-group col-12 col-xl-3">
                         <label for="zipcode" class="h3">{{ __('รหัสไปรษณีย์') }}<span
                                 class="text-danger">*</span></label>
-                        {!! Form::select('zipcode', $zipcodes, null, ['id' => 'zipcode', 'class' => 'form-control
+                        {!! Form::select('zipcode', $zipcodes, null, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('zipcode') ? ' is-invalid' : '' )]) !!}
                         @error('zipcode')
                         <div class="invalid-feedback">
