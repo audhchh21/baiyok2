@@ -27,7 +27,6 @@ class RequestSubdistrict extends FormRequest
             'name.required' => 'กรุณาใส่ชื่อตำบล',
             'zipcode.required' => 'กรุณาใส่รหัสไปรษณีย์',
             'zipcode.size' => 'กรุณาใส่รหัสไปรษณีย์ ให้ครบ 5 ตัว',
-
         ];
     }
 }

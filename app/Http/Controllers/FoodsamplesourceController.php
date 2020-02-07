@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestFoodsamplesource;
 
 use App\Foodsamplesource;
 
@@ -28,7 +29,7 @@ class FoodsamplesourceController extends Controller
     }
 
     //
-    public function foodsamplesourceStore(Request $request)
+    public function foodsamplesourceStore(RequestFoodsamplesource $request)
     {
         $input['name'] = str_replace(' ', '', $request->name);
         try {
@@ -40,7 +41,7 @@ class FoodsamplesourceController extends Controller
     }
 
     //
-    public function foodsamplesourceUpdate(Request $request, $id)
+    public function foodsamplesourceUpdate(RequestFoodsamplesource $request, $id)
     {
         $foodsamplesource = Foodsamplesource::findOrFail($id);
         $foodsamplesource->name = str_replace(' ', '', $request->name);

@@ -39,6 +39,44 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-subdistrict').DataTable();
+        var val_province = $('#province').val()
+        var opt_district = '<option value="selected">----- เลือก อำเภอ -----</option>'
+        var op_district = opt_district
+        $.ajax({
+                url : '{{ route("api.district") }}',
+                type: 'get',
+                data:({
+                    'id': val_province
+                }),
+                dataType:'json',
+                success: function(result) {
+                    // console.log(result)
+                    $.each(result.data, function (count, value) {
+                        // console.log(value);
+                        op_district += '<option value="' + value['id'] + '">' + value['name'] + '</option>'
+                    })
+                    $('#district').html(op_district)
+                }
+            })
+        $('#province').change( function() {
+            val_province = $(this).val()
+            $.ajax({
+                url : '{{ route("api.district") }}',
+                type: 'get',
+                data:({
+                    'id': val_province
+                }),
+                dataType:'json',
+                success: function(result) {
+                    // console.log(result)
+                    $.each(result.data, function (count, value) {
+                        // console.log(value);
+                        op_district += '<option value="' + value['id'] + '">' + value['name'] + '</option>'
+                    })
+                    $('#district').html(op_district)
+                }
+            })
+        })
     })
 
 </script>
@@ -139,7 +177,7 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="zipcode" class="h3">{{ __('เพิ่มรหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
+                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" pattern="[0-9]{5}" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
                         @error('zipcode')
                         <div class="invalid-feedback">
                             {{ $errors->first('zipcode') }}

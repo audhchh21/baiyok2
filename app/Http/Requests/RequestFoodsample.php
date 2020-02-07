@@ -15,6 +15,7 @@ class RequestFoodsample extends FormRequest
     {
         return [
             //
+            'name' => 'required',
         ];
     }
 
@@ -22,6 +23,7 @@ class RequestFoodsample extends FormRequest
     {
         return [
             //
+            'name.required' => 'กรุณาใส่ชื่อตัวอย่างอาหาร',
         ];
     }
 }

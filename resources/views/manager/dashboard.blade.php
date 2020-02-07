@@ -102,43 +102,6 @@
             </div>
         </div>
     </div>
-    <div class="row mb-5">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    {{-- {!! $result->render() !!} --}}
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    {{-- {!! $sample->render() !!} --}}
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    {{-- {!! $samplesource->render() !!} --}}
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    {{-- {!! $testkit->render() !!} --}}
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- End Content -->
 </div>
 

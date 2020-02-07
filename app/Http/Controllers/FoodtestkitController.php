@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestFoodtestkit;
 
 use App\Foodtestkit;
 
@@ -28,7 +29,7 @@ class FoodtestkitController extends Controller
     }
 
     //
-    public function foodtestkitStore(Request $request)
+    public function foodtestkitStore(RequestFoodtestkit $request)
     {
         // dd($request->all());
         $input['name'] = str_replace(' ', '', $request->name);
@@ -42,7 +43,7 @@ class FoodtestkitController extends Controller
     }
 
     //
-    public function foodtestkitUpdate(Request $request, $id)
+    public function foodtestkitUpdate(RequestFoodtestkit $request, $id)
     {
         // dd($request->all());
         $foodtestkit = Foodtestkit::findOrFail($id);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestShop;
 
 use App\Shop;
 use App\Titlename;
@@ -59,7 +60,7 @@ class ShopController extends Controller
     }
 
     //
-    public function shopStore(Request $request)
+    public function shopStore(RequestShop $request)
     {
         // dd($request->all());
         $input['name'] = str_replace(' ', '', $request->name);
@@ -81,7 +82,7 @@ class ShopController extends Controller
     }
 
     //
-    public function shopUpdate(Request $request, $id)
+    public function shopUpdate(RequestShop $request, $id)
     {
         // dd($request->all());
         $shop = Shop::findOrFail($id);
