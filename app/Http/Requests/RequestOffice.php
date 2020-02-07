@@ -20,7 +20,6 @@ class RequestOffice extends FormRequest
             'province' => 'required',
             'district' => 'required',
             'subdistrict' => 'required',
-            'zipcode' => 'required',
         ];
     }
 
@@ -33,8 +32,6 @@ class RequestOffice extends FormRequest
             'province.required' => 'กรุณาเลือกจังหวัด',
             'district.required' => 'กรุณาเลือกอำเภอ',
             'subdistrict.required' => 'กรุณาเลือกตำบล',
-            'zipcode.required' => 'กรุณาเลือกรหัสไปรษณีย์',
-            '' => '',
         ];
     }
 }

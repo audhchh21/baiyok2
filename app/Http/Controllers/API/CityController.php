@@ -47,6 +47,16 @@ class CityController extends Controller
         return $this->responseSuccess($subdistrict);
     }
 
+    //
+    public function getZipcode()
+    {
+        $id = request()->id;
+        if($id != null){
+            $zipcode = Subdistrict::findOrFail($id);
+        }
+        return $this->responseSuccess($zipcode);
+    }
+
     // response Success
     private function responseSuccess($res)
     {
