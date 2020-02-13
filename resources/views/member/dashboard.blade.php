@@ -3,7 +3,11 @@
 @section('titlepage', 'หน้าแรก')
 
 @push('style')
-
+<style type="text/css">
+    .tb-td {
+        vertical-align: middle !important;
+    }
+</style>
 @endpush
 
 @push('javascript')
@@ -11,7 +15,6 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     })
-
 </script>
 @endpush
 
@@ -113,7 +116,7 @@
                                 <th class="text-center col-3">{{ __('ระยะเวลา') }}</th>
                                 <th class="text-center col-3">{{ __('ผู้กำหนดแผนงาน') }}</th>
                                 <th class="text-center col-1">{{ __('สถานะ') }}</th>
-                                <th class="text-right col-2">{{ __('การจัดการ') }}</th>
+                                <th class="text-center col-2">{{ __('การจัดการ') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -145,14 +148,12 @@
                                             <span class="text-dark pr-1">
                                                 <i class="fas fa-check-square"></i>
                                             </span>
-                                            {{ __('บันทึกผลตรวจ') }}
                                         </a>
                                         <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white"
                                             data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                             <span class="text-warning pr-1">
                                                 <i class="far fa-edit"></i>
                                             </span>
-                                            {{ __('แก้ไข') }}
                                         </a>
                                         <a href="{{ route('member.plan.delete', ['id' => $plan->id]) }}" class="btn btn-white"
                                             data-toggle="tooltip" data-placement="top" title="ลบ"
@@ -160,7 +161,6 @@
                                             <span class="text-danger pr-1">
                                                 <i class="far fa-trash-alt"></i>
                                             </span>
-                                            {{ __('ลบ') }}
                                         </a>
                                         @endif
                                         @if ($plan->status == '1' || $plan->status == '2')
@@ -168,7 +168,6 @@
                                             <span class="text-success pr-1">
                                                 <i class="fas fa-info-circle"></i>
                                             </span>
-                                            {{ __('รายละเอียด') }}
                                         </a>
                                         @endif
                                         @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == Auth::user()->id)
@@ -176,7 +175,6 @@
                                             <span class="text-warning pr-1">
                                                 <i class="far fa-edit"></i>
                                             </span>
-                                            {{ __('แก้ไข') }}
                                          </a>
                                         @endif
                                         @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id == Auth::user()->id)
@@ -185,7 +183,6 @@
                                             <span class="text-danger pr-1">
                                                 <i class="far fa-trash-alt"></i>
                                             </span>
-                                            {{ __('ลบ') }}
                                         </a>
                                         @endif
                                     </div>

@@ -81,7 +81,7 @@
                         <th class="col-1 text-center">{{ __('ลำดับ') }}</th>
                         <th class="col-3 text-left">{{ __('คำนำหน้าชื่อ') }}</th>
                         <th class="col-6 text-left">{{ __('ที่อยู่หน่วยงาน') }}</th>
-                        <th class="col-2 text-right">{{ __('การจัดการ') }}</th>
+                        <th class="col-2 text-center">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -97,7 +97,6 @@
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
-                                    {{ __('แก้ไข') }}
                                 </a>
                                 <a href="{{ route('admin.office.delete', ['id'=>$office->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
@@ -105,7 +104,6 @@
                                     <span class="text-danger pr-1">
                                         <i class="far fa-trash-alt"></i>
                                     </span>
-                                    {{ __('ลบ') }}
                                 </a>
                             </div>
                         </td>

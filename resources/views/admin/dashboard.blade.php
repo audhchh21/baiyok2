@@ -3,7 +3,11 @@
 @section('titlepage', 'หน้าแรก')
 
 @push('style')
-
+<style type="text/css">
+    .tb-td {
+        vertical-align: middle !important;
+    }
+</style>
 @endpush
 
 @push('javascript')

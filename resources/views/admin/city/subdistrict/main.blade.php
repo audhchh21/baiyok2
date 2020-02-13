@@ -41,7 +41,6 @@
         $('#tb-subdistrict').DataTable();
         var val_province = $('#province').val()
         var opt_district = '<option value="selected">----- เลือก อำเภอ -----</option>'
-        var op_district = opt_district
         $.ajax({
                 url : '{{ route("api.district") }}',
                 type: 'get',
@@ -50,6 +49,7 @@
                 }),
                 dataType:'json',
                 success: function(result) {
+                    let op_district = opt_district
                     // console.log(result)
                     $.each(result.data, function (count, value) {
                         // console.log(value);
@@ -68,6 +68,7 @@
                 }),
                 dataType:'json',
                 success: function(result) {
+                    let op_district = opt_district
                     // console.log(result)
                     $.each(result.data, function (count, value) {
                         // console.log(value);
@@ -112,7 +113,7 @@
                     <tr>
                         <th class="col-1 text-center">{{ __('ลำดับ') }}</th>
                         <th class="col-9 text-left">{{ __('ตำบล') }}</th>
-                        <th class="col-2 text-right">{{ __('การจัดการ') }}</th>
+                        <th class="col-2 text-center">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -127,7 +128,6 @@
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
-                                    {{ __('แก้ไข') }}
                                 </a>
                                 <a href="{{ route('admin.subdistrict.delete', ['id'=>$subdistrict->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
@@ -135,7 +135,6 @@
                                     <span class="text-danger pr-1">
                                         <i class="far fa-trash-alt"></i>
                                     </span>
-                                    {{ __('ลบ') }}
                                 </a>
                             </div>
                         </td>

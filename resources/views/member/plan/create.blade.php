@@ -11,16 +11,25 @@
 @endpush
 
 @push('javascript')
-<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+
 {{-- javascript select2 --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-<script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
-        $('#plan_start').datepicker({language:'th-th',format:'yyyy-mm-dd'})
-        $('#plan_end').datepicker({language:'th-th',format:'yyyy-mm-dd'})
+        $('#plan_start').datepicker({
+            language:'th-th',
+            format:'yyyy-mm-dd',
+            startDate: '+543y'
+        })
+        $('#plan_end').datepicker({
+            language:'th-th',
+            format:'yyyy-mm-dd',
+            startDate: '+543y'
+        })
         $('#user').select2()
         $('#shop').select2()
     })
@@ -63,11 +72,11 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? date('Y-m-d') }}" placeholder="">
+                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? null }}" placeholder="">
                     </div>
                     <div class="form-group col">
                         <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? date('Y-m-d') }}" placeholder="">
+                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? null }}" placeholder="">
                     </div>
                 </div>
                 <div class="form-row">

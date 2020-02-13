@@ -99,7 +99,6 @@
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
-                                    {{ __('แก้ไข') }}
                                 </a>
                                 <a href="{{ route('member.shop.delete', ['id'=>$shop->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
@@ -107,7 +106,6 @@
                                     <span class="text-danger pr-1">
                                         <i class="far fa-trash-alt"></i>
                                     </span>
-                                    {{ __('ลบ') }}
                                 </a>
                             </div>
                         </td>

@@ -13,11 +13,11 @@
 @endpush
 
 @push('javascript')
-<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <!-- thai extension -->
 {{-- javascript Datatable bootstrap4 --}}
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
 <script>
@@ -44,11 +44,11 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-plan').DataTable();
         $('#start-plan').datepicker({
-            language: 'th-th',
+            language: 'th',
             format: 'dd/mm/yyyy'
         })
         $('#end-plan').datepicker({
-            language: 'th-th',
+            language: 'th',
             format: 'dd/mm/yyyy'
         })
     })
@@ -139,7 +139,7 @@
                         <th class="text-left">{{ __('ชื่อผู้ตรวจ') }}</th>
                         <th class="text-left">{{ __('ชื่อผู้ออกแผนตรวจ') }}</th>
                         <th class="text-center">{{ __('ระยะเวลา') }}</th>
-                        <th class="text-right">{{ __('การจัดการ') }}</th>
+                        <th class="text-center">{{ __('การจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -157,14 +157,12 @@
                                     <span class="text-dark pr-1">
                                         <i class="fas fa-check-square"></i>
                                     </span>
-                                    {{ __('ตรวจแผนงาน') }}
                                 </a>
                                 <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
-                                    {{ __('แก้ไข') }}
                                 </a>
                                 <a href="{{ route('member.plan.delete', ['id'=>$plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
@@ -172,7 +170,6 @@
                                     <span class="text-danger pr-1">
                                         <i class="far fa-trash-alt"></i>
                                     </span>
-                                    {{ __('ลบ') }}
                                 </a>
                             </div>
                         </td>
