@@ -7,12 +7,14 @@
     .tb-td {
         vertical-align: middle !important;
     }
+
 </style>
 @endpush
 
 @push('javascript')
 <script>
     $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
         $('#up-status').click(function () {
             $('#up-form').submit();
         });
@@ -106,41 +108,46 @@
                 <div class="card-header border-bottom">
                     <h6 class="m-0">{{ __('ผู้ใช้งานร้องของอนุมัติสิทธิ์') }}</h6>
                 </div>
-                <div class="card-body p-0">
-                    @forelse ($userstatus as $user)
-                    <div class="blog-comments__item d-flex p-3 border-bottom">
-                        <div class="blog-comments__content col">
-                            <div class="blog-comments__meta text-muted pb-2">
-                                <a class="text-secondary" href="#">{{ $user->Fullname }}</a> {{ __('หรือ') }}
-                                <a class="text-secondary" href="#">{{ $user->email }}</a>
-                                <span class="text-muted">{{ __(' - รอกำหนดสิทธิ์') }}</span>
-                            </div>
-                            <div class="blog-comments__actions">
-                                <div class="btn-group btn-group-sm float-right">
-                                    <button type="button" id="up-status" class="btn btn-white"
-                                        onclick="return confirm('คุณต้องอนุมัติสิทธิ์ ใช่ หรือ ไม่')">
-                                        <span class="text-success">
-                                            <i class="material-icons">check</i>
-                                        </span> {{ __('อนุมัติสิทธิ์') }} </button>
-                                    <form id="up-form" action="{{ route('admin.up.status') }}" method="post">@csrf<input
-                                            type="hidden" name="id" value="{{ $user->id }}"></form>
-                                    <button type="button" id="down-status" class="btn btn-white"
-                                        onclick="return confirm('คุณต้องยกเลิกสิทธิ์ ใช่ หรือ ไม่')">
-                                        <span class="text-danger">
-                                            <i class="material-icons">clear</i>
-                                        </span> {{ __('ยกเลิกสิทธิ์') }} </button>
-                                    <form id="down-form" action="{{ route('admin.down.status') }}" method="post">
-                                        @csrf<input type="hidden" name="id" value="{{ $user->id }}"></form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @empty
-                    <h5 class="text-center pt-4">{{ __('ไม่มีผู้ใช้ที่ของอนุมัติสิทธิ์') }}</h5>
-                    @endforelse
-                </div>
-                <div class="card-footer border-top">
-                </div>
+                <table class="table table-borderless table-hover p-0">
+                    <thead class="border-bottom">
+                        <tr>
+                            <th class="text-left col-5">{{ __('ชื่อ - นามสกุล') }}</th>
+                            <th class="text-left col-4">{{ __('อีเมล') }}</th>
+                            <th class="text-center col-3">{{ __('การจัดการ') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($userstatus as $user)
+                        <tr>
+                            <td class="text-left col-5">{{ $user->Fullname }}</td>
+                            <td class="text-left col-4">{{ $user->email }}</td>
+                            <td class="text-center col-3">
+                                <button type="button" id="up-status" class="btn btn-sm btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="อนุมัติสิทธิ์"
+                                    onclick="return confirm('คุณต้องอนุมัติสิทธิ์ ใช่ หรือ ไม่')">
+                                    <span class="text-success">
+                                        <i class="material-icons">check</i>
+                                    </span></button>
+
+                                <button type="button" id="down-status" class="btn btn-sm btn-white"
+                                    data-toggle="tooltip" data-placement="top" title="ไม่อนุมัติสิทธิ์"
+                                    onclick="return confirm('คุณต้องยกเลิกสิทธิ์ ใช่ หรือ ไม่')">
+                                    <span class="text-danger">
+                                        <i class="material-icons">clear</i>
+                                    </span></button>
+                                <form id="up-form" action="{{ route('admin.up.status') }}" method="post">
+                                    @csrf<input type="hidden" name="id" value="{{ $user->id }}"></form>
+                                <form id="down-form" action="{{ route('admin.down.status') }}" method="post">
+                                    @csrf<input type="hidden" name="id" value="{{ $user->id }}"></form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="3">{{ __('ไม่มีผู้ใช้ที่ของอนุมัติสิทธิ์') }}</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
@@ -165,34 +172,36 @@
                 </div>
                 <div class="card-footer border-top">
                     <div class="row">
-                    <div class="col text-right view-report">
-                        <a href="{{ route('admin.office') }}" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
+                        <div class="col text-right view-report">
+                            <a href="{{ route('admin.office') }}"
+                                class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card card-small h-100">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">{{ __('ผู้ใช้งานทั้งหมด') }}</h6>
+                </div>
+                <div class="card-body d-flex py-0">
+                    {!! $pieUser->render() !!}
+                </div>
+                <div class="card-footer border-top">
+                    <div class="row">
+                        <div class="col text-right view-report">
+                            <a href="{{ route('admin.user') }}"
+                                class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div class="card card-small h-100">
-            <div class="card-header border-bottom">
-                <h6 class="m-0">{{ __('ผู้ใช้งานทั้งหมด') }}</h6>
-            </div>
-            <div class="card-body d-flex py-0">
-                {!! $pieUser->render() !!}
-            </div>
-            <div class="card-footer border-top">
-                <div class="row">
-                <div class="col text-right view-report">
-                    <a href="{{ route('admin.user') }}" class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 
 
-<!-- End Content -->
+    <!-- End Content -->
 </div>
 
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titlepage', 'เพิ่มแผนงาน')
+@section('titlepage', 'แก้ไขแผนงาน')
 
 @push('style')
 {{-- css select2 --}}
@@ -11,19 +11,29 @@
 @endpush
 
 @push('javascript')
-<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
-{{-- javascript select2 --}}
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}"></script>
 <script>
     $(document).ready(() => {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
-        $('[data-toggle="tooltip"]').tooltip();
-        $('#plan_start').datepicker({language:'th-th',format:'yyyy-mm-dd'})
-        $('#plan_end').datepicker({language:'th-th',format:'yyyy-mm-dd'})
         $('#user').select2()
         $('#shop').select2()
+        $('#plan_start').datepicker({
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#plan_end').datepicker('setStartDate', e.format())
+        })
+        $('#plan_end').datepicker({
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#plan_start').datepicker('setEndDate', e.format())
+        })
     })
 </script>
 @endpush
@@ -40,7 +50,8 @@
     <div class="row mb-3">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('member.plan') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right"
+                    title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -63,32 +74,11 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? $plan->plan_start }}" placeholder="{{ $plan->plan_start }}">
-                    </div>
-                    <div class="form-group col">
-                        <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? $plan->plan_end }}" placeholder="{{ $plan->plan_end }}">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="user" class="h3">{{ __('ผู้ตรวจสอบวิเคราะห์') }}<span class="text-danger">*</span></label>
-                        <select class="form-control form-control-lg" name="user" id="user">
-                            @forelse ($users as $user)
-                            <option {{ $user->id == $plan->user_id ? ' selected':''}} value="{{ $user->id }}">{{ $user->Fullname }}</option>
-                            @empty
-                            <option>{{ __('ไม่มีผู้ใช้งาน') }}</option>
-                            @endforelse
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="shop" class="h3">{{ __('ร้านค้าที่ไปตรวจ') }}<span class="text-danger">*</span></label>
-                        <select class="form-control form-control-lg" name="shop" id="shop">
-                            @forelse ($shops as $shop)
-                            <option {{ $shop->id == $plan->shop_id ? ' selected':''}} value="{{ $shop->id }}">{{ $shop->name.' ('.$shop->Fullname.')' }}</option>
+                        <label for="office" class="h4">{{ __('หน่วยงาน') }}</label>
+                        <select class="form-control form-control-lg" name="office" id="office" disabled>
+                            @forelse ($offices as $office)
+                            <option {{ $office->id == Auth::user()->office_id ? ' selected':''}}
+                                value="{{  $office->id   }}">{{ $office->name }}</option>
                             @empty
                             <option>{{ __('ไม่มีร้านค้า') }}</option>
                             @endforelse
@@ -97,12 +87,42 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="office" class="h3">{{ __('หน่วยงาน') }}</label>
-                        <select class="form-control form-control-lg" name="office" id="office" disabled>
-                            @forelse ($offices as $office)
-                            <option {{ $office->id == Auth::user()->office_id ? ' selected':''}} value="{{  $office->id   }}" >{{ $office->name }}</option>
+                        <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start"
+                            value="{{ old('plan_start') ?? substr($plan->plan_start, 0, 10) }}" placeholder="{{ substr($plan->plan_start, 0, 10) }}">
+                    </div>
+                    <div class="form-group col">
+                        <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end"
+                            value="{{ old('plan_end') ?? substr($plan->plan_end, 0, 10) }}" placeholder="{{ substr($plan->plan_end, 0, 10) }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="user" class="h3">{{ __('ผู้ตรวจสอบวิเคราะห์') }}<span
+                                class="text-danger">*</span></label>
+                        <select class="form-control form-control-lg" name="user" id="user">
+                            @forelse ($users as $user)
+                            <option {{ $user->id == $plan->user_id ? ' selected':''}} value="{{ $user->id }}">
+                                {{ $user->Fullname }}</option>
                             @empty
-                            <option>{{ __('ไม่มีหน่วยงาน') }}</option>
+                            <option>{{ __('ไม่มีผู้ใช้งาน') }}</option>
+                            @endforelse
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="shop" class="h3">{{ __('ร้านค้าที่ไปตรวจ') }}<span
+                                class="text-danger">*</span></label>
+                        <select class="form-control form-control-lg" name="shop" id="shop">
+                            @forelse ($shops as $shop)
+                            <option {{ $shop->id == $plan->shop_id ? ' selected':''}} value="{{ $shop->id }}">
+                                {{ $shop->name.' ('.$shop->Fullname.')' }}</option>
+                            @empty
+                            <option>{{ __('ไม่มีร้านค้า') }}</option>
                             @endforelse
                         </select>
                     </div>

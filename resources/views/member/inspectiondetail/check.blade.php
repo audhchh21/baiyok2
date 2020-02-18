@@ -14,9 +14,9 @@
 @push('javascript')
 <script>
     $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+        var count = 1
         var html = `
-            <tr>
+            <tr id="${count}">
                 <td class="text-left col-12 col-lg-2 tb-td">
                     {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
@@ -26,7 +26,7 @@
                 <td class="text-left col-12 col-lg-2 tb-td">
                     {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
-                <td class="text-left col-12 col-lg-2 tb-td">
+                <td class="text-left col-12 col-lg-1 tb-td">
                     <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
@@ -35,11 +35,40 @@
                 <td class="text-left col-12 col-lg-2 tb-td">
                     <input type="text" class="form-control" id="" name="detail[]"  placeholder="กรณีตรวจผลสารปนเปื้อน">
                 </td>
+                <td class="text-center col-12 col-lg-1 tb-td">
+
+                </td>
             </tr>
             `
         $('#tb-plandetail tbody').append(html)
         $('#remove').prop('disabled', true)
         $('#add').click(function () {
+            count++
+            html = `
+            <tr id="tb-${count}">
+                <td class="text-left col-12 col-lg-2 tb-td">
+                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                </td>
+                <td class="text-left col-12 col-lg-2 tb-td">
+                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                </td>
+                <td class="text-left col-12 col-lg-2 tb-td">
+                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                </td>
+                <td class="text-left col-12 col-lg-1 tb-td">
+                    <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
+                </td>
+                <td class="text-left col-12 col-lg-2 tb-td">
+                    {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control']) }}
+                </td>
+                <td class="text-left col-12 col-lg-2 tb-td">
+                    <input type="text" class="form-control" id="" name="detail[]"  placeholder="กรณีตรวจผลสารปนเปื้อน">
+                </td>
+                <td class="text-center col-12 col-lg-1 tb-td">
+                    <button type="button" class="btn btn-sm btn-dark" onclick="deleterow(${count})"><i class="far fa-times-circle"></i></button>
+                </td>
+            </tr>
+            `
             let row = $('#tb-plandetail tbody tr').length
             $('#tb-plandetail tbody').append(html)
             if(row >= 1){
@@ -54,8 +83,15 @@
                 $('#tb-plandetail tbody tr:last').remove()
                 $('#remove').prop('disabled', true)
             }
+            count--
         })
+        $('[data-toggle="tooltip"]').tooltip();
     })
+
+    function deleterow(count){
+        $(`#tb-${count}`).remove()
+        console.log(`#tb-${count}`)
+    }
 
 </script>
 @endpush
@@ -135,9 +171,10 @@
                             <th class="text-left col-12 col-lg-2">{{ __('ตัวอย่างอาหาร') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('ชุดทดสอบ') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</th>
-                            <th class="text-left col-12 col-lg-2">{{ __('รูป') }}</th>
+                            <th class="text-left col-12 col-lg-1">{{ __('รูป') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('ผลการตรวจสอบ') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('แนวทางการจัดการ') }}</th>
+                            <th class="text-right col-12 col-lg-1">{{ __('การจัดการ') }}</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white"></tbody>

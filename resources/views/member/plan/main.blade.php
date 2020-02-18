@@ -20,6 +20,7 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
+
 <script>
     $(document).ready(() => {
         $.extend(true, $.fn.dataTable.defaults, {
@@ -43,15 +44,23 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-plan').DataTable();
+
         $('#start-plan').datepicker({
-            language: 'th',
-            format: 'dd/mm/yyyy'
-        })
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#end-plan').datepicker('setStartDate', e.format());
+        });
+
         $('#end-plan').datepicker({
-            language: 'th',
-            format: 'dd/mm/yyyy'
-        })
-    })
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#start-plan').datepicker('setEndDate', e.format());
+        });
+    });
 
 </script>
 @endpush
@@ -98,12 +107,12 @@
                             <div class="form-group col-3 mb-0">
                                 <label for="start-plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="start-plan" name="start"
-                                    value="{{ old('start') ?? date('Y-m-d') }}" placeholder="" required>
+                                    value="{{ old('start') ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-3 mb-0">
                                 <label for="end-plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="end-plan" name="end"
-                                    value="{{ old('start') ?? date('Y-m-d') }}" placeholder="" required>
+                                    value="{{ old('start') ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <label for="end-plan">{{ __('สถานะแผนงาน') }}</label>

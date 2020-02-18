@@ -131,43 +131,43 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
-                        <label for="shop" class="h3">{{ __('ชื่อร้านค้า') }}<span class="text-danger">*</span></label>
+                        <label for="shop" class="h4">{{ __('ชื่อร้านค้า') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="shop" name="name" value="{{ old('name') ?? 'ร้านค้า' }}" placeholder="ร้านค้า" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-2">
-                        <label for="titlename" class="h3">{{ __('คำนำหน้าชื่อ') }}<span class="text-danger">*</span></label>
+                        <label for="titlename" class="h4">{{ __('คำนำหน้าชื่อ') }}<span class="text-danger">*</span></label>
                         {!! Form::select('titlename', $titlenames, old('titlename') ?? null, ['id' => 'titlename', 'class' => 'form-control form-control-lg']) !!}
                     </div>
                     <div class="form-group col-12 col-xl-5">
-                        <label for="f_name" class="h3">{{ __('ชื่อ') }}<span class="text-danger">*</span></label>
+                        <label for="f_name" class="h4">{{ __('ชื่อ') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="f_name" name="f_name" value="{{ old('f_name') }}" placeholder="ชื่อ" required>
                     </div>
                     <div class="form-group col-12 col-xl-5">
-                        <label for="l_name" class="h3">{{ __('นามสกุล') }}<span class="text-danger">*</span></label>
+                        <label for="l_name" class="h4">{{ __('นามสกุล') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="l_name" name="l_name" value="{{ old('l_name') }}" placeholder="นามสกุล" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-5">
-                        <label for="tel" class="h3">{{ __('เบอร์โทรศัพท์') }}<span class="text-danger">*</span></label>
+                        <label for="tel" class="h4">{{ __('เบอร์โทรศัพท์') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="tel" name="tel" value="{{ old('tel') }}" placeholder="เบอร์โทรศัพท์" required>
                     </div>
                     <div class="form-group col-12 col-xl-7">
-                        <label for="place" class="h3">{{ __('สถานที่เก็บตัวอย่าง') }}<span class="text-danger">*</span></label>
+                        <label for="place" class="h4">{{ __('สถานที่เก็บตัวอย่าง') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="place" name="place" value="{{ old('place') }}" placeholder="สถานที่เก็บตัวอย่าง" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
-                        <label for="address" class="h3">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
+                        <label for="address" class="h4">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
                         <textarea class="form-control form-control-lg" name="address" id="address" cols="30" rows="8">{{ old('address') ?? 'ที่อยู่' }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-3">
-                        <label for="province" class="h3">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
+                        <label for="province" class="h4">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
                         {!! Form::select('province', $provinces, null, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('province') ? ' is-invalid' : '' )]) !!}
                         @error('province')
@@ -177,7 +177,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
+                        <label for="district" class="h4">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
                         {!! Form::select('district', $districts, null, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('district') ? ' is-invalid' : '' )]) !!}
                         @error('district')
@@ -187,7 +187,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="subdistrict" class="h3">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
+                        <label for="subdistrict" class="h4">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
                         {!! Form::select('subdistrict', $subdistricts, null, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
                         'form-control form-control-lg'.( $errors->has('subdistrict') ? ' is-invalid' : '' )]) !!}
                         @error('subdistrict')
@@ -197,7 +197,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="zipcode" class="h3">{{ __('รหัสไปรษณีย์') }}<span
+                        <label for="zipcode" class="h4">{{ __('รหัสไปรษณีย์') }}<span
                                 class="text-danger">*</span></label>
                         {!! Form::select('zipcode', $zipcodes, null, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
                         form-control-lg'.( $errors->has('zipcode') ? ' is-invalid' : '' )]) !!}
