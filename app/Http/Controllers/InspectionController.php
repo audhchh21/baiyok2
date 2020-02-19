@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Arr;
 use App\Plan;
 use App\Inspection;
 use App\inspectiondetail;
@@ -12,13 +12,25 @@ use App\Foodsamplesource;
 use App\Foodtestkit;
 use App\User;
 
+use Auth;
+
 class InspectionController extends Controller
 {
     //
+    public function office_ids($output = [])
+    {
+        $userid = User::where('office_id', auth()->user()->office_id)
+        ->get();
+        foreach($userid as $item)
+        {
+            $output = Arr::prepend($output, $item->id);
+        }
+        return $output;
+    }
+    //
     public function inspectionAll()
     {
-        $userid = User::where('office_id', Auth::user()->office_id)->get();
-        $plan = Plan::whereIn('id', $userid)
+        $plan = Plan::whereIn('user_id', $this->office_ids())
         ->orderBy('created_at', 'desc')
         ->get();
         return view('member.inspection.all', [
@@ -31,6 +43,7 @@ class InspectionController extends Controller
     public function inspectionSuccessful()
     {
         $plan = Plan::where('status', '1')
+        ->whereIn('user_id', $this->office_ids())
         ->orderBy('created_at', 'desc')
         ->get();
         return view('member.inspection.successful', [
@@ -43,6 +56,7 @@ class InspectionController extends Controller
     public function inspectionSlowsuccessful()
     {
         $plan = Plan::where('status', '2')
+        ->whereIn('user_id', $this->office_ids())
         ->orderBy('created_at', 'desc')
         ->get();
         return view('member.inspection.slowsuccessful', [
@@ -55,6 +69,7 @@ class InspectionController extends Controller
     public function inspectionUnsuccessful()
     {
         $plan = Plan::where('status', '0')
+        ->whereIn('user_id', $this->office_ids())
         ->orderBy('created_at', 'desc')
         ->get();
         return view('member.inspection.unsuccessful', [
