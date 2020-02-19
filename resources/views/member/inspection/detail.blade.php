@@ -100,7 +100,9 @@
                         <td class="tb-td text-left col-12 col-lg-2">{{ $detail->foodsamplesource->name }}</td>
                         <td class="tb-td text-left col-12 col-lg-2">{{ $detail->foodtestkit->name }}</td>
                         <td class="tb-td text-center col-12 col-lg-2">
-                            <img src="{{ asset('images/uploads').'/'.$detail->inspection_image }}" class="img-fluid" alt="" style="max-height:80px;">
+                            <a href="{{ asset('images/uploads').'/'.$detail->inspection_image }}" target="_blank">
+                                <img src="{{ asset('images/uploads').'/'.$detail->inspection_image }}" class="img-fluid" alt="" style="max-height:80px;">
+                            </a>
                         </td>
                         <td class="tb-td text-center col-12 col-lg-2">
                             @if ($detail->inspection_result == '1')

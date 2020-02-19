@@ -10,6 +10,13 @@ use App\Province;
 class ProvinceController extends Controller
 {
     //
+    public function all()
+    {
+        $provinces = $this->getProvince();
+        dd($provinces);
+    }
+
+    //
     public function provinceMain()
     {
         $provinces = $this->getProvince();
