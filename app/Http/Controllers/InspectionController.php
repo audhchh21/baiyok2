@@ -10,13 +10,17 @@ use App\inspectiondetail;
 use App\Foodsample;
 use App\Foodsamplesource;
 use App\Foodtestkit;
+use App\User;
 
 class InspectionController extends Controller
 {
     //
     public function inspectionAll()
     {
-        $plan = Plan::orderBy('created_at', 'desc')->get();
+        $userid = User::where('office_id', Auth::user()->office_id)->get();
+        $plan = Plan::whereIn('id', $userid)
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('member.inspection.all', [
             'count' => 1,
             'plans' => $plan
