@@ -28,7 +28,13 @@
                     <span>{{ __('คำนำหน้าชื่อ') }}</span>
                 </a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.city') }}">
+                    <i class="fas fa-list-alt pr-2"></i>
+                    <span>{{ __('จัดการจังหวัด') }}</span>
+                </a>
+            </li>
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle " data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
                     <i class="fas fa-list-alt pr-2"></i>
@@ -41,7 +47,7 @@
                     <a class="dropdown-item " href="{{ route('admin.district') }}"><i class="fas fa-th-list pr-2"></i>{{ __('อำเภอ') }}</a>
                     <a class="dropdown-item " href="{{ route('admin.subdistrict') }}"><i class="fas fa-th-list pr-2"></i>{{ __('ตำบล') }}</a>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.office') }}">
                     <i class="far fa-list-alt pr-2"></i>

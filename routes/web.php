@@ -18,7 +18,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'AdminLogin']], funct
     Route::post('up/status', 'HomeController@userSuccess')->name('admin.up.status');
     Route::post('down/status', 'HomeController@userUnsuccess')->name('admin.down.status');
     Route::group(['prefix' => 'city'], function () {
-        Route::get('/', 'ProvinceController@all')->name('city');
+        Route::get('/', 'ProvinceController@all')->name('admin.city');
         Route::group(['prefix' => 'province'], function () {
             Route::get('', 'ProvinceController@provinceMain')->name('admin.province');
             Route::get('edit/{id}', 'ProvinceController@provinceEdit')->name('admin.province.edit');

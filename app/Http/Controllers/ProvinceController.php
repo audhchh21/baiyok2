@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RequestProvince;
 
 use App\Province;
+use App\Subdistrict;
 
 class ProvinceController extends Controller
 {
     //
     public function all()
     {
-        $provinces = $this->getProvince();
-        dd($provinces);
+        $city = Subdistrict::all();
+        return view('admin.city.city', [
+            'citys' => $city
+        ]);
     }
 
     //
