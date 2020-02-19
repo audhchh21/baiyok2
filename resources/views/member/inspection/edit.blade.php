@@ -108,7 +108,9 @@
                                 {!! Form::select('foodtestkit[]', $foodtestkit, $detail->foodtestkit->id, ['id' => 'foodtestkit', 'class' => 'form-control']) !!}
                             </td>
                             <td class="tb-td text-center col-12 col-lg-2">
-                                <img src="{{ asset('images/uploads').'/'.$detail->inspection_image }}" class="img-fluid" alt="" style="max-height:60px;">
+                                <a href="{{ asset('images/uploads').'/'.$detail->inspection_image }}" target="_blank">
+                                    <img src="{{ asset('images/uploads').'/'.$detail->inspection_image }}" class="img-fluid" alt="" style="max-height:60px;">
+                                </a>
                                 <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
                             </td>
                             <td class="tb-td text-center col-12 col-lg-2">
