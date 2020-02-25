@@ -24,7 +24,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขรายละเอียดแผนงาน', 'subtitle' => 'แก้ไขรายละเอียดแผนงาน'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขรายละเอียดแผนงาน'])
 
     <!-- End Page Header -->
 
@@ -32,8 +32,7 @@
     <div class="row mb-5">
         <div class="col">
             <div class="text-left">
-                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark" data-toggle="tooltip" data-placement="right"
-                title="ผลการตรวจสอบสารปนเปื้อน"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

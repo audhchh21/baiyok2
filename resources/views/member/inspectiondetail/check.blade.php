@@ -112,7 +112,7 @@
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-secondary"><i
                         class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>

@@ -72,27 +72,27 @@
     <div class="row mb-5">
         <div class="col">
             <div class="text-right">
-                <a href="{{ route('admin.province') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการจังหวัด') }}</a>
-                <a href="{{ route('admin.district') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการอำเภอ') }}</a>
-                <a href="{{ route('admin.subdistrict') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการตำบล') }}</a>
+                <a href="{{ route('admin.province') }}" class="btn btn-sm btn-info"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการจังหวัด') }}</a>
+                <a href="{{ route('admin.district') }}" class="btn btn-sm btn-info"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการอำเภอ') }}</a>
+                <a href="{{ route('admin.subdistrict') }}" class="btn btn-sm btn-info"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการตำบล') }}</a>
             </div>
             <hr>
             <table class="table table-hover table-bordered" id="tb-city">
                 <thead class="bg-white">
                     <tr>
-                        <th>{{ __('จังหวัด') }}</th>
-                        <th>{{ __('อำเภอ') }}</th>
-                        <th>{{ __('ตำบล') }}</th>
-                        <th>{{ __('รหัสไปรษณีย์') }}</th>
+                        <th class="text-left">{{ __('จังหวัด') }}</th>
+                        <th class="text-left">{{ __('อำเภอ') }}</th>
+                        <th class="text-left">{{ __('ตำบล') }}</th>
+                        <th class="text-left">{{ __('รหัสไปรษณีย์') }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
                     @foreach ($citys as $city)
                     <tr>
-                        <td>{{ $city->districts->provinces->name }}</td>
-                        <td>{{ $city->districts->name }}</td>
-                        <td>{{ $city->name }}</td>
-                        <td>{{ $city->zip_code }}</td>
+                        <td class="text-left">{{ $city->districts->provinces->name }}</td>
+                        <td class="text-left">{{ $city->districts->name }}</td>
+                        <td class="text-left">{{ $city->name }}</td>
+                        <td class="text-left">{{ $city->zip_code }}</td>
                     </tr>
                     @endforeach
                 </tbody>

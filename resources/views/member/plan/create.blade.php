@@ -43,7 +43,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'เพิ่มแผนงาน', 'subtitle' => 'เพิ่มแผนงานตรวจสอบ'])
+    @include('layouts.pageheader.title', ['title' => 'เพิ่มแผนงาน'])
 
     <!-- End Page Header -->
 
@@ -51,7 +51,7 @@
     <div class="row mb-3">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('member.plan') }}" class="btn btn-dark"><i class="fas fa-angle-double-left" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"></i>
+                <a href="{{ route('member.plan') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

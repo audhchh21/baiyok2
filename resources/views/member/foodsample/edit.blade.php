@@ -18,13 +18,13 @@ $(document).ready( function() {
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขตัวอย่างอาหาร', 'subtitle' => 'แก้ไขตัวอย่างอาหาร'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขตัวอย่างอาหาร'])
 
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="text-left">
-        <a href="{{ route('member.foodsample') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าตัวอย่างอาหาร"><i class="fas fa-angle-double-left"></i>
+        <a href="{{ route('member.foodsample') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
             {{ __('ย้อนกลับ')   }}</a>
         <hr>
     </div>

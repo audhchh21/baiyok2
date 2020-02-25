@@ -108,7 +108,7 @@
     <div class="row mb-5">
         <div class="col-12 col-xl-12 mb-3">
             <div class="text-left">
-                <a href="{{ route('member.shop') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าร้านค้า"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('member.shop') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -162,7 +162,7 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
                         <label for="address" class="h4">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
-                        <textarea class="form-control form-control-lg" name="address" id="address" cols="30" rows="8">{{ old('address') ?? $shop->address }}</textarea>
+                        <textarea class="form-control form-control-lg" name="address" id="address" cols="30" rows="5">{{ old('address') ?? $shop->address }}</textarea>
                     </div>
                 </div>
                 <div class="form-row">
