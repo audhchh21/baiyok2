@@ -14,14 +14,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขบัญชีผู้ใช้งาน', 'subtitle'=>'แก้ไขบัญชีผู้ใช้งาน'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขบัญชีผู้ใช้งาน'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('admin.user') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('admin.user') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

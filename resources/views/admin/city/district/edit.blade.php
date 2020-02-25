@@ -14,14 +14,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขอำเภอ', 'subtitle'=>'แก้ไขอำเภอ'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขอำเภอ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('admin.district') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i> {{ __('ย้อนกลับ')   }}</a>
+                <a href="{{ route('admin.district') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i> {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
                 <form action="{{ route('admin.district.update',['id' => $district->id]) }}" method="post">

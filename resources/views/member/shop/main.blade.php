@@ -48,7 +48,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'ร้านค้า', 'subtitle' => 'ร้านค้าทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'ร้านค้า'])
 
     <!-- End Page Header -->
 

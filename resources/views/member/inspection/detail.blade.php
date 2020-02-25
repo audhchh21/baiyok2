@@ -24,7 +24,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'รายละเอียดแผนงาน', 'subtitle' => 'รายละเอียดแผนงาน'])
+    @include('layouts.pageheader.title', ['title' => 'รายละเอียดแผนงาน'])
 
     <!-- End Page Header -->
 
@@ -86,11 +86,11 @@
                 <thead class="bg-white">
                     <tr>
                         <th class="text-left col-12 col-lg-2">{{ __('ตัวอย่างอาหาร') }}</th>
-                        <th class="text-left col-12 col-lg-2">{{ __('ชุดทดสอบ') }}</th>
                         <th class="text-left col-12 col-lg-2">{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</th>
+                        <th class="text-left col-12 col-lg-2">{{ __('ชุดทดสอบ') }}</th>
                         <th class="text-center col-12 col-lg-2">{{ __('รูป') }}</th>
                         <th class="text-center col-12 col-lg-2">{{ __('ผลการตรวจสอบ') }}</th>
-                        <th class="text-left col-12 col-lg-2">{{ __('หมายเหตุ') }}</th>
+                        <th class="text-left col-12 col-lg-2">{{ __('แนวทางการจัดการ') }}</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -100,8 +100,8 @@
                         <td class="tb-td text-left col-12 col-lg-2">{{ $detail->foodsamplesource->name }}</td>
                         <td class="tb-td text-left col-12 col-lg-2">{{ $detail->foodtestkit->name }}</td>
                         <td class="tb-td text-center col-12 col-lg-2">
-                            <a href="{{ asset('images/uploads').'/'.$detail->inspection_image }}" target="_blank">
-                                <img src="{{ asset('images/uploads').'/'.$detail->inspection_image }}" class="img-fluid" alt="" style="max-height:80px;">
+                            <a href="{{ asset('images/uploads/'.$detail->inspection_image) }}" target="_blank">
+                                <img src="{{ asset('images/uploads/'.$detail->inspection_image) }}" class="img-fluid" alt="" style="max-height:80px;">
                             </a>
                         </td>
                         <td class="tb-td text-center col-12 col-lg-2">

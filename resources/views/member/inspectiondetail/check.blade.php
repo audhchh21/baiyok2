@@ -3,6 +3,9 @@
 @section('titlepage', 'บันทึกแผนการตรวจ')
 
 @push('style')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css">
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
 <style>
     .tb-td {
         vertical-align: middle !important;
@@ -12,6 +15,7 @@
 @endpush
 
 @push('javascript')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function () {
         var count = 1
@@ -47,19 +51,19 @@
             html = `
             <tr id="tb-${count}">
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-1 tb-td">
                     <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control']) }}
+                    {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control select2']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
                     <input type="text" class="form-control" id="" name="detail[]"  placeholder="กรณีตรวจผลสารปนเปื้อน">
@@ -71,7 +75,8 @@
             `
             let row = $('#tb-plandetail tbody tr').length
             $('#tb-plandetail tbody').append(html)
-            if(row >= 1){
+
+            if (row >= 1) {
                 $('#remove').prop('disabled', false)
             }
         })
@@ -79,7 +84,7 @@
             let row = $('#tb-plandetail tbody tr').length
             if (row > 2) {
                 $('#tb-plandetail tbody tr:last').remove()
-            } else if(row == 2){
+            } else if (row == 2) {
                 $('#tb-plandetail tbody tr:last').remove()
                 $('#remove').prop('disabled', true)
             }
@@ -88,7 +93,7 @@
         $('[data-toggle="tooltip"]').tooltip();
     })
 
-    function deleterow(count){
+    function deleterow(count) {
         $(`#tb-${count}`).remove()
         console.log(`#tb-${count}`)
     }
@@ -100,14 +105,15 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'บันทึกแผนการตรวจ', 'subtitle' => 'บันทึกรายละเอียดแผนการตรวจ'])
+    @include('layouts.pageheader.title', ['title' => 'บันทึกแผนการตรวจ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark" data-toggle="tooltip" data-placement="right" title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
+                <a href="#" onclick="window.location.reload(history.back());" class="btn btn-dark"><i
+                        class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -133,20 +139,20 @@
             <div class="card pt-2">
                 <table class="table">
                     <tr>
-                        <td>{{ __('ชื่อร้านค้า') }}</td>
-                        <td>{{ $plan->shops->name }}</td>
+                        <td class="col-2">{{ __('ชื่อร้านค้า') }}</td>
+                        <td class="col-10">{{ $plan->shops->name }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('ชื่อผู้ตรวจ') }}</td>
-                        <td>{{ $plan->to_user->Fullname }}</td>
+                        <td class="col-2">{{ __('ชื่อผู้ตรวจ') }}</td>
+                        <td class="col-10">{{ $plan->to_user->Fullname }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('ระยะเวลาตรวจสอบ') }}</td>
-                        <td>{{ $plan->Fulltime }}</td>
+                        <td class="col-2">{{ __('ระยะเวลาตรวจสอบ') }}</td>
+                        <td class="col-10">{{ $plan->Fulltime }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('ผู้ออกแผนงาน') }}</td>
-                        <td>{{ $plan->by_user->Fullname }}</td>
+                        <td class="col-2">{{ __('ผู้ออกแผนงาน') }}</td>
+                        <td class="col-10">{{ $plan->by_user->Fullname }}</td>
                     </tr>
                 </table>
             </div>
@@ -155,11 +161,12 @@
     <div class="row mb-3">
         <div class="col">
             <div class="text-right mt-3 mb-2">
-                <button type="button" id="add" class="btn btn-sm btn-dark">
-                    <i class="far fa-plus-square"></i>
+                <button type="button" class="btn bg-white text-dark p-0">
+                    <i id="add" class="far fa-plus-square fa-2x"></i>
                 </button>
-                <button type="button" id="remove" class="btn btn-sm btn-dark">
-                    <i class="far fa-minus-square"></i>
+                |
+                <button type="button" class="btn bg-white text-dark p-0">
+                    <i id="remove" class="far fa-minus-square fa-2x"></i>
                 </button>
             </div>
             <form action="{{ route('member.inspectiondetail.confirm', ['id' => $plan->id]) }}" method="post"
@@ -169,18 +176,22 @@
                     <thead class="bg-white">
                         <tr>
                             <th class="text-left col-12 col-lg-2">{{ __('ตัวอย่างอาหาร') }}</th>
-                            <th class="text-left col-12 col-lg-2">{{ __('ชุดทดสอบ') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</th>
+                            <th class="text-left col-12 col-lg-2">{{ __('ชุดทดสอบ') }}</th>
                             <th class="text-left col-12 col-lg-1">{{ __('รูป') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('ผลการตรวจสอบ') }}</th>
                             <th class="text-left col-12 col-lg-2">{{ __('แนวทางการจัดการ') }}</th>
-                            <th class="text-right col-12 col-lg-1">{{ __('การจัดการ') }}</th>
+                            <th class="text-right col-12 col-lg-1">{{ __('') }}</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white"></tbody>
                 </table>
                 <hr>
-                <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('ตรวจบันทึก') }}</button>
+                <div class="form-row justify-content-md-center">
+                    <div class="col-xl-6">
+                        <button type="submit" class="btn btn-block btn-success">{{ __('ตรวจบันทึก') }}</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

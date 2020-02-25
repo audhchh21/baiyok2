@@ -45,20 +45,20 @@
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-plan').DataTable();
 
-        $('#start-plan').datepicker({
+        $('#start_plan').datepicker({
             language:'th-th',
             format:'dd-mm-yyyy',
         }).on('changeDate', function(e) {
             // console.log(e.format())
-            $('#end-plan').datepicker('setStartDate', e.format());
+            $('#end_plan').datepicker('setStartDate', e.format());
         });
 
-        $('#end-plan').datepicker({
+        $('#end_plan').datepicker({
             language:'th-th',
             format:'dd-mm-yyyy',
         }).on('changeDate', function(e) {
             // console.log(e.format())
-            $('#start-plan').datepicker('setEndDate', e.format());
+            $('#start_plan').datepicker('setEndDate', e.format());
         });
     });
 
@@ -69,7 +69,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แผนงาน', 'subtitle' => 'แผนงานทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'แผนงาน'])
 
     <!-- End Page Header -->
 
@@ -78,7 +78,7 @@
         <div class="col-xl-12">
             <div class="text-right">
                 <a href="{{ route('member.plan.create') }}" class="btn btn-info"><i
-                        class="fas fa-plus-circle"></i>{{ __(' เพิ่มแผนงาน')   }}</a>
+                        class="fas fa-plus-circle"></i>{{ __('เพิ่มแผนงาน')   }}</a>
                 <hr>
             </div>
             @if (session('status'))
@@ -102,27 +102,29 @@
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="post">
+                    {{ request()->start_plan }}
+                    <form action="/" method="get">
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-3 mb-0">
-                                <label for="start-plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
-                                <input type="text" class="form-control" id="start-plan" name="start"
-                                    value="{{ old('start') ?? null }}" placeholder="" required>
+                                <label for="start_plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="start_plan" name="start"
+                                    value="{{ old('start_plan') ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-3 mb-0">
-                                <label for="end-plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
-                                <input type="text" class="form-control" id="end-plan" name="end"
-                                    value="{{ old('start') ?? null }}" placeholder="" required>
+                                <label for="end_plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="end_plan" name="end"
+                                    value="{{ old('end_plan') ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-2 mb-0">
-                                <label for="end-plan">{{ __('สถานะแผนงาน') }}</label>
-                                {!! Form::select('',
-                                ['s1'=>'แสดงทั้งหมด','s2'=>'ตรวจแล้ว','s3'=>'ยังไม่ได้ตรวจ','s4'=>'ตรวจล่าช้า',], null,
-                                ['id'=>'', 'class'=>'form-control']) !!}
+                                <label for="status_plan">{{ __('สถานะแผนงาน') }}</label>
+                                {!! Form::select('status_plan',
+                                ['s1'=>'แสดงทั้งหมด','s2'=>'ตรวจแล้ว','s3'=>'ยังไม่ได้ตรวจ','s4'=>'ตรวจล่าช้า',], old('status_plan'),
+                                ['id'=>'status_plan', 'class'=>'form-control']) !!}
                             </div>
                             <div class="form-group col-2 mb-0">
-                                <label for="end-plan">{{ __('การแสดงผล') }}</label>
-                                {!! Form::select('', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], null, ['id'=>'',
+                                <label for="show_plan">{{ __('การแสดงผล') }}</label>
+                                {!! Form::select('show_plan', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], old('show_plan'), ['id'=>'show_plan',
                                 'class'=>'form-control']) !!}
                             </div>
                             <div class="form-group col-2 mb-0">

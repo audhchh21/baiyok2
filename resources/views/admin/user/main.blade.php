@@ -48,7 +48,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'บัญชีผู้ใช้งาน', 'subtitle' => 'บัญชีผู้ใช้งานทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'บัญชีผู้ใช้งาน'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
@@ -58,6 +58,12 @@
                 <a href="{{ route('admin.user.create') }}" class="btn btn-info"><i
                         class="fas fa-plus-circle"></i>{{ __(' เพิ่มผู้ใช้ใหม่')   }}</a>
                 <hr>
+                <div class="pb-3 pt-0">
+                    <span class="mr-2">{{ __('ระดับบัญชี:') }}</span>
+                    <span class="badge" style="background-color:Purple;">{{ __('ผู้ดูแลระบบ') }}</span>
+                    <span class="badge" style="background-color:Blue;">{{ __('ผู้บริหาร') }}</span>
+                    <span class="badge" style="background-color:Orange;">{{ __('เจ้าหน้าที่') }}</span>
+                </div>
             </div>
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -97,11 +103,11 @@
                         <td class="col-1 text-right tb-td">{{ $user->phone }}</td>
                         <td class="col-1 text-center tb-td">
                             @if($user->type == 'Admin')
-                            <span class="badge badge-danger pl-3 pr-3 pt-2 pb-2">{{ __('ผู้ดูแลระบบ') }}</span>
+                            <span class="badge pl-3 pr-3 pt-2 pb-2" style="background-color:Purple;">{{ __('ผู้ดูแลระบบ') }}</span>
                             @elseif($user->type == 'Manager')
-                            <span class="badge badge-primary pl-3 pr-3 pt-2 pb-2">{{ __('ผู้บริหาร') }}</span>
+                            <span class="badge pl-3 pr-3 pt-2 pb-2" style="background-color:Blue;">{{ __('ผู้บริหาร') }}</span>
                             @elseif($user->type == 'User')
-                            <span class="badge badge-dark pl-3 pr-3 pt-2 pb-2">{{ __('เจ้าหน้าที่') }}</span>
+                            <span class="badge pl-3 pr-3 pt-2 pb-2" style="background-color:Orange;">{{ __('เจ้าหน้าที่') }}</span>
                             @endif
                         </td>
                         <td class="col-1 text-center tb-td">

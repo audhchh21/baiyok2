@@ -19,6 +19,7 @@ class PlanController extends Controller
         $plans = Plan::all()
         ->where('user_id', Auth::user()->id)
         ->where('status', '0');
+        request()->start_plan ? dd(request()->start_plan) : null;
         return view('member.plan.main', [
             'count' => 1,
             'plans' => $plans

@@ -99,7 +99,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขร้านค้า', 'subtitle' => 'แก้ไขร้านค้า'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขร้านค้า'])
 
     <!-- End Page Header -->
 
@@ -168,7 +168,7 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-3">
                         <label for="province" class="h4">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('province', $provinces, null, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
+                        {!! Form::select('province', $provinces, $shop->province, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('province') ? ' is-invalid' : '' )]) !!}
                         @error('province')
                         <div class="invalid-feedback">
@@ -178,7 +178,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="district" class="h4">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('district', $districts, null, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
+                        {!! Form::select('district', $districts, $shop->district, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('district') ? ' is-invalid' : '' )]) !!}
                         @error('district')
                         <div class="invalid-feedback">
@@ -188,7 +188,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="subdistrict" class="h4">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('subdistrict', $subdistricts, null, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
+                        {!! Form::select('subdistrict', $subdistricts, $shop->subdistrict, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
                         'form-control form-control-lg'.( $errors->has('subdistrict') ? ' is-invalid' : '' )]) !!}
                         @error('subdistrict')
                         <div class="invalid-feedback">
@@ -199,7 +199,7 @@
                     <div class="form-group col-12 col-xl-3">
                         <label for="zipcode" class="h4">{{ __('รหัสไปรษณีย์') }}<span
                                 class="text-danger">*</span></label>
-                        {!! Form::select('zipcode', $zipcodes, null, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
+                        {!! Form::select('zipcode', $zipcodes, $shop->subdistrict, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
                         form-control-lg'.( $errors->has('zipcode') ? ' is-invalid' : '' )]) !!}
                         @error('zipcode')
                         <div class="invalid-feedback">

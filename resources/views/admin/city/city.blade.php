@@ -72,13 +72,13 @@
     <div class="row mb-5">
         <div class="col">
             <div class="text-right">
-                <a href="{{ route('admin.province') }}" class="btn btn-sm btn-dark"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการจังหวัด') }}</a>
-                <a href="{{ route('admin.district') }}" class="btn btn-sm btn-dark"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการอำเภอ') }}</a>
-                <a href="{{ route('admin.subdistrict') }}" class="btn btn-sm btn-dark"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการตำบล') }}</a>
+                <a href="{{ route('admin.province') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการจังหวัด') }}</a>
+                <a href="{{ route('admin.district') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการอำเภอ') }}</a>
+                <a href="{{ route('admin.subdistrict') }}" class="btn btn-sm text-white" style="background-color:Blue;"><i class="fas fa-th-list pr-2"></i>{{ __('จัดการตำบล') }}</a>
             </div>
             <hr>
             <table class="table table-hover table-bordered" id="tb-city">
-                <thead>
+                <thead class="bg-white">
                     <tr>
                         <th>{{ __('จังหวัด') }}</th>
                         <th>{{ __('อำเภอ') }}</th>
@@ -86,7 +86,7 @@
                         <th>{{ __('รหัสไปรษณีย์') }}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @foreach ($citys as $city)
                     <tr>
                         <td>{{ $city->districts->provinces->name }}</td>

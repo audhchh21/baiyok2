@@ -99,14 +99,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'เพิ่มหน่วยงาน', 'subtitle' => 'เพิ่มหน่วยงาน'])
+    @include('layouts.pageheader.title', ['title' => 'เพิ่มหน่วยงาน'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row mb-5">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('admin.office') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('admin.office') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -142,9 +142,9 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
                         <label for="address" class="h3">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
-                        <textarea name="address" id="address" cols="30" rows="10"
+                        <textarea name="address" id="address" cols="30" rows="5"
                             class="@error('address') is-invalid @enderror form-control form-control-lg"
-                            required>{{ old('address') ?? __('ที่อยู่') }}</textarea>
+                            required>{{ old('address') ?? __('') }}</textarea>
                         @error('address')
                         <div class="invalid-feedback">
                             {{ $errors->first('address') }}

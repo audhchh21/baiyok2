@@ -14,9 +14,9 @@ class CreateFoodsamplesTable extends Migration
     public function up()
     {
         Schema::create('foodsamples', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique()->nullable();
-            $table->string('category')->nullable();
+            $table->increments('id', 10);
+            $table->string('name', 150)->unique()->nullable();
+            $table->string('category', 150)->nullable();
         });
     }
 

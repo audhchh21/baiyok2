@@ -14,14 +14,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'เพิ่มคำนำหน้าชื่อ', 'subtitle'=>'เพิ่มรายการคำนำหน้าชื่อ'])
+    @include('layouts.pageheader.title', ['title' => 'เพิ่มคำนำหน้าชื่อ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('admin.titlename') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i> {{ __('ย้อนกลับ')   }}</a>
+                <a href="{{ route('admin.titlename') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i> {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
             <form action="{{ route('admin.titlename.store') }}" method="post">

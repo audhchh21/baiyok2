@@ -39,21 +39,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Fullname User
-    public function getFullnameAttribute()
-    {
-        return $this->titlenames->name.''.$this->f_name.' '.$this->l_name;
-    }
-
     // Join Table Titlename
     public function titlenames()
     {
-        return $this->belongsTo('App\Titlename', 'office_id', 'id');
+        return $this->belongsTo('App\Titlename', 'office_id');
     }
 
     // Join Table Office
     public function offices()
     {
-        return $this->belongsTo('App\Office', 'office_id', 'id');
+        return $this->belongsTo('App\Office', 'office_id');
+    }
+
+    // Fullname User
+    public function getFullnameAttribute()
+    {
+        return $this->titlenames->name.''.$this->f_name.' '.$this->l_name;
     }
 }

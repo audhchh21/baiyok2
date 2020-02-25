@@ -99,14 +99,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'แก้ไขหน่วยงาน', 'subtitle' => 'แก้ไขหน่วยงาน'])
+    @include('layouts.pageheader.title', ['title' => 'แก้ไขหน่วยงาน'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row mb-5">
         <div class="col">
             <div class="text-left">
-                <a href="{{ route('admin.office') }}" class="btn btn-dark"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('admin.office') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
@@ -142,9 +142,9 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
                         <label for="address" class="h3">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
-                        <textarea name="address" id="address" cols="30" rows="10"
+                        <textarea name="address" id="address" cols="30" rows="5"
                             class="@error('address') is-invalid @enderror form-control form-control-lg"
-                            required>{{ $office->address ?? old('address') ?? __('ที่อยู่') }}</textarea>
+                            required>{{ $office->address ?? old('address') }}</textarea>
                         @error('address')
                         <div class="invalid-feedback">
                             {{ $errors->first('address') }}
@@ -155,7 +155,7 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-3">
                         <label for="province" class="h3">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('province', $provinces, null, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
+                        {!! Form::select('province', $provinces, $office->province, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('province') ? ' is-invalid' : '' )]) !!}
                         @error('province')
                         <div class="invalid-feedback">
@@ -165,7 +165,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('district', $districts, null, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
+                        {!! Form::select('district', $districts, $office->district, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('district') ? ' is-invalid' : '' )]) !!}
                         @error('district')
                         <div class="invalid-feedback">
@@ -175,7 +175,7 @@
                     </div>
                     <div class="form-group col-12 col-xl-3">
                         <label for="subdistrict" class="h3">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('subdistrict', $subdistricts, null, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
+                        {!! Form::select('subdistrict', $subdistricts, $office->subdistrict, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
                         'form-control form-control-lg'.( $errors->has('subdistrict') ? ' is-invalid' : '' )]) !!}
                         @error('subdistrict')
                         <div class="invalid-feedback">
@@ -186,7 +186,7 @@
                     <div class="form-group col-12 col-xl-3">
                         <label for="zipcode" class="h3">{{ __('รหัสไปรษณีย์') }}<span
                                 class="text-danger">*</span></label>
-                        {!! Form::select('zipcode', $zipcodes, null, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
+                        {!! Form::select('zipcode', $zipcodes, $office->subdistrict, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
                         form-control-lg'.( $errors->has('zipcode') ? ' is-invalid' : '' )]) !!}
                         @error('zipcode')
                         <div class="invalid-feedback">

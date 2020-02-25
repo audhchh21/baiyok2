@@ -48,15 +48,14 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'จัดการจังหวัด', 'subtitle'=>'รายการจังหวัด'])
+    @include('layouts.pageheader.title', ['title' => 'จัดการจังหวัด'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
     <div class="row mb-5">
         <div class="col-12 col-xl-8 border-right">
             <div class="text-left">
-                <a href="{{ route('admin.city') }}" class="btn btn-dark" data-toggle="tooltip" data-placement="right"
-                    title="หน้าแผนงาน"><i class="fas fa-angle-double-left"></i>
+                <a href="{{ route('admin.city') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>

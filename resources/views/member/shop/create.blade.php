@@ -99,7 +99,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'เพิ่มร้านค้า', 'subtitle' => 'เพิ่มร้านค้า'])
+    @include('layouts.pageheader.title', ['title' => 'เพิ่มร้านค้า'])
 
     <!-- End Page Header -->
 

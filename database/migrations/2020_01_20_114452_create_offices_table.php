@@ -14,12 +14,12 @@ class CreateOfficesTable extends Migration
     public function up()
     {
         Schema::create('offices', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->unique()->nullable();
+            $table->increments('id', 10);
+            $table->string('name', 150)->unique()->nullable();
             $table->string('address')->nullable();
-            $table->unsignedBigInteger('province')->nullable();
-            $table->unsignedBigInteger('district')->nullable();
-            $table->unsignedBigInteger('subdistrict')->nullable();
+            $table->unsignedInteger('province')->nullable();
+            $table->unsignedInteger('district')->nullable();
+            $table->unsignedInteger('subdistrict')->nullable();
 
             $table->foreign('province')->references('id')->on('provinces');
             $table->foreign('district')->references('id')->on('districts');

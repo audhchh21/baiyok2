@@ -48,7 +48,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'คำนำหน้าชื่อ', 'subtitle'=>'รายการคำนำหน้าชื่อ'])
+    @include('layouts.pageheader.title', ['title' => 'คำนำหน้าชื่อ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->

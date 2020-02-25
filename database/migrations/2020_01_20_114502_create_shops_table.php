@@ -14,16 +14,16 @@ class CreateShopsTable extends Migration
     public function up()
     {
         Schema::create('shops', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->unsignedBigInteger('titlename_id')->nullable();
+            $table->increments('id');
+            $table->string('name', 150)->nullable();
+            $table->unsignedInteger('titlename_id')->nullable();
             $table->string('f_name')->nullable();
             $table->string('l_name')->nullable();
             $table->string('address')->nullable();
-            $table->unsignedBigInteger('province')->nullable();
-            $table->unsignedBigInteger('district')->nullable();
-            $table->unsignedBigInteger('subdistrict')->nullable();
-            $table->string('tel')->nullable();
+            $table->unsignedInteger('province')->nullable();
+            $table->unsignedInteger('district')->nullable();
+            $table->unsignedInteger('subdistrict')->nullable();
+            $table->string('tel', 10)->nullable();
             $table->string('place')->nullable()->default('ไม่มีสถานที่เก็บตัวอย่าง');
 
             $table->foreign('titlename_id')->references('id')->on('titlenames');

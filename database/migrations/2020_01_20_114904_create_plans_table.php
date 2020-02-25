@@ -14,14 +14,14 @@ class CreatePlansTable extends Migration
     public function up()
     {
         Schema::create('plans', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('createby_user_id')->nullable();
-            $table->unsignedBigInteger('to_user_id')->nullable();
-            $table->unsignedBigInteger('shop_id')->nullable();
+            $table->increments('id', 10);
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('createby_user_id')->nullable();
+            $table->unsignedInteger('to_user_id')->nullable();
+            $table->unsignedInteger('shop_id')->nullable();
             $table->dateTime('plan_start')->nullable();
             $table->dateTime('plan_end')->nullable();
-            $table->string('status')->default('0');
+            $table->string('status', 5)->default('0');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

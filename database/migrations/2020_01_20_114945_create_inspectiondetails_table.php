@@ -14,11 +14,11 @@ class CreateInspectiondetailsTable extends Migration
     public function up()
     {
         Schema::create('inspectiondetails', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('inspection_id')->nullable();
-            $table->unsignedBigInteger('foodsample_id')->nullable();
-            $table->unsignedBigInteger('foodsamplesource_id')->nullable();
-            $table->unsignedBigInteger('foodtestkit_id')->nullable();
+            $table->increments('id', 10);
+            $table->unsignedInteger('inspection_id')->nullable();
+            $table->unsignedInteger('foodsample_id')->nullable();
+            $table->unsignedInteger('foodsamplesource_id')->nullable();
+            $table->unsignedInteger('foodtestkit_id')->nullable();
             $table->integer('inspection_result')->nullable();
             $table->string('actuation_after')->nullable()->default('ไม่มีหมายเหตุ');
             $table->string('inspection_image')->nullable()->default('no-image.png');
