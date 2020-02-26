@@ -205,15 +205,27 @@ class HomeController extends Controller
         $plan_check = $plan->where('status', '0')->where('to_user_id', $user->id)->count();
         $user_count = $this->getUser()->where('office_id', $user->office_id)->count();
         $plans = $plan->where('status', '0')->where('to_user_id', $user->id);
+        $category = [
+            'ผัดสด' => 'ผัดสด',
+            'ผลไม้สด' => 'ผลไม้สด',
+            'ของหมักดอง' => 'ของหมักดอง',
+            'ของสด' => 'ของสด',
+            'อาหารแปรรูป' => 'อาหารแปรรูป',
+            'ของทอด' => 'ของทอด',
+            'อื่นๆ' => 'อื่นๆ'
+        ];
         // dd($user_count);
         return view('member.dashboard', [
             'plan_all' => $plan_all,
             'plan_today' => $plan_today,
             'plan_check' => $plan_check,
             'user_count' => $user_count,
-            'plans' => $plans
+            'plans' => $plans,
+            'category' => $category
         ]);
     }
+
+
 
     private function getUser()
     {

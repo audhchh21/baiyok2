@@ -10,6 +10,8 @@ Route::get('unlogin', function () {
     return view('auth.unlogin');
 })->name('unlogin');
 
+
+Route::get('chart', 'ChartjsController@main');
 /**
 * Admin Route
 */

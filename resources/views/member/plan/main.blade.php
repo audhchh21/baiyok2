@@ -43,8 +43,6 @@
             }
         });
         $('[data-toggle="tooltip"]').tooltip();
-        $('#tb-plan').DataTable();
-
         $('#start_plan').datepicker({
             language:'th-th',
             format:'dd-mm-yyyy',
@@ -60,6 +58,7 @@
             // console.log(e.format())
             $('#start_plan').datepicker('setEndDate', e.format());
         });
+        $('#tb-plan').DataTable();
     });
 
 </script>
@@ -102,34 +101,32 @@
         <div class="col-12 col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    {{ request()->start_plan }}
-                    <form action="/" method="get">
-                        @csrf
+                    <form action="" method="get">
                         <div class="form-row">
                             <div class="form-group col-3 mb-0">
                                 <label for="start_plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
-                                <input type="text" class="form-control" id="start_plan" name="start"
-                                    value="{{ old('start_plan') ?? null }}" placeholder="" required>
+                                <input type="text" class="form-control" id="start_plan" name="start_plan"
+                                    value="{{ request()->start_plan ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-3 mb-0">
                                 <label for="end_plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
-                                <input type="text" class="form-control" id="end_plan" name="end"
-                                    value="{{ old('end_plan') ?? null }}" placeholder="" required>
+                                <input type="text" class="form-control" id="end_plan" name="end_plan"
+                                    value="{{ request()->end_plan ?? null }}" placeholder="" required>
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <label for="status_plan">{{ __('สถานะแผนงาน') }}</label>
                                 {!! Form::select('status_plan',
-                                ['s1'=>'แสดงทั้งหมด','s2'=>'ตรวจแล้ว','s3'=>'ยังไม่ได้ตรวจ','s4'=>'ตรวจล่าช้า',], old('status_plan'),
+                                ['s1'=>'แสดงทั้งหมด','s2'=>'ตรวจแล้ว','s3'=>'ยังไม่ได้ตรวจ','s4'=>'ตรวจล่าช้า',], request()->status_plan,
                                 ['id'=>'status_plan', 'class'=>'form-control']) !!}
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <label for="show_plan">{{ __('การแสดงผล') }}</label>
-                                {!! Form::select('show_plan', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], old('show_plan'), ['id'=>'show_plan',
+                                {!! Form::select('show_plan', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], request()->show_plan, ['id'=>'show_plan',
                                 'class'=>'form-control']) !!}
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <div class="text-center">
-                                    <a href="" class="btn btn-sm btn-block btn-success">{{ __('แสดงผล') }}</a>
+                                    <button type="submit" class="btn btn-sm btn-block btn-success">{{ __('แสดงผล') }}</button>
                                     <button type="reset"
                                         class="btn btn-sm btn-block btn-danger">{{ __('ล้างค่า') }}</button>
                                 </div>

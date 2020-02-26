@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Auth;
-
 use App\Plan;
 use App\User;
 use App\Shop;
@@ -16,10 +14,53 @@ class PlanController extends Controller
     //
     public function planMain()
     {
-        $plans = Plan::all()
-        ->where('user_id', Auth::user()->id)
-        ->where('status', '0');
-        request()->start_plan ? dd(request()->start_plan) : null;
+        $start = request()->start_plan;
+        $end = request()->end_plan;
+        $status = request()->status_plan;
+        $show = request()->show_plan;
+        if($start && $end && $status && $show){
+            $date_start = date_create($start);
+            $date_end = date_create($end);
+            $f_start = date_format($date_start,"Y-m-d 00:00:00");
+            $f_end = date_format($date_end,"Y-m-d 23:59:59");
+            switch ($status) {
+                case 's1':
+                    $q_status = ['0','1','2','3'];
+                    break;
+
+                case 's2':
+                    $q_status = ['1'];
+                    break;
+
+                case 's3':
+                    $q_status = ['0'];
+                    break;
+
+                case 's4':
+                    $q_status = ['2'];
+                    break;
+
+                default:
+                    $q_status = ['0','1','2','3'];
+                    break;
+            }
+            if($show == 'd1'){
+                $userid = User::where('office_id', auth()->user()->office_id)->get();
+                $plans = Plan::whereIn('status', $q_status)
+                ->whereBetween('plan_start', [$f_start, $f_end])
+                ->whereIn('to_user_id', $userid)
+                ->get();
+            }elseif($show == 'd2'){
+                $plans = Plan::where('to_user_id', auth()->user()->id)
+                ->whereIn('status', $q_status)
+                ->whereBetween('plan_start', [$f_start, $f_end])
+                ->get();
+            }
+        }else{
+            $plans = Plan::all()
+            ->where('user_id', auth()->user()->id)
+            ->where('status', '0');
+        }
         return view('member.plan.main', [
             'count' => 1,
             'plans' => $plans
@@ -30,7 +71,7 @@ class PlanController extends Controller
     public function planCreate()
     {
         $offices = Office::all();
-        $users = User::where('office_id', Auth::user()->office_id)->get();
+        $users = User::where('office_id', auth()->user()->office_id)->get();
         $shops = Shop::all();
         return view('member.plan.create', [
             'offices' => $offices,
@@ -44,7 +85,7 @@ class PlanController extends Controller
     {
         $plan = Plan::findOrFail($id);
         $offices = Office::all();
-        $users = User::where('office_id', Auth::user()->office_id)->get();
+        $users = User::where('office_id', auth()->user()->office_id)->get();
         $shops = Shop::all();
         return view('member.plan.edit', [
             'plan' => $plan,
@@ -59,10 +100,10 @@ class PlanController extends Controller
     {
         $startdate = date_create($request->plan_start);
         $enddate = date_create($request->plan_end);
-        $input['user_id'] = Auth::user()->id;
+        $input['user_id'] = auth()->user()->id;
         $input['plan_start'] = date_format($startdate, "Y-m-d 00:00:00");
         $input['plan_end'] = date_format($enddate, "Y-m-d 23:59:59");
-        $input['createby_user_id'] = Auth::user()->id;
+        $input['createby_user_id'] = auth()->user()->id;
         $input['to_user_id'] = $request->user;
         $input['shop_id'] = $request->shop;
         $input['status'] = '0';
@@ -88,7 +129,7 @@ class PlanController extends Controller
 
         $plan->plan_start = date_format($startdate, "Y-m-d 00:00:00");
         $plan->plan_end = date_format($enddate, "Y-m-d 23:59:59");
-        $plan->createby_user_id = Auth::user()->id;
+        $plan->createby_user_id = auth()->user()->id;
         $plan->to_user_id = $request->user;
         $plan->shop_id = $request->shop;
         try {

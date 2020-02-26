@@ -7,6 +7,7 @@
     .tb-td {
         vertical-align: middle !important;
     }
+
 </style>
 @endpush
 
@@ -15,6 +16,7 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     })
+
 </script>
 @endpush
 
@@ -127,36 +129,36 @@
                                 <td class="text-center col-3 tb-td">{{ $plan->by_user->Fullname }}</td>
                                 <td class="text-center col-1 tb-td">
                                     @if ($plan->status == '0')
-                                    <span class="badge badge-pill badge-info" data-toggle="tooltip"
-                                        data-placement="top" title="ยังไม่ได้ทำการบันทึก"><i
-                                            class="far fa-calendar fa-lg m-1"></i></span>
+                                    <span class="badge badge-pill badge-info" data-toggle="tooltip" data-placement="top"
+                                        title="ยังไม่ได้ทำการบันทึก"><i class="far fa-calendar fa-lg m-1"></i></span>
                                     @elseif ($plan->status == '1')
-                                    <span class="badge badge-pill badge-info" data-toggle="tooltip"
-                                        data-placement="top" title="ทำการบันทึกเรียบร้อย"><i
+                                    <span class="badge badge-pill badge-info" data-toggle="tooltip" data-placement="top"
+                                        title="ทำการบันทึกเรียบร้อย"><i
                                             class="far fa-calendar-check fa-lg m-1"></i></span>
                                     @elseif ($plan->status == '2')
-                                    <span class="badge badge-pill badge-info" data-toggle="tooltip"
-                                        data-placement="top" title="ทำการบันทึกล่าช้า"><i
-                                            class="fas fa-calendar-times fa-lg m-1"></i></span>
+                                    <span class="badge badge-pill badge-info" data-toggle="tooltip" data-placement="top"
+                                        title="ทำการบันทึกล่าช้า"><i class="fas fa-calendar-times fa-lg m-1"></i></span>
                                     @endif
                                 </td>
                                 <td class="text-center col-2 tb-td">
                                     <div class="btn-group btn-group-sm">
                                         @if ($plan->status == '0' && $plan->to_user_id == Auth::user()->id)
-                                        <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-white"
-                                            data-toggle="tooltip" data-placement="top" title="บันทึกผลตรวจ">
+                                        <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top"
+                                            title="บันทึกผลตรวจ">
                                             <span class="text-dark pr-1">
                                                 <i class="fas fa-check-square"></i>
                                             </span>
                                         </a>
-                                        <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white"
-                                            data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                        <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top"
+                                            title="แก้ไข">
                                             <span class="text-warning pr-1">
                                                 <i class="far fa-edit"></i>
                                             </span>
                                         </a>
-                                        <a href="{{ route('member.plan.delete', ['id' => $plan->id]) }}" class="btn btn-white"
-                                            data-toggle="tooltip" data-placement="top" title="ลบ"
+                                        <a href="{{ route('member.plan.delete', ['id' => $plan->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top" title="ลบ"
                                             onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')">
                                             <span class="text-danger pr-1">
                                                 <i class="far fa-trash-alt"></i>
@@ -164,21 +166,28 @@
                                         </a>
                                         @endif
                                         @if ($plan->status == '1' || $plan->status == '2')
-                                        <a href="{{ route('member.inspection.detail', ['id' => $plan->inspection->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="รายละเอียด">
+                                        <a href="{{ route('member.inspection.detail', ['id' => $plan->inspection->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top"
+                                            title="รายละเอียด">
                                             <span class="text-success pr-1">
                                                 <i class="fas fa-info-circle"></i>
                                             </span>
                                         </a>
                                         @endif
-                                        @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == Auth::user()->id)
-                                        <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                        @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id ==
+                                        Auth::user()->id)
+                                        <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top"
+                                            title="แก้ไข">
                                             <span class="text-warning pr-1">
                                                 <i class="far fa-edit"></i>
                                             </span>
-                                         </a>
+                                        </a>
                                         @endif
-                                        @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id == Auth::user()->id)
-                                        <a href="{{ route('member.inspection.delete', ['id' => $plan->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="ลบ"
+                                        @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id
+                                        == Auth::user()->id)
+                                        <a href="{{ route('member.inspection.delete', ['id' => $plan->id]) }}"
+                                            class="btn btn-white" data-toggle="tooltip" data-placement="top" title="ลบ"
                                             onclick="return confirm('คุณต้องการลบแผนงานตรวจสอบ {{ $plan->shops->name }} ใช่ หรือ ไม่')">
                                             <span class="text-danger pr-1">
                                                 <i class="far fa-trash-alt"></i>
@@ -190,7 +199,8 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="text-center"><span class="h3">{{ __('ไม่มีแผนงานที่ต้องตรวจสอบ') }}</span></td>
+                                <td colspan="5" class="text-center"><span
+                                        class="h3">{{ __('ไม่มีแผนงานที่ต้องตรวจสอบ') }}</span></td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -227,15 +237,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-12">
                                         <label for="foodsample">{{ __('ตัวอย่างอาหาร') }}</label>
-                                        <input type="text" class="form-control" id="foodsample" name="foodsample"
-                                            value="{{ old('foodsample') ?? null }}" placeholder="ตัวอย่างอาหาร"
+                                        <input type="text" class="form-control" id="foodsample" name="name"
+                                            value="{{ old('name') ?? null }}" placeholder="ตัวอย่างอาหาร"
                                             required>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-12">
-                                        <label for="">{{ __('ตัวอย่างอาหาร') }}</label>
-                                        {!! Form::select('', [], null, ['id' => '', 'class' => 'form-control',
+                                        <label for="">{{ __('หมวดหมู่') }}</label>
+                                        {!! Form::select('category', $category, null, ['id' => 'category', 'class' => 'form-control',
                                         'placeholder' => 'เลือกหมวดหมู่', 'required' => '']) !!}
                                     </div>
                                 </div>
@@ -252,7 +262,7 @@
                                     <div class="form-group col-12">
                                         <label for="foodsamplesource">{{ __('ตัวอย่างแหล่งที่มาอาหาร') }}</label>
                                         <input type="text" class="form-control" id="foodsamplesource"
-                                            name="foodsamplesource" value="{{ old('foodsamplesource') ?? null }}"
+                                            name="name" value="{{ old('name') ?? null }}"
                                             placeholder="ตัวอย่างแหล่งที่มาอาหาร" required>
                                     </div>
                                 </div>
@@ -268,8 +278,8 @@
                                 <div class="form-row">
                                     <div class="form-group col-12">
                                         <label for="foodtestkit">{{ __('ตัวอย่างชุดทดสอบอาหาร') }}</label>
-                                        <input type="text" class="form-control" id="foodtestkit" name="foodtestkit"
-                                            value="{{ old('foodtestkit') ?? null }}" placeholder="ตัวอย่างชุดทดสอบอาหาร"
+                                        <input type="text" class="form-control" id="foodtestkit" name="name"
+                                            value="{{ old('name') ?? null }}" placeholder="ตัวอย่างชุดทดสอบอาหาร"
                                             required>
                                     </div>
                                 </div>

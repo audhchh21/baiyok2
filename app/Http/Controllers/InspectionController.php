@@ -19,14 +19,13 @@ class InspectionController extends Controller
     //
     public function office_ids($output = [])
     {
-        $userid = User::where('office_id', auth()->user()->office_id)
-        ->get();
-        foreach($userid as $item)
-        {
+        $userid = User::where('office_id', auth()->user()->office_id)->get();
+        foreach($userid as $item){
             $output = Arr::prepend($output, $item->id);
         }
         return $output;
     }
+
     //
     public function inspectionAll()
     {
