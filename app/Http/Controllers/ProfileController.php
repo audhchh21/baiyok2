@@ -84,19 +84,19 @@ class ProfileController extends Controller
             $password = User::findOrFail(Auth::user()->id);
             $password->password = Hash::make($request->new_password);
             $password->save();
-            if($user->type == 'Admin'){
+            if($password->type == 'Admin'){
                 return redirect()->route('admin.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
-            }elseif($user->type == 'Manager'){
+            }elseif($password->type == 'Manager'){
                 return redirect()->route('manager.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
-            }elseif($user->type == 'User'){
+            }elseif($password->type == 'User'){
                 return redirect()->route('member.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านสำเร็จ!!');
             }
         }else{
-            if($user->type == 'Admin'){
+            if($password->type == 'Admin'){
                 return redirect()->route('admin.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
-            }elseif($user->type == 'Manager'){
+            }elseif($password->type == 'Manager'){
                 return redirect()->route('manager.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
-            }elseif($user->type == 'User'){
+            }elseif($password->type == 'User'){
                 return redirect()->route('member.profile.edit')->with('status', 'เปลี่ยนรหัสผ่านไม่สำเร็จ!!');
             }
         }
