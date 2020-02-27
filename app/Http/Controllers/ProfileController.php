@@ -79,9 +79,10 @@ class ProfileController extends Controller
     public function profilePasswordReset(Request $request)
     {
         // dd($request->all());
+        $password = User::findOrFail(Auth::user()->id);
         if(Hash::check($request->current_password, Auth::user()->password))
         {
-            $password = User::findOrFail(Auth::user()->id);
+
             $password->password = Hash::make($request->new_password);
             $password->save();
             if($password->type == 'Admin'){
