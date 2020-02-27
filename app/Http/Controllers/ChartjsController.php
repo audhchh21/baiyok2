@@ -7,6 +7,8 @@ use Illuminate\Support\Arr;
 
 use App\District;
 use App\Foodtestkit;
+use App\Plan;
+use App\Inspection;
 use App\Inspectiondetail;
 use App\Office;
 
@@ -69,15 +71,15 @@ class ChartjsController extends Controller
         $label = $this->getLabels($this->getDistrict());
         $color = $this->getColor(count($label));
         $dataset = [];
-        foreach($this->getFoodtestkit() as $key => $testkit){
+        foreach($this->getFoodtestkit() as $testkitkey => $testkit){
             $data = [];
-            foreach($this->getFoodtestkit() as $testkit_data){
-                $inspectiondetails = $this->getInspectiondetail();
-                $data = Arr::prepend($data, $inspectiondetails->where('foodtestkit_id', $testkit_data->id)->count());
+            for($count = 0; $count <= count($label); $count++){
+                $plans = $this->getPlan();
+                $data = Arr::prepend($data, $plans);
             }
             $datas = [
                 'label' => $testkit->name,
-                'backgroundColor' => $color[$key],
+                'backgroundColor' => $color[$testkitkey],
                 'data' => $data
             ];
             $dataset = Arr::prepend($dataset, $datas);
@@ -114,12 +116,16 @@ class ChartjsController extends Controller
         $color = $this->getColor(count($label));
         $dataset = [];
         foreach($this->getFoodtestkit() as $key => $testkit){
-            $data = [
+            $data = [];
+            for($count = 0 ; $count <= count($label); $count++){
+                $data = Arr::prepend($data, rand(0,50));
+            }
+            $datas = [
                 'label' => $testkit->name,
                 'backgroundColor' => $color[$key],
-                'data' => [1,2,3,4,5,6,7]
+                'data' => $data
             ];
-            $dataset = Arr::prepend($dataset, $data);
+            $dataset = Arr::prepend($dataset, $datas);
         }
         $options = [
             'title' => [
@@ -147,26 +153,6 @@ class ChartjsController extends Controller
         ->options($options);
     }
 
-    private function getInspectiondetail()
-    {
-        return Inspectiondetail::all();
-    }
-
-    private function getFoodtestkit()
-    {
-        return Foodtestkit::all();
-    }
-
-    private function getDistrict()
-    {
-        return District::orderBy('id', 'desc')->get();
-    }
-
-    private function getOffice()
-    {
-        return Office::all();
-    }
-
     private function getLabels($foodtestkit)
     {
         $output = [];
@@ -184,5 +170,35 @@ class ChartjsController extends Controller
             $output = Arr::prepend($output, '#'.$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)]);
         }
         return $output;
+    }
+
+    private function getInspectiondetail()
+    {
+        return Inspectiondetail::all();
+    }
+
+    private function getInspection()
+    {
+        return Inspection::all();
+    }
+
+    private function getFoodtestkit()
+    {
+        return Foodtestkit::all();
+    }
+
+    private function getDistrict()
+    {
+        return District::orderBy('id', 'desc')->get();
+    }
+
+    private function getOffice()
+    {
+        return Office::all();
+    }
+
+    private function getPlan()
+    {
+        return Plan::all();
     }
 }

@@ -42,7 +42,7 @@ class User extends Authenticatable
     // Join Table Titlename
     public function titlenames()
     {
-        return $this->belongsTo('App\Titlename', 'office_id');
+        return $this->belongsTo('App\Titlename', 'titlename_id');
     }
 
     // Join Table Office

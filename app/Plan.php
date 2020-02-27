@@ -30,6 +30,12 @@ class Plan extends Model
     }
 
     //
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    //
     public function by_user()
     {
         return $this->belongsTo('App\User', 'createby_user_id', 'id');
