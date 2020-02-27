@@ -74,8 +74,8 @@ class ChartjsController extends Controller
         foreach($this->getFoodtestkit() as $testkitkey => $testkit){
             $data = [];
             for($count = 0; $count <= count($label); $count++){
-                $plans = $this->getPlan();
-                $data = Arr::prepend($data, $plans);
+                // $plans = $this->getPlan();
+                $data = Arr::prepend($data, rand(5, 15));
             }
             $datas = [
                 'label' => $testkit->name,
@@ -118,7 +118,7 @@ class ChartjsController extends Controller
         foreach($this->getFoodtestkit() as $key => $testkit){
             $data = [];
             for($count = 0 ; $count <= count($label); $count++){
-                $data = Arr::prepend($data, rand(0,50));
+                $data = Arr::prepend($data, rand(5,50));
             }
             $datas = [
                 'label' => $testkit->name,
