@@ -70,12 +70,17 @@ class ChartjsController extends Controller
         $color = $this->getColor(count($label));
         $dataset = [];
         foreach($this->getFoodtestkit() as $key => $testkit){
-            $data = [
+            $data = [];
+            foreach($this->getFoodtestkit() as $testkit_data){
+                $inspectiondetails = $this->getInspectiondetail();
+                $data = Arr::prepend($data, $inspectiondetails->where('foodtestkit_id', $testkit_data->id)->count());
+            }
+            $datas = [
                 'label' => $testkit->name,
                 'backgroundColor' => $color[$key],
-                'data' => [1,2,3,4,5,6,7]
+                'data' => $data
             ];
-            $dataset = Arr::prepend($dataset, $data);
+            $dataset = Arr::prepend($dataset, $datas);
         }
         $options = [
             'title' => [

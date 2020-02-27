@@ -71,7 +71,7 @@ class PlanController extends Controller
     public function planCreate()
     {
         $offices = Office::all();
-        $users = User::where('office_id', auth()->user()->office_id)->get();
+        $users = User::where('office_id', auth()->user()->office_id)->where('status', '1')->get();
         $shops = Shop::all();
         return view('member.plan.create', [
             'offices' => $offices,
