@@ -124,7 +124,7 @@
                             <td class="text-center col-3">
                                 <button type="button" id="up-status" class="btn btn-sm btn-white"
                                     data-toggle="tooltip" data-placement="top" title="อนุมัติสิทธิ์"
-                                    onclick="return confirm('คุณต้องอนุมัติสิทธิ์ ใช่ หรือ ไม่')">
+                                    >
                                     <span class="text-success">
                                         <i class="material-icons">check</i>
                                     </span></button>
