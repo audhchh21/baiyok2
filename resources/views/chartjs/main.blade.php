@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>สรุปกราฟ</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,25 +14,37 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row mt-5">
-            <div class="col mb-3">
+        <div class="row">
+            <div class="col-5 m-auto">
+                <form action="" method="get">
+                    <div class="form-group">
+                      <label for=""></label>
+                      <select class="form-control" name="" id="">
+                          <option value=""></option>
+                      </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row m-5">
+            <div class="col-12 col-xl-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        {!! $chartjs1->render() !!}
+                        {!! $FoodProvince->render() !!}
                     </div>
                 </div>
             </div>
-            <div class="col mb-3">
+            <div class="col-12 col-xl-6 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        {!! $chartjs2->render() !!}
+                        {!! $FoodDistrict->render() !!}
                     </div>
                 </div>
             </div>
-            <div class="col mb-3">
+            <div class="col-12 col-xl-12 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        {!! $chartjs3->render() !!}
+                        {!! $FoodSubdistrict->render() !!}
                     </div>
                 </div>
             </div>

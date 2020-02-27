@@ -3,86 +3,181 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+
+use App\District;
+use App\Foodtestkit;
+use App\Inspectiondetail;
+use App\Office;
 
 class ChartjsController extends Controller
 {
     //
     public function main()
     {
-        $chartjs1 = app()->chartjs
-         ->name('barChartTest')
-         ->type('horizontalBar')
-         ->size(['width' => 400, 'height' => 200])
-         ->labels(['Label x', 'Label y'])
-         ->datasets([
-             [
-                 "label" => "My First dataset",
-                 'backgroundColor' => ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-                 'data' => [69, 59]
-             ],
-             [
-                 "label" => "My First dataset",
-                 'backgroundColor' => ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)'],
-                 'data' => [65, 12]
-             ]
-         ])
-         ->options([
+        return view('chartjs.main', [
+            'FoodProvince' => $this->chartFoodProvince(),
+            'FoodDistrict' => $this->chartFoodDistrict(),
+            'FoodSubdistrict' => $this->chartFoodSubdistrict(),
+        ]);
+    }
+
+    public function chartFoodProvince()
+    {
+
+        $label = $this->getLabels($this->getFoodtestkit());
+        $color = $this->getColor(count($label));
+        $data = [];
+        foreach($this->getFoodtestkit() as $key => $testkit){
+            $inspectiondetail = $this->getInspectiondetail();
+            $data = Arr::prepend($data, $inspectiondetail->where('foodtestkit_id', $testkit->id)->count());
+        }
+        $dataset = [
+            [
+                'backgroundColor' => $color,
+                'data' => $data
+            ]
+        ];
+        $options = [
             'title' => [
                 'display' => true,
-                'text' => 'nice',
-                'fontSize' => 18,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับจังหวัด',
+                'fontSize' => 24,
                 'fontStyle' => 'bold'
             ],
-         ]);
-
-         $chartjs2 = app()->chartjs
-        ->name('lineChartTest')
-        ->type('line')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
-        ->datasets([
-            [
-                "label" => "My First dataset",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [65, 59, 80, 81, 56, 55, 40],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
             ],
-            [
-                "label" => "My Second dataset",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
-                "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                "pointHoverBackgroundColor" => "#fff",
-                "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                'data' => [12, 33, 44, 44, 55, 23, 40],
-            ]
-        ])
-        ->options([]);
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
 
-        $chartjs3 = app()->chartjs
-        ->name('pieChartTest')
+        return app()->chartjs
+        ->name('province')
         ->type('pie')
         ->size(['width' => 400, 'height' => 200])
-        ->labels(['Label x', 'Label y'])
-        ->datasets([
-            [
-                'backgroundColor' => ['#FF6384', '#36A2EB'],
-                'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
-                'data' => [69, 59]
-            ]
-        ])
-        ->options([]);
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
 
-        // dd($chartjs);
-        return view('chartjs.main', [
-            'chartjs1' => $chartjs1,
-            'chartjs2' => $chartjs2,
-            'chartjs3' => $chartjs3,
-        ]);
+    public function chartFoodDistrict()
+    {
+        $label = $this->getLabels($this->getDistrict());
+        $color = $this->getColor(count($label));
+        $dataset = [];
+        foreach($this->getFoodtestkit() as $key => $testkit){
+            $data = [
+                'label' => $testkit->name,
+                'backgroundColor' => $color[$key],
+                'data' => [1,2,3,4,5,6,7]
+            ];
+            $dataset = Arr::prepend($dataset, $data);
+        }
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับอำเภอ',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('district')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
+
+    public function chartFoodSubdistrict()
+    {
+        $label = $this->getLabels($this->getOffice());
+        $color = $this->getColor(count($label));
+        $dataset = [];
+        foreach($this->getFoodtestkit() as $key => $testkit){
+            $data = [
+                'label' => $testkit->name,
+                'backgroundColor' => $color[$key],
+                'data' => [1,2,3,4,5,6,7]
+            ];
+            $dataset = Arr::prepend($dataset, $data);
+        }
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับโรงพยาบาลส่งเสริมสุขภาพตำบล',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'right',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('subdistrict')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
+
+    private function getInspectiondetail()
+    {
+        return Inspectiondetail::all();
+    }
+
+    private function getFoodtestkit()
+    {
+        return Foodtestkit::all();
+    }
+
+    private function getDistrict()
+    {
+        return District::orderBy('id', 'desc')->get();
+    }
+
+    private function getOffice()
+    {
+        return Office::all();
+    }
+
+    private function getLabels($foodtestkit)
+    {
+        $output = [];
+        foreach($foodtestkit as $data){
+            $output = Arr::prepend($output, $data->name);
+        }
+        return $output;
+    }
+
+    private function getColor($count = 1)
+    {
+        $hexcode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+        $output = [];
+        for($i = 0; $i <= $count; $i++){
+            $output = Arr::prepend($output, '#'.$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)]);
+        }
+        return $output;
     }
 }

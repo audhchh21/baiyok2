@@ -21,6 +21,11 @@ class Inspectiondetail extends Model
         'inspection_image',
     ];
 
+    public function inspection()
+    {
+        return $this->belongsTo('App\Inspection', 'inspection_id');
+    }
+
     //
     public function foodsample()
     {
