@@ -62,6 +62,6 @@ class FoodsamplesourceController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('member.foodsamplesource')->with('error', 'แหล่งที่มาตัวอย่างอาหาร "'.$foodsamplesource->name.'" ใช้ถูกใช้งานอยู่ ไม่สามารถลบได้!!');
         }
-        return redirect()->route('member.foodsamplesource')->with('status', 'status', 'ลบแหล่งที่มาตัวอย่างอาหาร "'.$foodsamplesource->name.'" เรียบร้อย!!');
+        return redirect()->route('member.foodsamplesource')->with('status', 'ลบแหล่งที่มาตัวอย่างอาหาร "'.$foodsamplesource->name.'" เรียบร้อย!!');
     }
 }
