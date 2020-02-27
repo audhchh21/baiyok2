@@ -62,7 +62,7 @@
                             <div class="form-group col-12 col-xl-3">
                                 <label for="titlename" class="h3">{{ __('คำนำหน้าชื่อ') }}<span
                                         class="text-danger">*</span></label>
-                                {!! Form::select('titlename', $titlenames, old('email') ?? $user->titlename_id, ['id' =>
+                                {!! Form::select('titlename', $titlenames, old('titlename') ?? $user->titlename_id, ['id' =>
                                 'titlename', 'class' =>
                                 'form-control form-control-lg']) !!}
                                 @error('titlename')

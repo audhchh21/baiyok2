@@ -91,9 +91,9 @@
                                 {!! Form::select('titlename', $titlenames, old('titlename') ?? null, ['id' =>
                                 'titlename', 'class' =>
                                 'form-control form-control-lg']) !!}
-                                @error('email')
+                                @error('titlename')
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('titlename') }}
                                 </div>
                                 @enderror
                             </div>
@@ -102,9 +102,9 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control form-control-lg" id="f_name" name="f_name"
                                     value="{{ old('f_name') }}" placeholder="ชื่อ" required>
-                                @error('email')
+                                @error('f_name')
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('f_name') }}
                                 </div>
                                 @enderror
                             </div>
@@ -113,9 +113,9 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control form-control-lg" id="l_name" name="l_name"
                                     value="{{ old('l_name') }}" placeholder="นามสกุล" required>
-                                @error('email')
+                                @error('l_name')
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('l_name') }}
                                 </div>
                                 @enderror
                             </div>
@@ -126,9 +126,9 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control form-control-lg" id="phone" name="phone"
                                     value="{{ old('phone') }}" placeholder="เบอร์โทรศัพท์" required>
-                                @error('email')
+                                @error('phone')
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('phone') }}
                                 </div>
                                 @enderror
                             </div>
@@ -138,9 +138,9 @@
                                 {!! Form::select('office', $offices, old('office') ?? null, ['id' => 'office', 'class'
                                 => 'form-control
                                 form-control-lg']) !!}
-                                @error('email')
+                                @error('office')
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
+                                    {{ $errors->first('office') }}
                                 </div>
                                 @enderror
                             </div>
