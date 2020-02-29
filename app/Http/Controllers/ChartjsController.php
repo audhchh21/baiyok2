@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
+use App\Mapdistrict;
+use App\Mapoffice;
+use App\Office;
 use App\District;
 use App\Foodtestkit;
-use App\Plan;
-use App\Inspection;
 use App\Inspectiondetail;
-use App\Office;
 
 class ChartjsController extends Controller
 {
@@ -73,9 +73,19 @@ class ChartjsController extends Controller
         $dataset = [];
         foreach($this->getFoodtestkit() as $testkitkey => $testkit){
             $data = [];
-            for($count = 0; $count <= count($label); $count++){
-                // $plans = $this->getPlan();
-                $data = Arr::prepend($data, rand(5, 15));
+            foreach($this->getDistrict() as $district){
+                $id = $testkit->id;
+                $data = Arr::prepend($data, Mapdistrict::where('map_district', $district->id)
+                ->whereIn('map_inspectiondetail', function ($query) use ($id) {
+                    $query->select('id')
+                    ->from('inspectiondetails')
+                    ->where('foodtestkit_id', function ($query) use ($id) {
+                        $query->select('id')
+                        ->from('foodtestkits')
+                        ->where('id', $id);
+                    });
+                })
+                ->count());
             }
             $datas = [
                 'label' => $testkit->name,
@@ -117,8 +127,19 @@ class ChartjsController extends Controller
         $dataset = [];
         foreach($this->getFoodtestkit() as $key => $testkit){
             $data = [];
-            for($count = 0 ; $count <= count($label); $count++){
-                $data = Arr::prepend($data, rand(5,50));
+            foreach($this->getOffice() as $office){
+                $id = $testkit->id;
+                $data = Arr::prepend($data, Mapoffice::where('map_office', $office->id)
+                ->whereIn('map_inspectiondetail', function ($query) use ($id) {
+                    $query->select('id')
+                    ->from('inspectiondetails')
+                    ->where('foodtestkit_id', function ($query) use ($id) {
+                        $query->select('id')
+                        ->from('foodtestkits')
+                        ->where('id', $id);
+                    });
+                })
+                ->count());
             }
             $datas = [
                 'label' => $testkit->name,
@@ -177,11 +198,6 @@ class ChartjsController extends Controller
         return Inspectiondetail::all();
     }
 
-    private function getInspection()
-    {
-        return Inspection::all();
-    }
-
     private function getFoodtestkit()
     {
         return Foodtestkit::all();
@@ -189,16 +205,11 @@ class ChartjsController extends Controller
 
     private function getDistrict()
     {
-        return District::orderBy('id', 'desc')->get();
+        return District::all();
     }
 
     private function getOffice()
     {
         return Office::all();
-    }
-
-    private function getPlan()
-    {
-        return Plan::all();
     }
 }

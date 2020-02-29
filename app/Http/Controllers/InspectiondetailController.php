@@ -10,6 +10,8 @@ use App\inspectiondetail;
 use App\Foodsample;
 use App\Foodsamplesource;
 use App\Foodtestkit;
+use App\Mapdistrict;
+use App\Mapoffice;
 
 class InspectiondetailController extends Controller
 {
@@ -75,7 +77,7 @@ class InspectiondetailController extends Controller
         $detail['detail'] = $request->detail;
         for($count = 0; $count < count($detail['foodsample']); $count++)
         {
-            // แปลง statu
+            // แปลง status
             $statusCheck = $detail['status'][$count];
             if($statusCheck == 's1'){
                 $status = 1;
@@ -100,6 +102,7 @@ class InspectiondetailController extends Controller
             }
             // เพิ่มแผนงาน
             try {
+
                 $inspectiondetail = Inspectiondetail::create([
                     'inspection_id' => $inspection->id,
                     'foodsample_id' => $detail['foodsample'][$count],
@@ -109,7 +112,16 @@ class InspectiondetailController extends Controller
                     'actuation_after' => $detail['detail'][$count],
                     'inspection_image' => $fileImage,
                 ]);
+                Mapdistrict::create([
+                    'map_district' => auth()->user()->offices->district,
+                    'map_inspectiondetail' => $inspectiondetail->id
+                ]);
+                Mapoffice::create([
+                    'map_office' => auth()->user()->offices->id,
+                    'map_inspectiondetail' => $inspectiondetail->id
+                ]);
             } catch ( \Exception $e) {
+                dd($e->getMessage());
                 return redirect()->route('member.inspectiondetail.check', ['id' => $inspection->id])->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');
             }
         }
@@ -121,6 +133,7 @@ class InspectiondetailController extends Controller
         }
 
         try{
+
             $plan->save();
         } catch ( \Exception $e) {
             return redirect()->route('member.inspectiondetail.check', ['id' => $inspection->id])->with('error', 'เกิดข้อผิดพลาด!! ไม่สามารถบันทึกแผนงานได้!!');

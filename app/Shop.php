@@ -40,6 +40,12 @@ class Shop extends Model
     }
 
     //
+    public function plans()
+    {
+        return $this->hasMany('App\Plan', 'shop_id', 'id');
+    }
+
+    //
     public function titlenames()
     {
         return $this->belongsTo('App\Titlename', 'titlename_id', 'id');
