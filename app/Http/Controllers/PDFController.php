@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Plan;
 use App\Foodtestkit;
-
+use App\Mapoffice;
 use PDF;
 
 class PDFController extends Controller
@@ -54,6 +54,14 @@ class PDFController extends Controller
     //
     public function resultProvince()
     {
+        $id = request()->province;
+        // $dd = Mapoffice::whereIn('map_office', function($query) use ($id) {
+        //     $query->select('province')
+        //     ->from('offices')
+        //     ->where('province', $id)
+        //     ->get();
+        // });
+        // dd($dd);
         $data = Plan::all()->whereIn('status', ['1','2']);
         $testkit = Foodtestkit::all();
         $pdf = \App::make('dompdf.wrapper');

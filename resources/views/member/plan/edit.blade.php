@@ -34,6 +34,9 @@
             // console.log(e.format())
             $('#plan_start').datepicker('setEndDate', e.format())
         })
+        $('#save').click( function() {
+            return confirm('คุณต้องการบันทึกข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
     })
 </script>
 @endpush
@@ -127,7 +130,7 @@
                     </div>
                 </div>
                 <div class="text-left">
-                    <button type="submit" class="btn btn-success">{{ __('เพิ่ม') }}</button>
+                    <button type="submit" class="btn btn-success" id="save">{{ __('แก้ไข') }}</button>
                 </div>
             </form>
         </div>

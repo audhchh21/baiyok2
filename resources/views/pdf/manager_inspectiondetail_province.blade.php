@@ -11,7 +11,7 @@
     </div>
 </header>
 <footer style="text-align:right">
-    <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.now() }}</span>
+    <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.date('d/m/Y H:i', strtotime(now())) }}</span>
 </footer>
 <main>
     <div style="
@@ -56,7 +56,7 @@
                         @endif
                     </td>
                     @endforeach
-                    <td style="text-align:center;width:80px;">{{ str_replace('-','/',substr($plan->inspection->date,0,10)) }}</td>
+                    <td style="text-align:center;width:80px;">{{ date('d/m/Y', strtotime($plan->inspection->date)) }}</td>
                     <td style="text-align:center;width:80px;">{{ $foodtest->actuation_after ?? 'ไม่มีผลดำเนินการ' }}</td>
                     <td style="text-align:center;width:150px;">{{ $plan->to_user->Fullname }}</td>
                     <td style="text-align:center;width:130px;">{{ $plan->to_user->offices->name }}</td>

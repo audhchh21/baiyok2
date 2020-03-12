@@ -7,7 +7,13 @@
 @endpush
 
 @push('javascript')
-
+<script>
+    $(document).ready( function() {
+        $('#save').click( function() {
+            return confirm('คุณต้องการบันทึกข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
+    })
+</script>
 @endpush
 
 @section('content')
@@ -53,7 +59,7 @@
                     </div>
                 </div>
                 <div class="text-left">
-                    <button type="submit" class="btn btn-success">{{ __('บันทึก') }}</button>
+                    <button type="submit" class="btn btn-success" id="save">{{ __('บันทึก') }}</button>
                 </div>
             </form>
         </div>

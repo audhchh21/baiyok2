@@ -10,6 +10,9 @@
 <script>
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+        $('#save').click( function() {
+            return confirm('คุณต้องการบันทึกข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
     })
 
 </script>
@@ -57,7 +60,7 @@
                     </div>
                 </div>
                 <div class="text-left">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('เพิ่ม') }}</button>
+                    <button type="submit" class="btn btn-block btn-lg btn-success" id="save">{{ __('แก้ไข') }}</button>
                 </div>
             </form>
         </div>

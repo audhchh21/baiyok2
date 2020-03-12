@@ -14,6 +14,9 @@ use App\Foodsample;
 use App\Foodsamplesource;
 use App\Foodtestkit;
 use App\Inspectiondetail;
+use App\Province;
+use App\District;
+use App\Subdistrict;
 
 class HomeController extends Controller
 {
@@ -190,7 +193,12 @@ class HomeController extends Controller
 
     public function managerPDF()
     {
-        return view('manager.pdf.main');
+        $province = Province::pluck('name', 'id');
+        $district = District::pluck('name', 'id');
+        return view('manager.pdf.main', [
+            'provinces' => $province,
+            'districts' => $district,
+        ]);
     }
 
 
