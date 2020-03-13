@@ -39,6 +39,9 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-titlename').DataTable();
+        $('#edit').click( function() {
+            return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
     })
 
 </script>
@@ -89,7 +92,7 @@
                         <td class="col-9 text-left tb-td">{{ $titlename->name }}</td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('admin.titlename.edit', ['id'=>$titlename->id]) }}" class="btn btn-white"
+                                <a href="{{ route('admin.titlename.edit', ['id'=>$titlename->id]) }}" class="btn btn-white" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>

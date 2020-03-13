@@ -59,6 +59,9 @@
             $('#start_plan').datepicker('setEndDate', e.format());
         });
         $('#tb-plan').DataTable();
+        $('#edit').click( function() {
+            return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
     });
 
 </script>
@@ -166,7 +169,7 @@
                                         <i class="fas fa-check-square"></i>
                                     </span>
                                 </a>
-                                <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-white"
+                                <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-white" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>

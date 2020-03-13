@@ -39,6 +39,9 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-plan').DataTable();
+        $('#edit').click( function() {
+            return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
+        })
     })
 </script>
 @endpush
@@ -117,7 +120,7 @@
                                         <i class="fas fa-check-square"></i>
                                     </span>
                                 </a>
-                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white"
+                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -139,7 +142,7 @@
                                 </a>
                                 @endif
                                 @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == Auth::user()->id)
-                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" id="edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>

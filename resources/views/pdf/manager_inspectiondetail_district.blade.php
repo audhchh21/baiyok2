@@ -11,7 +11,7 @@
     </div>
 </header>
 <footer style="text-align:right">
-    <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.now() }}</span>
+    <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.date('d/m/Y H:i', strtotime(now())) }}</span>
 </footer>
 <main>
     <div style="
