@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titlepage', 'ผลการตรวจสอบสารปนเปิ้อนล่าช้า')
+@section('titlepage', 'ผลการตรวจสอบสารปนเปิ้อนทั้งหมด')
 
 @push('style')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
@@ -16,6 +16,9 @@
 {{-- javascript Datatable bootstrap4 --}}
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker-thai.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/locales/bootstrap-datepicker.th.js') }}" charset="UTF-8"></script>
 <script>
     $(document).ready(() => {
         $.extend(true, $.fn.dataTable.defaults, {
@@ -38,11 +41,27 @@
             }
         });
         $('[data-toggle="tooltip"]').tooltip();
+        $('#start_plan').datepicker({
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#end_plan').datepicker('setStartDate', e.format());
+        });
+
+        $('#end_plan').datepicker({
+            language:'th-th',
+            format:'dd-mm-yyyy',
+        }).on('changeDate', function(e) {
+            // console.log(e.format())
+            $('#start_plan').datepicker('setEndDate', e.format());
+        });
         $('#tb-plan').DataTable();
         $('#edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
+
 </script>
 @endpush
 
@@ -55,13 +74,46 @@
     <!-- End Page Header -->
 
     <!-- Start Content -->
-    <div class="row mb-5">
-        <div class="col">
+    <div class="row mb-xl-5">
+        <div class="col-12 col-xl-12">
             <div class="text-left">
                 <a href="#" onclick="window.location.reload(history.back());" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
                     {{ __('ย้อนกลับ')   }}</a>
                 <hr>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="get">
+                        <div class="form-row">
+                            <div class="form-group col-4 mb-0">
+                                <label for="start_plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="start_plan" name="start_plan"
+                                    value="{{ request()->start_plan ?? null }}" placeholder="วันที่เริ่มตรวจแผนงาน">
+                            </div>
+                            <div class="form-group col-4 mb-0">
+                                <label for="end_plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
+                                <input type="text" class="form-control" id="end_plan" name="end_plan"
+                                    value="{{ request()->end_plan ?? null }}" placeholder="วันที่สิ้นสุดตรวจแผนงาน">
+                            </div>
+                            <div class="form-group col-2 mb-0">
+                                <label for="show_plan">{{ __('การแสดงผล') }}</label>
+                                {!! Form::select('show_plan', ['d1'=>'หน่วยงาน','d2'=>'ของฉัน'], request()->show_plan, ['id'=>'show_plan',
+                                'class'=>'form-control']) !!}
+                            </div>
+                            <div class="form-group col-2 mb-0">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-sm btn-block btn-success">{{ __('แสดงผล') }}</button>
+                                    <button type="reset" class="btn btn-sm btn-block btn-danger">{{ __('ล้างค่า') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col">
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}
@@ -113,19 +165,23 @@
                         </td>
                         <td class="text-center col-2 tb-td">
                             <div class="btn-group btn-group-sm">
-                                @if ($plan->status == '0' && $plan->to_user_id == Auth::user()->id)
+                                @if ($plan->status == '0' && $plan->to_user_id == auth()->user()->id)
                                 <a href="{{ route('member.inspectiondetail.check', ['id' => $plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="บันทึกผลตรวจ">
                                     <span class="text-dark pr-1">
                                         <i class="fas fa-check-square"></i>
                                     </span>
                                 </a>
+                                @endif
+                                @if($plan->status == '0' && $plan->createby_user_id == auth()->user()->id)
                                 <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
                                 </a>
+                                @endif
+                                @if($plan->status == '0' && $plan->createby_user_id == auth()->user()->id)
                                 <a href="{{ route('member.plan.delete', ['id' => $plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
                                     onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')">
@@ -141,14 +197,14 @@
                                     </span>
                                 </a>
                                 @endif
-                                @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == Auth::user()->id)
+                                @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == auth()->user()->id)
                                 <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" id="edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
                                  </a>
                                 @endif
-                                @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id == Auth::user()->id)
+                                @if (($plan->status == '1' || $plan->status == '2') && $plan->createby_user_id == auth()->user()->id)
                                 <a href="{{ route('member.inspection.delete', ['id' => $plan->id]) }}" class="btn btn-white" data-toggle="tooltip" data-placement="top" title="ลบ"
                                     onclick="return confirm('คุณต้องการลบแผนงานตรวจสอบ {{ $plan->shops->name }} ใช่ หรือ ไม่')">
                                     <span class="text-danger pr-1">

@@ -29,9 +29,29 @@ class InspectionController extends Controller
     //
     public function inspectionAll()
     {
-        $plan = Plan::whereIn('user_id', $this->office_ids())
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $start = request()->start_plan;
+        $end = request()->end_plan;
+        $show = request()->show_plan;
+        if($start && $end && $show){
+            $date_start = date_create($start);
+            $date_end = date_create($end);
+            $f_start = date_format($date_start,"Y-m-d 00:00:00");
+            $f_end = date_format($date_end,"Y-m-d 23:59:59");
+            if($show == 'd1'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->whereIn('to_user_id', $this->office_ids())
+                ->get();
+            }elseif($show == 'd2'){
+                $plan = Plan::where('to_user_id', auth()->user()->id)
+                ->whereBetween('plan_start', [$f_start, $f_end])
+                ->get();
+            }
+        }else{
+            $plan = Plan::whereIn('user_id', $this->office_ids())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
         return view('member.inspection.all', [
             'count' => 1,
             'plans' => $plan
@@ -41,10 +61,34 @@ class InspectionController extends Controller
     //
     public function inspectionSuccessful()
     {
-        $plan = Plan::where('status', '1')
-        ->whereIn('user_id', $this->office_ids())
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $start = request()->start_plan;
+        $end = request()->end_plan;
+        $show = request()->show_plan;
+        if($start && $end && $show){
+            $date_start = date_create($start);
+            $date_end = date_create($end);
+            $f_start = date_format($date_start,"Y-m-d 00:00:00");
+            $f_end = date_format($date_end,"Y-m-d 23:59:59");
+            if($show == 'd1'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '1')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }elseif($show == 'd2'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '1')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }
+        }else{
+            $plan = Plan::where('status', '1')
+            ->whereIn('user_id', $this->office_ids())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+
         return view('member.inspection.successful', [
             'count' => 1,
             'plans' => $plan
@@ -54,10 +98,33 @@ class InspectionController extends Controller
     //
     public function inspectionSlowsuccessful()
     {
-        $plan = Plan::where('status', '2')
-        ->whereIn('user_id', $this->office_ids())
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $start = request()->start_plan;
+        $end = request()->end_plan;
+        $show = request()->show_plan;
+        if($start && $end && $show){
+            $date_start = date_create($start);
+            $date_end = date_create($end);
+            $f_start = date_format($date_start,"Y-m-d 00:00:00");
+            $f_end = date_format($date_end,"Y-m-d 23:59:59");
+            if($show == 'd1'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '2')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }elseif($show == 'd2'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '2')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }
+        }else{
+            $plan = Plan::where('status', '2')
+            ->whereIn('user_id', $this->office_ids())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
         return view('member.inspection.slowsuccessful', [
             'count' => 1,
             'plans' => $plan
@@ -67,10 +134,33 @@ class InspectionController extends Controller
     //
     public function inspectionUnsuccessful()
     {
-        $plan = Plan::where('status', '0')
-        ->whereIn('user_id', $this->office_ids())
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $start = request()->start_plan;
+        $end = request()->end_plan;
+        $show = request()->show_plan;
+        if($start && $end && $show){
+            $date_start = date_create($start);
+            $date_end = date_create($end);
+            $f_start = date_format($date_start,"Y-m-d 00:00:00");
+            $f_end = date_format($date_end,"Y-m-d 23:59:59");
+            if($show == 'd1'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '0')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }elseif($show == 'd2'){
+                $plan = Plan::whereBetween('plan_start', [$f_start, $f_end])
+                ->where('status', '0')
+                ->whereIn('user_id', $this->office_ids())
+                ->orderBy('created_at', 'desc')
+                ->get();
+            }
+        }else{
+            $plan = Plan::where('status', '0')
+            ->whereIn('user_id', $this->office_ids())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
         return view('member.inspection.unsuccessful', [
             'count' => 1,
             'plans' => $plan

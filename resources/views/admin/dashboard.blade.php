@@ -30,7 +30,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'กราฟ', 'subtitle'=>'กราฟทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'กราฟ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
@@ -103,7 +103,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12 mb-4">
+        <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
             <div class="card card-small blog-comments h-100">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">{{ __('ผู้ใช้งานร้องของอนุมัติสิทธิ์') }}</h6>
@@ -150,7 +150,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
             <div class="card card-small h-100">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">{{ __('หน่วยงาน') }}</h6>
@@ -174,24 +174,6 @@
                     <div class="row">
                         <div class="col text-right view-report">
                             <a href="{{ route('admin.office') }}"
-                                class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div class="card card-small h-100">
-                <div class="card-header border-bottom">
-                    <h6 class="m-0">{{ __('ผู้ใช้งานทั้งหมด') }}</h6>
-                </div>
-                <div class="card-body d-flex py-0">
-                    {!! $pieUser->render() !!}
-                </div>
-                <div class="card-footer border-top">
-                    <div class="row">
-                        <div class="col text-right view-report">
-                            <a href="{{ route('admin.user') }}"
                                 class="btn btn-sm bg-transparent">{{ __('ทั้งหมด') }}</a>
                         </div>
                     </div>

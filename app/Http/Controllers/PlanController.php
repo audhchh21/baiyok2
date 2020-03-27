@@ -58,7 +58,7 @@ class PlanController extends Controller
             }
         }else{
             $plans = Plan::all()
-            ->where('user_id', auth()->user()->id)
+            ->where('to_user_id', auth()->user()->id)
             ->where('status', '0');
         }
         return view('member.plan.main', [

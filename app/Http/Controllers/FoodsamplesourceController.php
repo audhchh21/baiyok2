@@ -20,6 +20,12 @@ class FoodsamplesourceController extends Controller
     }
 
     //
+    public function foodsamplesourceCreate()
+    {
+        return view('member.foodsamplesource.create');
+    }
+
+    //
     public function foodsamplesourceEdit($id)
     {
         $foodsamplesource = Foodsamplesource::findOrFail($id);

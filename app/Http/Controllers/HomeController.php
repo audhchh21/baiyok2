@@ -17,6 +17,7 @@ use App\Inspectiondetail;
 use App\Province;
 use App\District;
 use App\Subdistrict;
+use App\Mapoffice;
 
 class HomeController extends Controller
 {
@@ -222,6 +223,116 @@ class HomeController extends Controller
             'ของทอด' => 'ของทอด',
             'อื่นๆ' => 'อื่นๆ'
         ];
+
+        /**
+         *
+         */
+        $datas1 = [];
+        $datas2 = [];
+        $datas3 = [];
+        $testkids = Foodtestkit::all();
+        $lable = Arr::pluck($testkids, 'name');
+        foreach($testkids as $testkid) {
+            $testkid_id = $testkid->id;
+            $mapoffice1 = Mapoffice::where('map_office', auth()->user()->office_id)
+            ->whereIn('map_inspectiondetail', function ($query1) use ($testkid_id) {
+                $query1->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','1')
+                ->get();
+            })
+            ->count();
+            $datas1 = Arr::prepend($datas1, $mapoffice1);
+
+            $mapoffice2 = Mapoffice::where('map_office', auth()->user()->office_id)
+            ->whereIn('map_inspectiondetail', function ($query2) use ($testkid_id) {
+                $query2->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','2')
+                ->get();
+            })
+            ->count();
+            $datas2 = Arr::prepend($datas2, $mapoffice2);
+
+            $mapoffice3 = Mapoffice::where('map_office', auth()->user()->office_id)
+            ->whereIn('map_inspectiondetail', function ($query3) use ($testkid_id) {
+                $query3->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','3')
+                ->get();
+            })
+            ->count();
+            $datas3 = Arr::prepend($datas3, $mapoffice3);
+        }
+        // dd($datas);
+        $testkidchart = app()->chartjs
+        ->name('testkidchart')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 400])
+        ->labels($lable)
+        ->datasets([
+            [
+                'label' => 'ไม่พบ',
+                'backgroundColor' => 'rgba(38, 185, 154, 0.31)',
+                'borderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBorderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBackgroundColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointHoverBackgroundColor' => '#fff',
+                'pointHoverBorderColor' => 'rgba(220,220,220,1)',
+                'data' => $datas1,
+            ],
+            [
+                'label' => 'พบปลอดภัย',
+                'backgroundColor' => 'rgba(255, 123, 127, 0.31)',
+                'borderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBorderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBackgroundColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointHoverBackgroundColor' => '#fff',
+                'pointHoverBorderColor' => 'rgba(220,220,220,1)',
+                'data' => $datas2,
+            ],
+            [
+                'label' => 'พบไม่ปลอดภัย',
+                'backgroundColor' => 'rgba(255, 0, 127, 0.31)',
+                'borderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBorderColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointBackgroundColor' => 'rgba(0, 0, 0, 0.7)',
+                'pointHoverBackgroundColor' => '#fff',
+                'pointHoverBorderColor' => 'rgba(220,220,220,1)',
+                'data' => $datas3,
+            ]
+        ])
+        ->options([
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟแสดงผลการตรวจพบสารปนเปื้อน',
+                'fontSize' => 18,
+                'fontStyle' => 'bold',
+                'fontColor' => '#000',
+                'padding' => 10,
+                'lineHeight' => 1.2
+            ],
+            'tooltips' => [
+                'enabled' => 'true',
+                'titleFontSize' => 14,
+                'titleFontColor' => '#fff',
+                'titleAlign' => 'left',
+                'bodyFontSize' => 14
+            ],
+            'legend' => [
+                'display' => 'true',
+                'position' => 'top',
+                'fullWidth' => true,
+                'labels' => [
+                    'fontColor' => '#000'
+                ],
+            ]
+        ]);
+
         // dd($user_count);
         return view('member.dashboard', [
             'plan_all' => $plan_all,
@@ -229,7 +340,8 @@ class HomeController extends Controller
             'plan_check' => $plan_check,
             'user_count' => $user_count,
             'plans' => $plans,
-            'category' => $category
+            'category' => $category,
+            'testkidchart' => $testkidchart
         ]);
     }
 

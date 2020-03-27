@@ -49,13 +49,13 @@
                                 </button>
                             </div>
                         @endif
-                        <label for="province" class="h3">{{ __('จังหวัด') }}</label>
+                        <label for="province" class="h5">{{ __('จังหวัด') }}</label>
                         {!! Form::select('province', $provinces, $district->province_id, ['id' => 'province', 'class' => 'form-control form-control-lg']) !!}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-xl-4">
-                        <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
+                        <label for="district" class="h5">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('district') is-invalid @enderror form-control form-control-lg " id="district" name="name" value="{{ old('district') ?? $district->name }}" placeholder="{{ $district->name }}" required>
                         @error('district')
                         <div class="invalid-feedback">

@@ -56,6 +56,24 @@
 
     <!-- Start Content -->
     <div class="row mb-5">
+        <div class="col-12 col-xl-4">
+            <form action="{{ route('admin.district.store') }}" method="post">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="province" class="h5">{{ __('เลือกจังหวัด') }}<span class="text-danger">*</span></label>
+                        {!! Form::select('province', $provinces, session('province') ?? null, ['id' => 'province', 'class' => 'form-control form-control-lg']) !!}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="district" class="h5">{{ __('เพิ่มอำเภอ') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-lg" id="district" name="name" value="{{ old('district') }}" placeholder="อำเภอ" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-block btn-success">{{ __('เพิ่ม') }}</button>
+            </form>
+        </div>
         <div class="col-12 col-xl-8 border-right">
             <div class="text-left">
                 <a href="{{ route('admin.city') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
@@ -110,30 +128,13 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="3" class="text-center h3">{{ __('ไม่มีรายการ') }}</td>
+                        <td colspan="3" class="text-center h5">{{ __('ไม่มีรายการ') }}</td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-xl-4">
-            <form action="{{ route('admin.district.store') }}" method="post">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="province" class="h3">{{ __('เลือกจังหวัด') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('province', $provinces, session('province') ?? null, ['id' => 'province', 'class' => 'form-control form-control-lg']) !!}
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="district" class="h3">{{ __('เพิ่มอำเภอ') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="district" name="name" value="{{ old('district') }}" placeholder="อำเภอ" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-lg btn-block btn-success">{{ __('เพิ่ม') }}</button>
-            </form>
-        </div>
+
     </div>
     <!-- End Content -->
 </div>

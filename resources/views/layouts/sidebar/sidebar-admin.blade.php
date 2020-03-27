@@ -19,19 +19,37 @@
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-chart-line pr-2"></i>
-                    <span>{{ __('กราฟ') }}</span>
+                    <span>{{ __('หน้าแรก') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.titlename') }}">
                     <i class="far fa-list-alt pr-2"></i>
-                    <span>{{ __('คำนำหน้าชื่อ') }}</span>
+                    <span>{{ __('จัดการข้อมูลคำนำหน้าชื่อ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.city') }}">
                     <i class="fas fa-list-alt pr-2"></i>
-                    <span>{{ __('จัดการจังหวัด') }}</span>
+                    <span>{{ __('จัดการข้อมูลจังหวัดทั้งหมด') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.province') }}">
+                    <i class="fas fa-list-alt pr-2"></i>
+                    <span>{{ __('จัดการข้อมูลจังหวัด') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.district') }}">
+                    <i class="fas fa-list-alt pr-2"></i>
+                    <span>{{ __('จัดการข้อมูลอำเภอ') }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admin.subdistrict') }}">
+                    <i class="fas fa-list-alt pr-2"></i>
+                    <span>{{ __('จัดการข้อมูลตำบล') }}</span>
                 </a>
             </li>
             {{-- <li class="nav-item dropdown">
@@ -51,13 +69,13 @@
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.office') }}">
                     <i class="far fa-list-alt pr-2"></i>
-                    <span>{{ __('หน่วยงาน') }}</span>
+                    <span>{{ __('จัดการข้อมูลหน่วยงาน') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admin.user') }}">
                     <i class="fas fa-users pr-2"></i>
-                    <span>{{ __('จัดการบัญชีผู้ใช้') }}</span>
+                    <span>{{ __('จัดการข้อมูลบัญชีผู้ใช้') }}</span>
                 </a>
             </li>
         </ul>

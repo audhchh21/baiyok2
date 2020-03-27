@@ -39,7 +39,7 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-foodsample').DataTable();
-        $('#edit').click( function() {
+        $('.edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
@@ -57,7 +57,12 @@
 
     <!-- Start Content -->
     <div class="row mb-5">
-        <div class="col-12 col-xl-8 border-right">
+        <div class="col-12 col-xl-12 border-right">
+            <div class="text-right">
+                <a href="{{ route('member.foodsample.create') }}" class="btn btn-info"><i
+                        class="fas fa-plus-circle"></i>{{ __(' เพิ่มตัวอย่างอาหาร')   }}</a>
+                <hr>
+            </div>
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}
@@ -90,7 +95,7 @@
                         <td class="text-left col-4 tb-td">{{ $foodsample->category }}</td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('member.foodsample.edit', ['id'=>$foodsample->id]) }}" class="btn btn-white" id="edit"
+                                <a href="{{ route('member.foodsample.edit', ['id'=>$foodsample->id]) }}" class="btn btn-white edit" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -114,7 +119,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-xl-4">
+        {{-- <div class="col-12 col-xl-4">
             <form action="{{ route('member.foodsample.store') }}" method="post">
                 @csrf
                 <div class="form-row">
@@ -133,7 +138,7 @@
                     <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('เพิ่ม') }}</button>
                 </div>
             </form>
-        </div>
+        </div> --}}
     </div>
     <!-- End Content -->
 </div>

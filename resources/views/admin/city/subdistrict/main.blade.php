@@ -95,6 +95,46 @@
 
     <!-- Start Content -->
     <div class="row mb-5">
+        <div class="col-12 col-xl-4">
+            <form action="{{ route('admin.subdistrict.store') }}" method="post">
+                @csrf
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="province" class="h5">{{ __('เลือกจังหวัด') }}<span class="text-danger">*</span></label>
+                        {!! Form::select('province', $provinces,  session('province') ?? null, ['id' => 'province', 'class' => 'form-control form-control-lg']) !!}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="district" class="h5">{{ __('เลือกอำเภอ') }}<span class="text-danger">*</span></label>
+                        {!! Form::select('district', $districts,  session('district') ?? null, ['id' => 'district', 'class' => 'form-control form-control-lg']) !!}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="subdistrict" class="h5">{{ __('เพิ่มตำบล') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="@error('name') is-invalid @enderror form-control form-control-lg" id="subdistrict" name="name" value="{{ old('name') }}" placeholder="ตำบล" required>
+                        @error('name')
+                        <div class="invalid-feedback">
+                            {{ $errors->first('name') }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="zipcode" class="h5">{{ __('เพิ่มรหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
+                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" pattern="[0-9]{5}" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
+                        @error('zipcode')
+                        <div class="invalid-feedback">
+                            {{ $errors->first('zipcode') }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-block btn-success">{{ __('เพิ่ม') }}</button>
+            </form>
+        </div>
         <div class="col-12 col-xl-8 border-right">
             <div class="text-left">
                 <a href="{{ route('admin.city') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
@@ -155,46 +195,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-xl-4">
-            <form action="{{ route('admin.subdistrict.store') }}" method="post">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="province" class="h3">{{ __('เลือกจังหวัด') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('province', $provinces,  session('province') ?? null, ['id' => 'province', 'class' => 'form-control form-control-lg']) !!}
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="district" class="h3">{{ __('เลือกอำเภอ') }}<span class="text-danger">*</span></label>
-                        {!! Form::select('district', $districts,  session('district') ?? null, ['id' => 'district', 'class' => 'form-control form-control-lg']) !!}
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="subdistrict" class="h3">{{ __('เพิ่มตำบล') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="@error('name') is-invalid @enderror form-control form-control-lg" id="subdistrict" name="name" value="{{ old('name') }}" placeholder="ตำบล" required>
-                        @error('name')
-                        <div class="invalid-feedback">
-                            {{ $errors->first('name') }}
-                        </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="zipcode" class="h3">{{ __('เพิ่มรหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" pattern="[0-9]{5}" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
-                        @error('zipcode')
-                        <div class="invalid-feedback">
-                            {{ $errors->first('zipcode') }}
-                        </div>
-                        @enderror
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-lg btn-block btn-success">{{ __('เพิ่ม') }}</button>
-            </form>
-        </div>
+
     </div>
     <!-- End Content -->
 </div>

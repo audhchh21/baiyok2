@@ -73,7 +73,7 @@ class UserController extends Controller
             $input['status'] = '1';
         }else if($status == 's2'){
             $input['status'] = '0';
-        }else if($status == 'a3'){
+        }else if($status == 's3'){
             $input['status'] = '2';
         }
 
@@ -113,7 +113,7 @@ class UserController extends Controller
             $user->status = '1';
         }else if($status == 's2'){
             $user->status = '0';
-        }else if($status == 'a3'){
+        }else if($status == 's3'){
             $user->status = '2';
         }
 

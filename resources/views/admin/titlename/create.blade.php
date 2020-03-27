@@ -43,7 +43,7 @@
                                 </button>
                             </div>
                         @endif
-                        <label for="titlename" class="h3">{{ __('คำนำหน้าชื่อ') }}<span class="text-danger">*</span></label>
+                        <label for="titlename" class="h5">{{ __('คำนำหน้าชื่อ') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('titlename') is-invalid @enderror form-control form-control-lg" id="titlename" name="titlename" value="{{ old('titlename') }}" placeholder="คำนำหน้าชื่อ" required>
                         @error('titlename')
                         <div class="invalid-feedback">

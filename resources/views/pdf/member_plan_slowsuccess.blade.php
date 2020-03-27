@@ -1,47 +1,59 @@
 @extends('layouts.pdf')
 
 @section('content')
-<header>
-    <img src="images/web/logopdf.png" alt="" style="width:125px;height:125px;margin-top:15px;">
-    <div style="font-size:28px;margin-top:15px;text-align:center;">
-        {{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}
-    </div>
-    <div style="font-size:32px;margin-top:40px;text-align:center;">
-        {{ __('รายงานแผนงานการตรวจสอบสารปนเปื้อนในอาหาร') }}
-    </div>
+<header class="text-center mt-3">
+    <img src="images/web/logopdf.png" alt="" style="width:155px;height:155px;">
+    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานสรุปผลสารปนเปิ้อนในอาหาร ') }}</p>
+    <p style="font-size:18px;">{{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}</p>
 </header>
-<footer style="text-align:right">
+<footer class="text-right">
     <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.now() }}</span>
 </footer>
 <main>
-
-    <table border="1" style="border-color:black;width:100%;">
+    <table class="table-bordered mt-2" style="table-layout:fixed; width:100%;">
         <thead>
             <tr>
-                <th style="text-align:center;">{{ __('ร้านค้า') }}</th>
-                <th style="text-align:center;">{{ __('ผู้กำหนดแผนงาน') }}</th>
-                <th style="text-align:center;">{{ __('ผู้ตรวจวิเคราะห์') }}</th>
-                <th style="text-align:center;">{{ __('ระยะเวลาการตรวจ') }}</th>
-                <th style="text-align:center;">{{ __('สถานะแผนงาน') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('ร้านค้า') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
+                <th class="text-center px-2 py-1" colspan="{{ $testkits->count() }}">{{ __('ชุดทดสอบสาร') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('วันที่ตรวจบันทึก') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผลดำเนินการ') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผู้ตรวจ') }}</th>
+            </tr>
+            <tr>
+                @foreach ($testkits as $testkit)
+                <th class="text-center px-1 py-1 ">{{ $testkit->name }}</th>
+                @endforeach
             </tr>
         </thead>
         <tbody>
             @foreach ($plans as $plan)
+            @if ($plan->inspectiondetail->inspection->plan->status == '2')
             <tr>
-                <td style="text-align:center;">{{ $plan->Shops->name }}</td>
-                <td style="text-align:center;">{{ $plan->to_user->Fullname }}</td>
-                <td style="text-align:center;">{{ $plan->by_user->Fullname }}</td>
-                <td style="text-align:center;">{{ $plan->Fulltime }}</td>
-                <td style="text-align:center;">
-                    @if ($plan->status == '0')
-                    {{ __('ยังไม่ได้ทำการบันทึก') }}
-                    @elseif($plan->status == '1')
-                    {{ __('ทำการบันทึกเรียบร้อย') }}
-                    @elseif($plan->status == '2')
-                    {{ __('ทำการบันทึกล่าช้า') }}
+                <td class="text-left px-2 py-1" style="width:15%;">
+                    {{ $plan->inspectiondetail->inspection->plan->shops->fullname }}</td>
+                <td class="text-left px-2 py-1" style="width:10%;">{{ $plan->inspectiondetail->foodsample->name }}</td>
+                @foreach ($testkits as $testkit)
+                <td class="text-center px-1 py-1">
+                    @if ($plan->inspectiondetail->foodtestkit_id == $testkit->id)
+                    @if ($plan->inspectiondetail->inspection_result == '1')
+                    {{ __('ไม่พบ') }}
+                    @elseif($plan->inspectiondetail->inspection_result == '2')
+                    {{ __('พบปลอดภัย') }}
+                    @elseif($plan->inspectiondetail->inspection_result == '3')
+                    {{ __('พบไม่ปลอดภัย') }}
+                    @endif
                     @endif
                 </td>
+                @endforeach
+                <td class="text-center px-2 py-1" style="width:10%;">
+                    {{ $plan->inspectiondetail->created_at->format('d/m/Y H:i') }}</td>
+                <td class="text-left px-2 py-1" style="width:15%;">
+                    {{ $plan->inspectiondetail->inspection->plan->to_user->fullname }}</td>
+                <td class="text-left px-2 py-1" style="width:15%;">
+                    {{ $plan->inspectiondetail->inspection->plan->by_user->fullname }}</td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

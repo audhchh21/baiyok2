@@ -24,7 +24,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'กราฟ', 'subtitle' => 'กราฟทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'กราฟ'])
 
     <!-- End Page Header -->
 
@@ -105,8 +105,15 @@
     </div>
     <hr>
     <div class="row mb-5">
+        <div class="col-12 col-xl-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    {!! $testkidchart->render() !!}
+                </div>
+            </div>
+        </div>
         <div class="col-12 col-xl-8">
-            <div class="card">
+            <div class="card h-100">
                 <div class="card-header">
                     <span class="h3">{{ __('แผนงานที่ต้องตรวจสอบ') }}</span>
                 </div>
@@ -205,90 +212,6 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-xl-4">
-            <div class="card">
-                <nav class="pt-2">
-                    <div class="nav nav-tabs pl-3" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-foodsample-tab" data-toggle="tab"
-                            href="#nav-foodsample" role="tab" aria-controls="nav-foodsample" aria-selected="true">
-                            <span class="text-body">{{ __('เพิ่มตัวอย่างอาหาร') }}</span>
-                        </a>
-                        <a class="nav-item nav-link" id="nav-foodsamplesource-tab" data-toggle="tab"
-                            href="#nav-foodsamplesource" role="tab" aria-controls="nav-foodsamplesource"
-                            aria-selected="false">
-                            <span class="text-body">{{ __('เพิ่มแหล่งที่มาตัวอย่างอาหาร') }}</span>
-                        </a>
-                        <a class="nav-item nav-link" id="nav-foodtestkit-tab" data-toggle="tab" href="#nav-foodtestkit"
-                            role="tab" aria-controls="nav-foodtestkit" aria-selected="false">
-                            <span class="text-body">{{ __('เพิ่มชุดทดสอบ') }}</span>
-                        </a>
-                    </div>
-                </nav>
-                <div class="card-body">
-
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-foodsample" role="tabpanel"
-                            aria-labelledby="nav-foodsample-tab">
-                            <form action="{{ route('member.foodsample.store') }}" method="post">
-                                @csrf
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label for="foodsample">{{ __('ตัวอย่างอาหาร') }}</label>
-                                        <input type="text" class="form-control" id="foodsample" name="name"
-                                            value="{{ old('name') ?? null }}" placeholder="ตัวอย่างอาหาร"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label for="">{{ __('หมวดหมู่') }}</label>
-                                        {!! Form::select('category', $category, null, ['id' => 'category', 'class' => 'form-control',
-                                        'placeholder' => 'เลือกหมวดหมู่', 'required' => '']) !!}
-                                    </div>
-                                </div>
-                                <div class="text-left">
-                                    <button type="submit" class="btn btn-success">{{ __('เพิ่ม') }}</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="nav-foodsamplesource" role="tabpanel"
-                            aria-labelledby="nav-foodsamplesource-tab">
-                            <form action="{{ route('member.foodsamplesource.store') }}" method="post">
-                                @csrf
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label for="foodsamplesource">{{ __('ตัวอย่างแหล่งที่มาอาหาร') }}</label>
-                                        <input type="text" class="form-control" id="foodsamplesource"
-                                            name="name" value="{{ old('name') ?? null }}"
-                                            placeholder="ตัวอย่างแหล่งที่มาอาหาร" required>
-                                    </div>
-                                </div>
-                                <div class="text-left">
-                                    <button type="submit" class="btn btn-success">{{ __('เพิ่ม') }}</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="nav-foodtestkit" role="tabpanel"
-                            aria-labelledby="nav-foodtestkit-tab">
-                            <form action="{{ route('member.foodtestkit.store') }}" method="post">
-                                @csrf
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label for="foodtestkit">{{ __('ตัวอย่างชุดทดสอบอาหาร') }}</label>
-                                        <input type="text" class="form-control" id="foodtestkit" name="name"
-                                            value="{{ old('name') ?? null }}" placeholder="ตัวอย่างชุดทดสอบอาหาร"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="text-left">
-                                    <button type="submit" class="btn btn-success">{{ __('เพิ่ม') }}</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

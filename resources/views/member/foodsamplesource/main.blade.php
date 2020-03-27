@@ -57,7 +57,12 @@
 
     <!-- Start Content -->
     <div class="row mb-5">
-        <div class="col-12 col-xl-8 border-right">
+        <div class="col-12 col-xl-12 border-right">
+            <div class="text-right">
+                <a href="{{ route('member.foodsamplesource.create') }}" class="btn btn-info"><i
+                        class="fas fa-plus-circle"></i>{{ __(' เพิ่มแหล่งที่มาตัวอย่างอาหาร')   }}</a>
+                <hr>
+            </div>
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}
@@ -112,7 +117,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-12 col-xl-4">
+        {{-- <div class="col-12 col-xl-4">
             <form action="{{ route('member.foodsamplesource.store') }}" method="post">
                 @csrf
                 <div class="form-row">
@@ -125,7 +130,7 @@
                     <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('เพิ่ม') }}</button>
                 </div>
             </form>
-        </div>
+        </div> --}}
     </div>
     <!-- End Content -->
 </div>

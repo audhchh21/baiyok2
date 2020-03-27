@@ -133,7 +133,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
-                        <label for="name" class="h3">{{ __('ชื่อหน่วยงาน') }}<span class="text-danger">*</span></label>
+                        <label for="name" class="h5">{{ __('ชื่อหน่วยงาน') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('name') is-invalid @enderror form-control form-control-lg"
                             id="name" name="name" value="{{ $office->name ?? old('name') }}" placeholder="ชื่อหน่วยงาน" required>
                         @error('name')
@@ -145,7 +145,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-12">
-                        <label for="address" class="h3">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
+                        <label for="address" class="h5">{{ __('ที่อยู่') }}<span class="text-danger">*</span></label>
                         <textarea name="address" id="address" cols="30" rows="5"
                             class="@error('address') is-invalid @enderror form-control form-control-lg"
                             required>{{ $office->address ?? old('address') }}</textarea>
@@ -158,7 +158,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-xl-3">
-                        <label for="province" class="h3">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
+                        <label for="province" class="h5">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
                         {!! Form::select('province', $provinces, $office->province, ['id' => 'province', 'placeholder' => '----- เลือก จังหวัด -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('province') ? ' is-invalid' : '' )]) !!}
                         @error('province')
@@ -168,7 +168,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
+                        <label for="district" class="h5">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
                         {!! Form::select('district', $districts, $office->district, ['id' => 'district', 'placeholder' => '----- เลือก อำเภอ -----', 'class' => 'form-control
                         form-control-lg'.( $errors->has('district') ? ' is-invalid' : '' )]) !!}
                         @error('district')
@@ -178,7 +178,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="subdistrict" class="h3">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
+                        <label for="subdistrict" class="h5">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
                         {!! Form::select('subdistrict', $subdistricts, $office->subdistrict, ['id' => 'subdistrict', 'placeholder' => '----- เลือก ตำบล -----', 'class' =>
                         'form-control form-control-lg'.( $errors->has('subdistrict') ? ' is-invalid' : '' )]) !!}
                         @error('subdistrict')
@@ -188,7 +188,7 @@
                         @enderror
                     </div>
                     <div class="form-group col-12 col-xl-3">
-                        <label for="zipcode" class="h3">{{ __('รหัสไปรษณีย์') }}<span
+                        <label for="zipcode" class="h5">{{ __('รหัสไปรษณีย์') }}<span
                                 class="text-danger">*</span></label>
                         {!! Form::select('zipcode', $zipcodes, $office->subdistrict, ['id' => 'zipcode', 'placeholder' => '----- เลือก รหัสไปรษณีย์ -----', 'disabled' => '', 'class' => 'form-control
                         form-control-lg'.( $errors->has('zipcode') ? ' is-invalid' : '' )]) !!}

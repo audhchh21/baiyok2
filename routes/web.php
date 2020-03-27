@@ -110,6 +110,7 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     Route::get('dashboard', 'HomeController@memberDashboard')->name('member.dashboard');
     Route::group(['prefix' => 'foodsample'], function () {
         Route::get('', 'FoodsampleController@foodsampleMain')->name('member.foodsample');
+        Route::get('create', 'FoodsampleController@foodsampleCreate')->name('member.foodsample.create');
         Route::get('edit/{id}', 'FoodsampleController@foodsampleEdit')->name('member.foodsample.edit');
         Route::post('store', 'FoodsampleController@foodsampleStore')->name('member.foodsample.store');
         Route::post('update/{id}', 'FoodsampleController@foodsampleUpdate')->name('member.foodsample.update');
@@ -117,6 +118,7 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     });
     Route::group(['prefix' => 'foodsamplesource'], function () {
         Route::get('', 'FoodsamplesourceController@foodsamplesourceMain')->name('member.foodsamplesource');
+        Route::get('create', 'FoodsamplesourceController@foodsamplesourceCreate')->name('member.foodsamplesource.create');
         Route::get('edit/{id}', 'FoodsamplesourceController@foodsamplesourceEdit')->name('member.foodsamplesource.edit');
         Route::post('store', 'FoodsamplesourceController@foodsamplesourceStore')->name('member.foodsamplesource.store');
         Route::post('update/{id}', 'FoodsamplesourceController@foodsamplesourceUpdate')->name('member.foodsamplesource.update');
@@ -124,6 +126,7 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
     });
     Route::group(['prefix' => 'foodtestkit'], function () {
         Route::get('', 'FoodtestkitController@foodtestkitMain')->name('member.foodtestkit');
+        Route::get('create', 'FoodtestkitController@foodtestkitCreate')->name('member.foodtestkit.create');
         Route::get('edit/{id}', 'FoodtestkitController@foodtestkitEdit')->name('member.foodtestkit.edit');
         Route::post('store', 'FoodtestkitController@foodtestkitStore')->name('member.foodtestkit.store');
         Route::post('update/{id}', 'FoodtestkitController@foodtestkitUpdate')->name('member.foodtestkit.update');
@@ -172,6 +175,7 @@ Route::group(['prefix' => 'member','middleware' => ['auth', 'MemberLogin']], fun
 
     });
     Route::group(['prefix' => 'pdf'], function () {
+        Route::get('plan', 'PDFController@plan')->name('pdf.plan');
         Route::get('plan/all', 'PDFController@planAll')->name('pdf.plan.all');
         Route::get('plan/success', 'PDFController@planSuccess')->name('pdf.plan.success');
         Route::get('plan/slowsuccess', 'PDFController@planSlowsuccess')->name('pdf.plan.slowsuccess');
@@ -207,38 +211,38 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-//Clear Cache facade value:
-Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('cache:clear');
-    return '<h1>Cache facade value cleared</h1>';
-});
+// //Clear Cache facade value:
+// Route::get('/clear-cache', function() {
+//     $exitCode = Artisan::call('cache:clear');
+//     return '<h1>Cache facade value cleared</h1>';
+// });
 
-//Reoptimized class loader:
-Route::get('/optimize', function() {
-    $exitCode = Artisan::call('optimize');
-    return '<h1>Reoptimized class loader</h1>';
-});
+// //Reoptimized class loader:
+// Route::get('/optimize', function() {
+//     $exitCode = Artisan::call('optimize');
+//     return '<h1>Reoptimized class loader</h1>';
+// });
 
-//Route cache:
-Route::get('/route-cache', function() {
-    $exitCode = Artisan::call('route:cache');
-    return '<h1>Routes cached</h1>';
-});
+// //Route cache:
+// Route::get('/route-cache', function() {
+//     $exitCode = Artisan::call('route:cache');
+//     return '<h1>Routes cached</h1>';
+// });
 
-//Clear Route cache:
-Route::get('/route-clear', function() {
-    $exitCode = Artisan::call('route:clear');
-    return '<h1>Route cache cleared</h1>';
-});
+// //Clear Route cache:
+// Route::get('/route-clear', function() {
+//     $exitCode = Artisan::call('route:clear');
+//     return '<h1>Route cache cleared</h1>';
+// });
 
-//Clear View cache:
-Route::get('/view-clear', function() {
-    $exitCode = Artisan::call('view:clear');
-    return '<h1>View cache cleared</h1>';
-});
+// //Clear View cache:
+// Route::get('/view-clear', function() {
+//     $exitCode = Artisan::call('view:clear');
+//     return '<h1>View cache cleared</h1>';
+// });
 
-//Clear Config cache:
-Route::get('/config-cache', function() {
-    $exitCode = Artisan::call('config:cache');
-    return '<h1>Clear Config cleared</h1>';
-});
+// //Clear Config cache:
+// Route::get('/config-cache', function() {
+//     $exitCode = Artisan::call('config:cache');
+//     return '<h1>Clear Config cleared</h1>';
+// });

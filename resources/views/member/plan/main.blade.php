@@ -109,12 +109,12 @@
                             <div class="form-group col-3 mb-0">
                                 <label for="start_plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="start_plan" name="start_plan"
-                                    value="{{ request()->start_plan ?? null }}" placeholder="" required>
+                                    value="{{ request()->start_plan ?? null }}" placeholder="วันที่เริ่มตรวจแผนงาน">
                             </div>
                             <div class="form-group col-3 mb-0">
                                 <label for="end_plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="end_plan" name="end_plan"
-                                    value="{{ request()->end_plan ?? null }}" placeholder="" required>
+                                    value="{{ request()->end_plan ?? null }}" placeholder="วันที่สิ้นสุดตรวจแผนงาน">
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <label for="status_plan">{{ __('สถานะแผนงาน') }}</label>
@@ -142,13 +142,15 @@
     </div>
     <div class="row mb-5">
         <div class="col-12 col-xl-12">
+            <a href="{{ route('pdf.plan') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('ออกรายงาน') }}</a>
+            <hr>
             <table id="tb-plan" class="table table-hover table-bordered">
                 <thead class="bg-white">
                     <tr>
                         <th class="text-center">{{ __('ลำดับ') }}</th>
                         <th class="text-left">{{ __('ร้านค้า') }}</th>
                         <th class="text-left">{{ __('ชื่อผู้ตรวจ') }}</th>
-                        <th class="text-left">{{ __('ชื่อผู้ออกแผนตรวจ') }}</th>
+                        <th class="text-left">{{ __('ผู้ออกแผนงาน') }}</th>
                         <th class="text-center">{{ __('ระยะเวลา') }}</th>
                         <th class="text-center">{{ __('การจัดการ') }}</th>
                     </tr>
@@ -163,18 +165,23 @@
                         <td class="text-center tb-td">{{ $plan->Fulltime }}</td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
+                                @if ($plan->to_user_id == auth()->user()->id)
                                 <a href="{{ route('member.inspectiondetail.check', ['id'=>$plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ตรวจแผนงาน">
                                     <span class="text-dark pr-1">
                                         <i class="fas fa-check-square"></i>
                                     </span>
                                 </a>
+                                @endif
+                                @if ($plan->createby_user_id == auth()->user()->id)
                                 <a href="{{ route('member.plan.edit', ['id'=>$plan->id]) }}" class="btn btn-white" id="edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>
                                 </a>
+                                @endif
+                                @if ($plan->createby_user_id == auth()->user()->id)
                                 <a href="{{ route('member.plan.delete', ['id'=>$plan->id]) }}" class="btn btn-white"
                                     data-toggle="tooltip" data-placement="top" title="ลบ"
                                     onclick="return confirm('คุณต้องการลบแผนงาน {{ $plan->to_user->Fullname }} ใช่ หรือ ไม่')">
@@ -182,6 +189,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </span>
                                 </a>
+                                @endif
                             </div>
                         </td>
                     </tr>

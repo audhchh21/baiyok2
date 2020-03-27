@@ -2,8 +2,6 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
         @font-face {
             font-family: 'THSarabunNew';
@@ -80,20 +78,20 @@
 
         main {
             position: relative;
-            top: 230px;
+            top:230px;
             left: 0px;
             right: 0px;
             width: 100%;
         }
 
-        table {
+        table{
             border-collapse: collapse !important;
         }
 
-        td,
-        th {
+        td,th {
             vertical-align: middle !important;
         }
+
 
     </style>
 </head>
@@ -102,18 +100,17 @@
     @yield('content')
     @php
         if (isset($pdf)) {
-        $x = 250;
-        $y = 10;
-        $text = "Page {PAGE_NUM} of {PAGE_COUNT}";
-        $font = null;
-        $size = 14;
-        $color = array(255,0,0);
-        $word_space = 0.0;  //  default
-        $char_space = 0.0;  //  default
-        $angle = 0.0;   //  default
-        $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
-    }
+            $text = "หน้า {PAGE_NUM} / {PAGE_COUNT}";
+            $size = 12;
+            $font = $fontMetrics->getFont("Verdana");
+            $width = $fontMetrics->get_text_width($text, $font, $size) / 2;
+            $x = ($pdf->get_width() - $width) / 2;
+            $y = $pdf->get_height()-100;
+            $color = array(0,0,0);
+            $pdf->page_text($x, $y, $text, $font, $size, $color);
+        }else{
+            echo '<div style="position: absolute; bottom: 0px; left: 0px; width: 200px;height:30px;">1/1</div>';
+        }
     @endphp
 </body>
-
 </html>

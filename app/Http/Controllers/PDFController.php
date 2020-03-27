@@ -12,72 +12,92 @@ use PDF;
 class PDFController extends Controller
 {
     //
+    public function plan()
+    {
+        $plans = Plan::whereIn('user_id', function($query) {
+            $query->select('id')
+            ->from('users')
+            ->where('office_id', auth()->user()->office_id)
+            ->get();
+        })
+        ->get();
+
+        $pdf = PDF::loadView('pdf.member_plan', compact('plans'));
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
+
+    }
+
+    //
     public function planAll()
     {
-        $data = Plan::all();
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan_all', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.member_plan_all', ['plans' => $data])->setPaper('a4', 'landscape');
-        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 
     //
     public function planSuccess()
     {
-        $data = Plan::all()->where('status', '1');
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan_success', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.member_plan_success', ['plans' => $data])->setPaper('a4', 'landscape');
-        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 
     //
     public function planSlowsuccess()
     {
-        $data = Plan::all()->where('status', '2');
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan_slowsuccess', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.member_plan_slowsuccess', ['plans' => $data])->setPaper('a4', 'landscape');
-        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 
     //
     public function planUnsuccess()
     {
-        $data = Plan::all()->where('status', '0');
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan_unsuccess', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.member_plan_unsuccess', ['plans' => $data])->setPaper('a4', 'landscape');
-        return $pdf->stream('ผลการตรวจสอบสารปนเปิ้อนทั้งหมด.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 
     //
     public function resultProvince()
     {
-        $id = request()->province;
-        // $dd = Mapoffice::whereIn('map_office', function($query) use ($id) {
-        //     $query->select('province')
-        //     ->from('offices')
-        //     ->where('province', $id)
-        //     ->get();
-        // });
-        // dd($dd);
-        $data = Plan::all()->whereIn('status', ['1','2']);
-        $testkit = Foodtestkit::all();
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.manager_inspectiondetail_province', ['plans' => $data, 'testkits' => $testkit])->setPaper('a4', 'landscape');
-        return $pdf->stream('รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 
     //
     public function resultDistrict()
     {
-        $data = Plan::all()->whereIn('status', ['1','2']);
-        $testkit = Foodtestkit::all();
-        $pdf = \App::make('dompdf.wrapper');
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $testkits = Foodtestkit::all();
+
+        $pdf = PDF::loadView('pdf.member_plan', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.manager_inspectiondetail_district', ['plans' => $data, 'testkits' => $testkit])->setPaper('a4', 'landscape');
-        return $pdf->stream('รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร.pdf');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
     }
 }

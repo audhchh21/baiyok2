@@ -20,6 +20,12 @@ class FoodtestkitController extends Controller
     }
 
     //
+    public function foodtestkitCreate()
+    {
+        return view('member.foodtestkit.create');
+    }
+
+    //
     public function foodtestkitEdit($id)
     {
         $foodtestkit = Foodtestkit::findOrFail($id);

@@ -49,19 +49,19 @@
                                 </button>
                             </div>
                         @endif
-                        <label for="province" class="h3">{{ __('จังหวัด') }}</label>
+                        <label for="province" class="h5">{{ __('จังหวัด') }}</label>
                         {!! Form::select('province', $provinces, old('province') ?? $subdistrict->districts->provinces->id, ['id' => 'province', 'class' => 'form-control form-control-lg', 'disabled' => '']) !!}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-xl-4">
-                        <label for="district" class="h3">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
+                        <label for="district" class="h5">{{ __('อำเภอ') }}<span class="text-danger">*</span></label>
                         {!! Form::select('district', $districts, old('district') ?? $subdistrict->district_id ?? null, ['id' => 'district', 'class' => 'form-control form-control-lg']) !!}
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-xl-4">
-                        <label for="subdistrict" class="h3">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
+                        <label for="subdistrict" class="h5">{{ __('ตำบล') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('subdistrict') is-invalid @enderror form-control form-control-lg " id="subdistrict" name="name" value="{{ old('subdistrict') ?? $subdistrict->name }}" placeholder="{{ $subdistrict->name }}" required>
                         @error('subdistrict')
                         <div class="invalid-feedback">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-xl-4">
-                        <label for="zipcode" class="h3">{{ __('รหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
+                        <label for="zipcode" class="h5">{{ __('รหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg " id="zipcode" name="zipcode" value="{{ old('subdistrict') ?? $subdistrict->zip_code }}" placeholder="{{ $subdistrict->zip_code }}" required>
                         @error('zipcode')
                         <div class="invalid-feedback">

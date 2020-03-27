@@ -17,31 +17,31 @@
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('member.dashboard') }}">
                     <i class="fas fa-chart-line"></i>
-                    <span>{{ __('กราฟ') }}</span>
+                    <span>{{ __('หน้าแรก') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('member.shop') }}">
                     <i class="far fa-list-alt"></i>
-                    <span>{{ __('ร้านค้า') }}</span>
+                    <span>{{ __('จัดการข้อมูลร้านค้า') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('member.foodtestkit') }}">
                     <i class="far fa-list-alt"></i>
-                    <span>{{ __('ชุดทดสอบ') }}</span>
+                    <span>{{ __('จัดการข้อมูลชุดทดสอบ') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('member.foodsample') }}">
                     <i class="far fa-list-alt"></i>
-                    <span>{{ __('ตัวอย่างอาหาร') }}</span>
+                    <span>{{ __('จัดการข้อมูลตัวอย่างอาหาร') }}</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('member.foodsamplesource') }}">
                     <i class="far fa-list-alt"></i>
-                    <span>{{ __('แหล่งที่มาตัวอย่างอาหาร') }}</span>
+                    <span>{{ __('จัดการข้อมูลแหล่งที่มาตัวอย่างอาหาร') }}</span>
                 </a>
             </li>
             <li class="nav-item">

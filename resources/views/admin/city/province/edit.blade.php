@@ -49,7 +49,7 @@
                                 </button>
                             </div>
                         @endif
-                        <label for="province" class="h3">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
+                        <label for="province" class="h5">{{ __('จังหวัด') }}<span class="text-danger">*</span></label>
                         <input type="text" class="@error('province') is-invalid @enderror form-control form-control-lg " id="province" name="name" value="{{ old('province') ?? $province->name }}" placeholder="{{ $province->name }}" required>
                         @error('province')
                         <div class="invalid-feedback">

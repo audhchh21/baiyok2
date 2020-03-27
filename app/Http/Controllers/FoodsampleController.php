@@ -13,6 +13,15 @@ class FoodsampleController extends Controller
     public function foodsampleMain()
     {
         $foodsample = Foodsample::all();
+        return view('member.foodsample.main', [
+            'count' => 1,
+            'foodsamples' => $foodsample,
+        ]);
+    }
+
+    //
+    public function foodsampleCreate()
+    {
         $category = [
             'ผัดสด' => 'ผัดสด',
             'ผลไม้สด' => 'ผลไม้สด',
@@ -22,9 +31,7 @@ class FoodsampleController extends Controller
             'ของทอด' => 'ของทอด',
             'อื่นๆ' => 'อื่นๆ'
         ];
-        return view('member.foodsample.main', [
-            'count' => 1,
-            'foodsamples' => $foodsample,
+        return view('member.foodsample.create', [
             'category' => $category
         ]);
     }
