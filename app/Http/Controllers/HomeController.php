@@ -318,6 +318,7 @@ class HomeController extends Controller
             ],
             'tooltips' => [
                 'enabled' => 'true',
+                'mode' => 'index',
                 'titleFontSize' => 14,
                 'titleFontColor' => '#fff',
                 'titleAlign' => 'left',
