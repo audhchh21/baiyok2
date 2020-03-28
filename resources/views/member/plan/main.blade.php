@@ -109,12 +109,12 @@
                             <div class="form-group col-3 mb-0">
                                 <label for="start_plan">{{ __('วันที่เริ่มตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="start_plan" name="start_plan"
-                                    value="{{ request()->start_plan ?? null }}" placeholder="วันที่เริ่มตรวจแผนงาน">
+                                    value="{{ request()->start_plan ?? null }}" placeholder="วันที่เริ่มตรวจแผนงาน" required>
                             </div>
                             <div class="form-group col-3 mb-0">
                                 <label for="end_plan">{{ __('วันที่สิ้นสุดตรวจแผนงาน') }}</label>
                                 <input type="text" class="form-control" id="end_plan" name="end_plan"
-                                    value="{{ request()->end_plan ?? null }}" placeholder="วันที่สิ้นสุดตรวจแผนงาน">
+                                    value="{{ request()->end_plan ?? null }}" placeholder="วันที่สิ้นสุดตรวจแผนงาน" required>
                             </div>
                             <div class="form-group col-2 mb-0">
                                 <label for="status_plan">{{ __('สถานะแผนงาน') }}</label>

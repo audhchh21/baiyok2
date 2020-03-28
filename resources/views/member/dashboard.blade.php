@@ -44,66 +44,6 @@
         </button>
     </div>
     @endif
-    <div class="row">
-        <div class="col-lg col-md-6 col-sm-6 mb-3">
-            <div class="stats-small stats-small--1 card card-small">
-                <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                        <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">{{ __('แผนงานทั้งหมด') }}</span>
-                            <h6 class="stats-small__value count my-3">
-                                {{ number_format($plan_all ?? 0, 0,'.',',') }}
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg col-md-6 col-sm-6 mb-3">
-            <div class="stats-small stats-small--1 card card-small">
-                <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                        <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">{{ __('แผนงานวันนี้') }}</span>
-                            <h6 class="stats-small__value count my-3">
-                                {{ number_format($plan_today ?? 0, 0,'.',',') }}
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg col-md-6 col-sm-6 mb-3">
-            <div class="stats-small stats-small--1 card card-small">
-                <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                        <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">{{ __('แผนงานที่ต้องทำ') }}</span>
-                            <h6 class="stats-small__value count my-3">
-                                {{ number_format($plan_check ?? 0, 0,'.',',') }}
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg col-md-6 col-sm-6 mb-3">
-            <div class="stats-small stats-small--1 card card-small">
-                <div class="card-body p-0 d-flex">
-                    <div class="d-flex flex-column m-auto">
-                        <div class="stats-small__data text-center">
-                            <span
-                                class="stats-small__label text-uppercase">{{ __('ผู้ใช้งานในหน่วยงานทั้งหมด') }}</span>
-                            <h6 class="stats-small__value count my-3">
-                                {{ number_format($user_count ?? 0, 0,'.',',') }}
-                            </h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
     <div class="row mb-5">
         <div class="col-12 col-xl-4">
             <div class="card h-100">

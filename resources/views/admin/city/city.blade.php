@@ -49,7 +49,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'จังหวัดทั้งหมด', 'subtitle' => 'จังหวัดทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'จังหวัดทั้งหมด'])
 
     <!-- End Page Header -->
 

@@ -75,11 +75,6 @@
             </form>
         </div>
         <div class="col-12 col-xl-8 border-right">
-            <div class="text-left">
-                <a href="{{ route('admin.city') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
-                    {{ __('ย้อนกลับ')   }}</a>
-                <hr>
-            </div>
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}

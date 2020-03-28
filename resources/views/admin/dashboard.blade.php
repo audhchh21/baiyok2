@@ -30,7 +30,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'กราฟ'])
+    @include('layouts.pageheader.title', ['title' => 'หน้าแรก'])
     <!-- End Page Header -->
 
     <!-- Start Content -->

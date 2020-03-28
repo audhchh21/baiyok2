@@ -124,7 +124,7 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="zipcode" class="h5">{{ __('เพิ่มรหัสไปรษณีย์') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" pattern="[0-9]{5}" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
+                        <input type="text" class="@error('zipcode') is-invalid @enderror form-control form-control-lg" id="zipcode" name="zipcode" pattern="[0-9]{5}" title="โปรดกรอกรหัสไปรษณีย์ให้ถูกต้อง" value="{{ old('zipcode') }}" placeholder="รหัสรหัสไปรษณีย์" required>
                         @error('zipcode')
                         <div class="invalid-feedback">
                             {{ $errors->first('zipcode') }}
@@ -136,11 +136,6 @@
             </form>
         </div>
         <div class="col-12 col-xl-8 border-right">
-            <div class="text-left">
-                <a href="{{ route('admin.city') }}" class="btn btn-secondary"><i class="fas fa-angle-double-left"></i>
-                    {{ __('ย้อนกลับ')   }}</a>
-                <hr>
-            </div>
             @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}

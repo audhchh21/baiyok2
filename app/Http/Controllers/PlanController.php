@@ -57,9 +57,14 @@ class PlanController extends Controller
                 ->get();
             }
         }else{
-            $plans = Plan::all()
-            ->where('to_user_id', auth()->user()->id)
-            ->where('status', '0');
+            $plans = Plan::whereIn('user_id', function ($query) {
+                $query->select('id')
+                ->from('users')
+                ->where('office_id', auth()->user()->office_id)
+                ->get();
+            })
+            ->where('status', '0')
+            ->get();
         }
         return view('member.plan.main', [
             'count' => 1,
