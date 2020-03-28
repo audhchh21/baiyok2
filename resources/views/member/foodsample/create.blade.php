@@ -52,7 +52,7 @@ $(document).ready( function() {
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-12">
-                        <label for="foodsample" class="h3">{{ __('ตัวอย่างอาหาร') }}</label>
+                        <label for="foodsample" class="h5">{{ __('ตัวอย่างอาหาร') }}</label>
                         <input type="text" id="foodsample" class="form-control form-control-lg" name="name"
                             value="{{ old('name') }}" placeholder="ตัวอย่างอาหาร"
                             required>
@@ -60,7 +60,7 @@ $(document).ready( function() {
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12">
-                        <label for="category" class="h3">{{ __('หมวดหมู่') }}</label>
+                        <label for="category" class="h5">{{ __('หมวดหมู่') }}</label>
                         {!! Form::select('category', $category, old('category'), ['id' =>
                         'category', 'class' => 'form-control form-control-lg']) !!}
                     </div>

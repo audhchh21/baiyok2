@@ -13,12 +13,12 @@
     <table class="table-bordered mt-2" style="table-layout:fixed; width:100%;">
         <thead>
             <tr>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ร้านค้า') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ร้านค้า') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
                 <th class="text-center px-2 py-1" colspan="{{ $testkits->count() }}">{{ __('ชุดทดสอบสาร') }}</th>
                 <th class="text-center px-2 py-1" rowspan="2">{{ __('วันที่ตรวจบันทึก') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผลดำเนินการ') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผู้ตรวจ') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ผลดำเนินการ') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ผู้ตรวจ') }}</th>
             </tr>
             <tr>
                 @foreach ($testkits as $testkit)
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
             @foreach ($plans as $plan)
-            @if ($plan->inspectiondetail->inspection->plan->status == '0')
+            @if ($plan->inspectiondetail->inspection->plan->status == '1' || $plan->inspectiondetail->inspection->plan->status == '2')
             <tr>
                 <td class="text-left px-2 py-1" style="width:15%;">
                     {{ $plan->inspectiondetail->inspection->plan->shops->fullname }}</td>

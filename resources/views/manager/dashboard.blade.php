@@ -94,15 +94,17 @@
     </div>
     <hr>
     <div class="row mb-3">
-        <div class="col-12 col-xl-6 mb-3">
-            <div class="card">
+        <div class="col-12 col-xl-5 mb-3">
+            <div class="card h-100">
                 <div class="card-body">
+                    {!! $FoodProvince->render() !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-6 mb-3">
-            <div class="card">
+        <div class="col-12 col-xl-7 mb-3">
+            <div class="card h-100">
                 <div class="card-body">
+                    {!! $FoodDistrict->render() !!}
                 </div>
             </div>
         </div>

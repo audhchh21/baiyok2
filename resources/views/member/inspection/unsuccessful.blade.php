@@ -57,7 +57,7 @@
             $('#start_plan').datepicker('setEndDate', e.format());
         });
         $('#tb-plan').DataTable();
-        $('#edit').click( function() {
+        $('.edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
@@ -129,7 +129,7 @@
                 </button>
             </div>
             @endif
-            <a href="{{ route('pdf.plan.unsuccess') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('ออกรายงาน') }}</a>
+            {{-- <a href="{{ route('pdf.plan.unsuccess') }}" class="btn btn-sm btn-dark" target="_blank" data-toggle="tooltip" data-placement="right" title="ออกรายงาน PDF"><i class="fas fa-file-pdf pr-2"></i>{{ __('ออกรายงาน') }}</a> --}}
             <div class="text-right pb-2">
                 <span class="badge badge-info"><i class="far fa-calendar fa-sm pr-1"></i>{{ __('ยังไม่ได้ทำการบันทึก') }}</span>
                 <span class="badge badge-info"><i class="far fa-calendar-check fa-sm pr-1"></i>{{ __('ทำการบันทึกเรียบร้อย') }}</span>
@@ -174,7 +174,7 @@
                                 </a>
                                 @endif
                                 @if($plan->status == '0' && $plan->createby_user_id == auth()->user()->id)
-                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white" id="edit"
+                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -198,7 +198,7 @@
                                 </a>
                                 @endif
                                 @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == auth()->user()->id)
-                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" id="edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>

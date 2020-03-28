@@ -18,6 +18,7 @@ use App\Province;
 use App\District;
 use App\Subdistrict;
 use App\Mapoffice;
+use App\Mapdistrict;
 
 class HomeController extends Controller
 {
@@ -112,6 +113,8 @@ class HomeController extends Controller
             'plan_today' => $plan_today,
             'plan_check' => $plan_check,
             'plan_un' => $plan_un,
+            'FoodProvince' => $this->chartFoodProvince(),
+            'FoodDistrict' => $this->chartFoodDistrict(),
         ]);
     }
 
@@ -122,9 +125,105 @@ class HomeController extends Controller
         return view('manager.pdf.main', [
             'provinces' => $province,
             'districts' => $district,
+
         ]);
     }
 
+    public function chartFoodProvince()
+    {
+
+        $label = $this->getLabels($this->getFoodtestkit());
+        $color = $this->getColor(count($label));
+        $data = [];
+        foreach($this->getFoodtestkit() as $key => $testkit){
+            $inspectiondetail = $this->getInspectiondetail();
+            $data = Arr::prepend($data, $inspectiondetail->where('foodtestkit_id', $testkit->id)->count());
+        }
+        $dataset = [
+            [
+                'backgroundColor' => $color,
+                'data' => $data
+            ]
+        ];
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับจังหวัด',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('province')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 300])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
+
+    public function chartFoodDistrict()
+    {
+        $label = $this->getLabels($this->getDistrict());
+        $color = $this->getColor(count($label));
+        $dataset = [];
+        foreach($this->getFoodtestkit() as $testkitkey => $testkit){
+            $data = [];
+            foreach($this->getDistrict() as $district){
+                $id = $testkit->id;
+                $data = Arr::prepend($data, Mapdistrict::where('map_district', $district->id)
+                ->whereIn('map_inspectiondetail', function ($query) use ($id) {
+                    $query->select('id')
+                    ->from('inspectiondetails')
+                    ->where('foodtestkit_id', function ($query) use ($id) {
+                        $query->select('id')
+                        ->from('foodtestkits')
+                        ->where('id', $id);
+                    });
+                })
+                ->count());
+            }
+            $datas = [
+                'label' => $testkit->name,
+                'backgroundColor' => $color[$testkitkey],
+                'data' => $data
+            ];
+            $dataset = Arr::prepend($dataset, $datas);
+        }
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับอำเภอ',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('district')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
 
     // MAMBER
 
@@ -153,11 +252,11 @@ class HomeController extends Controller
         $datas1 = [];
         $datas2 = [];
         $datas3 = [];
-        $testkids = Foodtestkit::select('id','name')->orderBy('id')->get();
-        $lable = Arr::pluck($testkids, 'name');
-
+        $lable = [];
+        $testkids = Foodtestkit::orderBy('id')->get();
         foreach($testkids as $testkid) {
             $testkid_id = $testkid->id;
+            $lable = Arr::prepend($lable, $testkid->name);
             $mapoffice1 = Mapoffice::where('map_office', auth()->user()->office_id)
             ->whereIn('map_inspectiondetail', function ($query1) use ($testkid_id) {
                 $query1->select('id')
@@ -191,11 +290,11 @@ class HomeController extends Controller
             ->count();
             $datas3 = Arr::prepend($datas3, $mapoffice3);
         }
-        // dd($datas);
+        // dd($lable);
         $testkidchart = app()->chartjs
         ->name('testkidchart')
         ->type('bar')
-        ->size(['width' => 400, 'height' => 400])
+        ->size(['width' => 400, 'height' => 200])
         ->labels($lable)
         ->datasets([
             [
@@ -277,5 +376,43 @@ class HomeController extends Controller
         return User::all();
     }
 
+    private function getLabels($foodtestkit)
+    {
+        $output = [];
+        foreach($foodtestkit as $data){
+            $output = Arr::prepend($output, $data->name);
+        }
+        return $output;
+    }
+
+    private function getColor($count = 1)
+    {
+        $hexcode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+        $output = [];
+        for($i = 0; $i <= $count; $i++){
+            $output = Arr::prepend($output, '#'.$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)]);
+        }
+        return $output;
+    }
+
+    private function getInspectiondetail()
+    {
+        return Inspectiondetail::all();
+    }
+
+    private function getFoodtestkit()
+    {
+        return Foodtestkit::all();
+    }
+
+    private function getDistrict()
+    {
+        return District::all();
+    }
+
+    private function getOffice()
+    {
+        return Office::all();
+    }
 
 }

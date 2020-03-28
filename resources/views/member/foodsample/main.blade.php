@@ -95,7 +95,7 @@
                         <td class="text-left col-4 tb-td">{{ $foodsample->category }}</td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('member.foodsample.edit', ['id'=>$foodsample->id]) }}" class="btn btn-white edit" id="edit"
+                                <a href="{{ route('member.foodsample.edit', ['id'=>$foodsample->id]) }}" class="btn btn-white edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -119,26 +119,6 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="col-12 col-xl-4">
-            <form action="{{ route('member.foodsample.store') }}" method="post">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="foodsample" class="h3">{{ __('ตัวอย่างอาหาร') }}</label>
-                        <input type="text" id="foodsample" class="form-control form-control-lg" name="name" value="{{ old('name') }}" placeholder="ชื่อตัวอย่างอาหาร" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="category" class="h3">{{ __('หมวดหมู่') }}</label>
-                        {!! Form::select('category', $category, old('category') ?? null, ['id' => 'category', 'class' => 'form-control form-control-lg']) !!}
-                    </div>
-                </div>
-                <div class="text-left">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('เพิ่ม') }}</button>
-                </div>
-            </form>
-        </div> --}}
     </div>
     <!-- End Content -->
 </div>

@@ -39,7 +39,7 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-foodtestkit').DataTable();
-        $('#edit').click( function() {
+        $('.edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
@@ -92,7 +92,7 @@
                         <td class="text-left col-9 tb-td">{{ $foodtestkit->name }}</td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('member.foodtestkit.edit', ['id'=>$foodtestkit->id]) }}" class="btn btn-white" id="edit"
+                                <a href="{{ route('member.foodtestkit.edit', ['id'=>$foodtestkit->id]) }}" class="btn btn-white edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -116,20 +116,6 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="col-12 col-xl-4">
-            <form action="{{ route('member.foodtestkit.store') }}" method="post">
-                @csrf
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="foodtestkit" class="h3">{{ __('ชุดทดสอบ') }}</label>
-                        <input type="text" id="foodtestkit" class="form-control form-control-lg" name="name" value="{{ old('name') }}" placeholder="ชื่อชุดทดสอบ" required>
-                    </div>
-                </div>
-                <div class="text-left">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">{{ __('เพิ่ม') }}</button>
-                </div>
-            </form>
-        </div> --}}
     </div>
     <!-- End Content -->
 </div>

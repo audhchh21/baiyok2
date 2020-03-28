@@ -39,7 +39,7 @@
         });
         $('[data-toggle="tooltip"]').tooltip();
         $('#tb-province').DataTable();
-        $('#edit').click( function() {
+        $('.edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
@@ -99,7 +99,7 @@
                         <td class="col-9 text-left tb-td"><span data-toggle="tooltip" data-placement="right" title="จังหวัด {{ $province->name }}">{{ $province->name }}</span></td>
                         <td class="text-center tb-td col-1">
                             <div class="btn-group btn-group-sm">
-                                <a href="{{ route('admin.province.edit', ['id'=>$province->id]) }}" class="btn btn-white" id="edit"
+                                <a href="{{ route('admin.province.edit', ['id'=>$province->id]) }}" class="btn btn-white edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>

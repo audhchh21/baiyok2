@@ -74,7 +74,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="office" class="h5">{{ __('หน่วยงาน') }}</label>
+                        <label for="office" class="h3">{{ __('หน่วยงาน') }}</label>
                         <select class="form-control form-control-lg" name="office" id="office" disabled>
                             @forelse ($offices as $office)
                             <option {{ $office->id == Auth::user()->office_id ? ' selected':''}} value="{{  $office->id   }}" >{{ $office->name }}</option>
@@ -86,17 +86,17 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="plan_start" class="h5">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
+                        <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? null }}" placeholder="เริ่มวันที่">
                     </div>
                     <div class="form-group col">
-                        <label for="plan_end" class="h5">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
+                        <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? null }}" placeholder="สิ้นสุดวันที่">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="user" class="h5">{{ __('ผู้ตรวจสอบวิเคราะห์') }}<span class="text-danger">*</span></label>
+                        <label for="user" class="h3">{{ __('ผู้ตรวจสอบวิเคราะห์') }}<span class="text-danger">*</span></label>
                         <select class="form-control form-control-lg" name="user" id="user">
                             @forelse ($users as $user)
                             <option {{ $user->id == Auth::user()->id ? ' selected':''}} value="{{ $user->id }}">{{ $user->Fullname }}</option>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label for="shop" class="h5">{{ __('ร้านค้าที่ไปตรวจ') }}<span class="text-danger">*</span></label>
+                        <label for="shop" class="h3">{{ __('ร้านค้าที่ไปตรวจ') }}<span class="text-danger">*</span></label>
                         <select class="form-control form-control-lg" name="shop" id="shop">
                             @forelse ($shops as $shop)
                             <option value="{{ $shop->id }}">{{ $shop->name.' ('.$shop->Fullname.')' }}</option>

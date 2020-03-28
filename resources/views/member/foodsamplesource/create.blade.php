@@ -53,7 +53,7 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-12">
-                        <label for="foodsamplesource" class="h3">{{ __('ตัวอย่างอาหาร') }}</label>
+                        <label for="foodsamplesource" class="h5">{{ __('ตัวอย่างอาหาร') }}</label>
                         <input type="text" id="foodsamplesource" class="form-control form-control-lg" name="name"
                             value="{{ old('name') }}"
                             placeholder="ตัวอย่างอาหาร" required>

@@ -44,7 +44,8 @@ class PDFController extends Controller
     //
     public function planSuccess()
     {
-        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $plans = Mapoffice::where('map_office', auth()->user()->office_id)
+        ->get();
         $testkits = Foodtestkit::all();
 
         $pdf = PDF::loadView('pdf.member_plan_success', compact('plans', 'testkits'));
@@ -83,10 +84,10 @@ class PDFController extends Controller
         $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
         $testkits = Foodtestkit::all();
 
-        $pdf = PDF::loadView('pdf.member_plan', compact('plans', 'testkits'));
+        $pdf = PDF::loadView('pdf.manager_inspectiondetail_province', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf->setPaper('a4', 'landscape');
-        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
+        return $pdf->stream('รายงานตรวจสอบสารปนเปื้อนในระดับจังหวัด.pdf');
     }
 
     //
@@ -98,6 +99,6 @@ class PDFController extends Controller
         $pdf = PDF::loadView('pdf.member_plan', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf->setPaper('a4', 'landscape');
-        return $pdf->stream('รายงานสรุปผลสารปนเปิ้อนในอาหาร.pdf');
+        return $pdf->stream('รายงานตรวจสอบสารปนเปื้อนในระดับอำเภอ.pdf');
     }
 }

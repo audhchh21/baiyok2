@@ -57,7 +57,7 @@
             $('#start_plan').datepicker('setEndDate', e.format());
         });
         $('#tb-plan').DataTable();
-        $('#edit').click( function() {
+        $('.edit').click( function() {
             return confirm('คุณต้องการแก้ไขข้อมูลใช่หรื่อไม่!?') ? true : false
         })
     })
@@ -174,7 +174,7 @@
                                 </a>
                                 @endif
                                 @if($plan->status == '0' && $plan->createby_user_id == auth()->user()->id)
-                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white" id="edit"
+                                <a href="{{ route('member.plan.edit', ['id' => $plan->id]) }}" class="btn btn-white edit"
                                     data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
@@ -198,7 +198,7 @@
                                 </a>
                                 @endif
                                 @if (($plan->status == '1' || $plan->status == '2') && $plan->to_user_id == auth()->user()->id)
-                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white" id="edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
+                                <a href="{{ route('member.inspection.edit', ['id' => $plan->inspection->id]) }}" class="btn btn-white edit" data-toggle="tooltip" data-placement="top" title="แก้ไข">
                                     <span class="text-warning pr-1">
                                         <i class="far fa-edit"></i>
                                     </span>

@@ -24,7 +24,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'กราฟ'])
+    @include('layouts.pageheader.title', ['title' => 'หน้าแรก'])
 
     <!-- End Page Header -->
 
@@ -44,15 +44,26 @@
         </button>
     </div>
     @endif
-    <div class="row mb-5">
-        <div class="col-12 col-xl-4">
+    <div class="row mb-3">
+        <div class="col-12 col-xl-7">
             <div class="card h-100">
                 <div class="card-body">
                     {!! $testkidchart->render() !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-8">
+        <div class="col-12 col-xl-5">
+            <div class="card h-100">
+                <div class="card-header">
+                    <span class="h3">{{ __('แผนงานที่ต้องตรวจสอบ') }}</span>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12 col-xl-12">
             <div class="card h-100">
                 <div class="card-header">
                     <span class="h3">{{ __('แผนงานที่ต้องตรวจสอบ') }}</span>

@@ -18,17 +18,18 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function () {
+
         var count = 1
         var html = `
             <tr id="${count}">
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control foodsample', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control foodsamplesource', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control foodtestkit', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-1 tb-td">
                     <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
@@ -46,24 +47,25 @@
             `
         $('#tb-plandetail tbody').append(html)
         $('#remove').prop('disabled', true)
+
         $('#add').click(function () {
             count++
             html = `
             <tr id="tb-${count}">
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsample[]', $foodsample, null, ['id' => 'foodsample', 'class' => 'form-control foodsample', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodsamplesource[]', $foodsamplesource, null, ['id' => 'foodsamplesource', 'class' => 'form-control foodsamplesource', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control select2', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
+                    {{ Form::select('foodtestkit[]', $foodtestkit, null, ['id' => 'foodtestkit', 'class' => 'form-control foodtestkit', 'placeholder' => '----- เลือก -----', 'required'=>'']) }}
                 </td>
                 <td class="text-left col-12 col-lg-1 tb-td">
                     <input type="file" class="form-control-file border p-1" id="customfile" name="uploadimage[]">
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
-                    {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control select2']) }}
+                    {{ Form::select('status[]', $check, null, ['id' => 'status', 'class' => 'form-control']) }}
                 </td>
                 <td class="text-left col-12 col-lg-2 tb-td">
                     <input type="text" class="form-control" id="" name="detail[]"  placeholder="กรณีตรวจผลสารปนเปื้อน">
@@ -75,7 +77,6 @@
             `
             let row = $('#tb-plandetail tbody tr').length
             $('#tb-plandetail tbody').append(html)
-
             if (row >= 1) {
                 $('#remove').prop('disabled', false)
             }

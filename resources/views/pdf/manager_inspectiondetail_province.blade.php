@@ -3,7 +3,7 @@
 @section('content')
 <header class="text-center mt-3">
     <img src="images/web/logopdf.png" alt="" style="width:155px;height:155px;">
-    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานแผนงานการตรวจสอบสารปนเปื้อนในอาหาร') }}</p>
+    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานตรวจสอบสารปนเปื้อนในระดับจังหวัด') }}</p>
     <p style="font-size:18px;">{{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}</p>
 </header>
 <footer class="text-right">
@@ -27,6 +27,7 @@
             </tr>
         </thead>
         <tbody>
+            {{ dd($plans) }}
             @foreach ($plans as $plan)
             <tr>
                 <td class="text-left px-2 py-1" style="width:15%;">
