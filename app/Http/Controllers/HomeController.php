@@ -153,8 +153,9 @@ class HomeController extends Controller
         $datas1 = [];
         $datas2 = [];
         $datas3 = [];
-        $testkids = Foodtestkit::all();
+        $testkids = Foodtestkit::select('id','name')->orderBy('id')->get();
         $lable = Arr::pluck($testkids, 'name');
+
         foreach($testkids as $testkid) {
             $testkid_id = $testkid->id;
             $mapoffice1 = Mapoffice::where('map_office', auth()->user()->office_id)
