@@ -14,7 +14,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'กราฟ', 'subtitle' => 'กราฟทั้งหมด'])
+    @include('layouts.pageheader.title', ['title' => 'กราฟ'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
@@ -94,10 +94,15 @@
     </div>
     <hr>
     <div class="row mb-3">
-        <div class="col">
+        <div class="col-12 col-xl-6 mb-3">
             <div class="card">
                 <div class="card-body">
-                    {!! $dashboardplan->render() !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-6 mb-3">
+            <div class="card">
+                <div class="card-body">
                 </div>
             </div>
         </div>

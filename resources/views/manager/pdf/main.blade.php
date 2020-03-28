@@ -14,7 +14,7 @@
 
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
-    @include('layouts.pageheader.title', ['title' => 'รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร', 'subtitle' => 'รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร'])
+    @include('layouts.pageheader.title', ['title' => 'รายงานสรุปผลการตรวจสอบสารปนเปื้อนในอาหาร'])
     <!-- End Page Header -->
 
     <!-- Start Content -->
