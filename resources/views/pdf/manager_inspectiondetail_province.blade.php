@@ -3,8 +3,7 @@
 @section('content')
 <header class="text-center mt-3">
     <img src="images/web/logopdf.png" alt="" style="width:155px;height:155px;">
-    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานตรวจสอบสารปนเปื้อนในระดับจังหวัด') }}</p>
-    <p style="font-size:18px;">{{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}</p>
+    <p class="mt-2 py-1" style="font-size:24px;font-weight: bold;">{{ __('รายงานตรวจสอบสารปนเปื้อนในระดับจังหวัด') }}</p>
 </header>
 <footer class="text-right">
     <span>{{ 'ผู้ออกรายงาน '.Auth::user()->Fullname.' วันที่ออกรายงาน '.now() }}</span>
@@ -13,12 +12,12 @@
     <table class="table-bordered mt-2" style="table-layout:fixed; width:100%;">
         <thead>
             <tr>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('อำเภอ') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('อำเภอ') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
                 <th class="text-center px-2 py-1" colspan="{{ $testkits->count() }}">{{ __('ชุดทดสอบสาร') }}</th>
                 <th class="text-center px-2 py-1" rowspan="2">{{ __('วันที่ตรวจบันทึก') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผลดำเนินการ') }}</th>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ผู้ตรวจ') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ผลดำเนินการ') }}</th>
+                <th class="text-center px-2 py-1" rowspan="2">{{ __('ผู้ตรวจ') }}</th>
             </tr>
             <tr>
                 @foreach ($testkits as $testkit)

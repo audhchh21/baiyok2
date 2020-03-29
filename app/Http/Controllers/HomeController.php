@@ -98,28 +98,33 @@ class HomeController extends Controller
     {
         $plans = Plan::all();
         $plan_all = $plans->count();
-        $plan_today = $plans
-        ->whereBetween('created_at', [
-            date('Y-m-d 00:00:00'),
-            date('Y-m-d 23:59:59')
-            ])
-        ->count();
-
+        $plan_today = $plans->whereBetween('created_at', [date('Y-m-d 00:00:00'),date('Y-m-d 23:59:59')])->count();
         $plan_check = $plans->whereIn('status', ['1','2'])->count();
         $plan_un = $plans->where('status', '0')->count();
 
-        $testkidProvince = [];
-        $testkidDistrict = [];
+        $testkids = $this->getFoodtestkit();
+        $districts = $this->getDistrict();
+
+        $data = [];
+        foreach($testkids as $testkid){
+            $data = Arr::prepend($data, [
+                'name' => $testkid->name,
+            ]);
+        }
 
         return view('manager.dashboard', [
             'plan_all' => $plan_all,
             'plan_today' => $plan_today,
             'plan_check' => $plan_check,
             'plan_un' => $plan_un,
-            'FoodProvince' => $this->chartFoodProvince(),
-            'foodtestkids' => $this->getFoodtestkit(),
-            'FoodDistrict' => $this->chartFoodDistrict(),
-            'districts' => $this->getDistrict()
+
+            'ChartProvince' => $this->chartFoodProvince(),
+            'ChartDistrict' => $this->chartFoodDistrict(),
+
+            'testkids' => $testkids,
+            'districts' => $districts,
+
+
         ]);
     }
 
@@ -200,7 +205,8 @@ class HomeController extends Controller
             ->count();
             $datas3 = Arr::prepend($datas3, $mapoffice3);
         }
-        // dd($lable);
+
+        // dd($datas3);
         $testkidchart = app()->chartjs
         ->name('testkidchart')
         ->type('bar')
@@ -284,16 +290,9 @@ class HomeController extends Controller
 
         $label = $this->getLabels($this->getFoodtestkit());
         $color = $this->getColor(count($label));
-        $data = [];
-        foreach($this->getFoodtestkit() as $key => $testkit){
-            $inspectiondetail = $this->getInspectiondetail();
-            $data = Arr::prepend($data, $inspectiondetail->where('foodtestkit_id', $testkit->id)->count());
-        }
-        $dataset = [
-            [
-                'backgroundColor' => $color,
-                'data' => $data
-            ]
+        $datas = [
+            'backgroundColor' => 'rgba(0,0,0,1)',
+            'data' => [1, 2, 3]
         ];
         $options = [
             'title' => [
@@ -314,10 +313,10 @@ class HomeController extends Controller
 
         return app()->chartjs
         ->name('province')
-        ->type('pie')
+        ->type('bar')
         ->size(['width' => 400, 'height' => 300])
         ->labels($label)
-        ->datasets($dataset)
+        ->datasets($datas)
         ->options($options);
     }
 
@@ -400,11 +399,6 @@ class HomeController extends Controller
         return $output;
     }
 
-    private function getInspectiondetail()
-    {
-        return Inspectiondetail::all();
-    }
-
     private function getFoodtestkit()
     {
         return Foodtestkit::all();
@@ -413,11 +407,6 @@ class HomeController extends Controller
     private function getDistrict()
     {
         return District::all();
-    }
-
-    private function getOffice()
-    {
-        return Office::all();
     }
 
 }

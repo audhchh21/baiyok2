@@ -97,7 +97,7 @@
         <div class="col-12 col-xl-5 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    {!! $FoodProvince->render() !!}
+                    {!! $ChartProvince->render() !!}
                 </div>
             </div>
         </div>
@@ -113,18 +113,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($foodtestkids as $testkid)
-                        <tr>
-                            <td class="text-center">{{ $testkid->name }}</td>
-                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
-                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
-                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td class="text-center" colspan="4"></td>
-                        </tr>
-                        @endforelse
+
                     </tbody>
                 </table>
             </div>
@@ -134,7 +123,7 @@
         <div class="col-12 col-xl-5 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    {!! $FoodDistrict->render() !!}
+                    {!! $ChartDistrict->render() !!}
                 </div>
             </div>
         </div>
@@ -144,7 +133,7 @@
                     <thead>
                         <tr>
                             <th class="text-center">{{ __('อำเภอ') }}</th>
-                            @foreach ($foodtestkids as $testkid)
+                            @foreach ($testkids as $testkid)
                             <th class="text-center">{{ $testkid->name }}</th>
                             @endforeach
                         </tr>
