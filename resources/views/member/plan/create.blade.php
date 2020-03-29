@@ -87,11 +87,11 @@
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="plan_start" class="h3">{{ __('เริ่มวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? null }}" placeholder="เริ่มวันที่">
+                        <input type="text" class="form-control form-control-lg" data-date-start-date="0d" id="plan_start" name="plan_start" value="{{ old('plan_start') ?? null }}" placeholder="เริ่มวันที่">
                     </div>
                     <div class="form-group col">
                         <label for="plan_end" class="h3">{{ __('สิ้นสุดวันที่') }}<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? null }}" placeholder="สิ้นสุดวันที่">
+                        <input type="text" class="form-control form-control-lg" data-date-start-date="0d" id="plan_end" name="plan_end" value="{{ old('plan_end') ?? null }}" placeholder="สิ้นสุดวันที่">
                     </div>
                 </div>
                 <div class="form-row">

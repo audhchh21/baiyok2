@@ -108,6 +108,9 @@ class HomeController extends Controller
         $plan_check = $plans->whereIn('status', ['1','2'])->count();
         $plan_un = $plans->where('status', '0')->count();
 
+        $testkidProvince = [];
+        $testkidDistrict = [];
+
         return view('manager.dashboard', [
             'plan_all' => $plan_all,
             'plan_today' => $plan_today,
@@ -131,101 +134,6 @@ class HomeController extends Controller
         ]);
     }
 
-    public function chartFoodProvince()
-    {
-
-        $label = $this->getLabels($this->getFoodtestkit());
-        $color = $this->getColor(count($label));
-        $data = [];
-        foreach($this->getFoodtestkit() as $key => $testkit){
-            $inspectiondetail = $this->getInspectiondetail();
-            $data = Arr::prepend($data, $inspectiondetail->where('foodtestkit_id', $testkit->id)->count());
-        }
-        $dataset = [
-            [
-                'backgroundColor' => $color,
-                'data' => $data
-            ]
-        ];
-        $options = [
-            'title' => [
-                'display' => true,
-                'position' => 'top',
-                'text' => 'กราฟสรุปในระดับจังหวัด',
-                'fontSize' => 24,
-                'fontStyle' => 'bold'
-            ],
-            'legend' => [
-                'display' => true,
-                'position' => 'bottom',
-            ],
-            'tooltips' => [
-                'enabled' => true,
-            ],
-        ];
-
-        return app()->chartjs
-        ->name('province')
-        ->type('pie')
-        ->size(['width' => 400, 'height' => 300])
-        ->labels($label)
-        ->datasets($dataset)
-        ->options($options);
-    }
-
-    public function chartFoodDistrict()
-    {
-        $label = $this->getLabels($this->getDistrict());
-        $color = $this->getColor(count($label));
-        $dataset = [];
-        foreach($this->getFoodtestkit() as $testkitkey => $testkit){
-            $data = [];
-            foreach($this->getDistrict() as $district){
-                $id = $testkit->id;
-                $data = Arr::prepend($data, Mapdistrict::where('map_district', $district->id)
-                ->whereIn('map_inspectiondetail', function ($query) use ($id) {
-                    $query->select('id')
-                    ->from('inspectiondetails')
-                    ->where('foodtestkit_id', function ($query) use ($id) {
-                        $query->select('id')
-                        ->from('foodtestkits')
-                        ->where('id', $id);
-                    });
-                })
-                ->count());
-            }
-            $datas = [
-                'label' => $testkit->name,
-                'backgroundColor' => $color[$testkitkey],
-                'data' => $data
-            ];
-            $dataset = Arr::prepend($dataset, $datas);
-        }
-        $options = [
-            'title' => [
-                'display' => true,
-                'position' => 'top',
-                'text' => 'กราฟสรุปในระดับอำเภอ',
-                'fontSize' => 24,
-                'fontStyle' => 'bold'
-            ],
-            'legend' => [
-                'display' => true,
-                'position' => 'bottom',
-            ],
-            'tooltips' => [
-                'enabled' => true,
-            ],
-        ];
-
-        return app()->chartjs
-        ->name('district')
-        ->type('bar')
-        ->size(['width' => 400, 'height' => 300])
-        ->labels($label)
-        ->datasets($dataset)
-        ->options($options);
-    }
 
     // MAMBER
 
@@ -371,6 +279,101 @@ class HomeController extends Controller
         ]);
     }
 
+    public function chartFoodProvince()
+    {
+
+        $label = $this->getLabels($this->getFoodtestkit());
+        $color = $this->getColor(count($label));
+        $data = [];
+        foreach($this->getFoodtestkit() as $key => $testkit){
+            $inspectiondetail = $this->getInspectiondetail();
+            $data = Arr::prepend($data, $inspectiondetail->where('foodtestkit_id', $testkit->id)->count());
+        }
+        $dataset = [
+            [
+                'backgroundColor' => $color,
+                'data' => $data
+            ]
+        ];
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับจังหวัด',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('province')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 300])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
+
+    public function chartFoodDistrict()
+    {
+        $label = $this->getLabels($this->getDistrict());
+        $color = $this->getColor(count($label));
+        $dataset = [];
+        foreach($this->getFoodtestkit() as $testkitkey => $testkit){
+            $data = [];
+            foreach($this->getDistrict() as $district){
+                $id = $testkit->id;
+                $data = Arr::prepend($data, Mapdistrict::where('map_district', $district->id)
+                ->whereIn('map_inspectiondetail', function ($query) use ($id) {
+                    $query->select('id')
+                    ->from('inspectiondetails')
+                    ->where('foodtestkit_id', function ($query) use ($id) {
+                        $query->select('id')
+                        ->from('foodtestkits')
+                        ->where('id', $id);
+                    });
+                })
+                ->count());
+            }
+            $datas = [
+                'label' => $testkit->name,
+                'backgroundColor' => $color[$testkitkey],
+                'data' => $data
+            ];
+            $dataset = Arr::prepend($dataset, $datas);
+        }
+        $options = [
+            'title' => [
+                'display' => true,
+                'position' => 'top',
+                'text' => 'กราฟสรุปในระดับอำเภอ',
+                'fontSize' => 24,
+                'fontStyle' => 'bold'
+            ],
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
+            ],
+            'tooltips' => [
+                'enabled' => true,
+            ],
+        ];
+
+        return app()->chartjs
+        ->name('district')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 300])
+        ->labels($label)
+        ->datasets($dataset)
+        ->options($options);
+    }
 
 
     private function getUser()

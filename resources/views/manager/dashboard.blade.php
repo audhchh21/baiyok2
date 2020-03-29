@@ -116,9 +116,9 @@
                         @forelse ($foodtestkids as $testkid)
                         <tr>
                             <td class="text-center">{{ $testkid->name }}</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
+                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
+                            <td class="text-center">{{ number_format(0, 0, '.', ',').'%' }}</td>
                         </tr>
                         @empty
                         <tr>
@@ -143,19 +143,16 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">{{ __('ชุดทดสอบ') }}</th>
-                            @foreach ($districts as $district)
-                            <th class="text-center">{{ $district->name }}</th>
+                            <th class="text-center">{{ __('อำเภอ') }}</th>
+                            @foreach ($foodtestkids as $testkid)
+                            <th class="text-center">{{ $testkid->name }}</th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($foodtestkids as $testkid)
+                        @forelse ($districts as $district)
                         <tr>
-                            <td class="text-center">{{ $testkid->name }}</td>
-                            @foreach ($districts as $district)
                             <td class="text-center">{{ $district->name }}</td>
-                            @endforeach
                         </tr>
                         @empty
                         <tr>
