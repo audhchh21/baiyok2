@@ -3,7 +3,7 @@
 @section('content')
 <header class="text-center mt-3">
     <img src="images/web/logopdf.png" alt="" style="width:155px;height:155px;">
-    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานแผนงานการตรวจสอบสารปนเปื้อนในอาหาร') }}</p>
+    <p style="font-size:24px;font-weight: bold;">{{ __('รายงานตรวจสอบสารปนเปื้อนในระดับอำเภอ') }}</p>
     <p style="font-size:18px;">{{ 'หน่วยงาน '.Auth::user()->offices->name.' '.Auth::user()->offices->Fulladdress }}</p>
 </header>
 <footer class="text-right">
@@ -13,7 +13,7 @@
     <table class="table-bordered mt-2" style="table-layout:fixed; width:100%;">
         <thead>
             <tr>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ร้านค้า') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('ตำบล') }}</th>
                 <th class="text-left px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
                 <th class="text-center px-2 py-1" colspan="{{ $testkits->count() }}">{{ __('ชุดทดสอบสาร') }}</th>
                 <th class="text-center px-2 py-1" rowspan="2">{{ __('วันที่ตรวจบันทึก') }}</th>
@@ -30,7 +30,7 @@
             @foreach ($plans as $plan)
             <tr>
                 <td class="text-left px-2 py-1" style="width:15%;">
-                    {{ $plan->inspectiondetail->inspection->plan->shops->fullname }}</td>
+                    {{ $plan->district->subdistrict->name}}</td>
                 <td class="text-left px-2 py-1" style="width:10%;">{{ $plan->inspectiondetail->foodsample->name }}</td>
                 @foreach ($testkits as $testkit)
                 <td class="text-center px-1 py-1">

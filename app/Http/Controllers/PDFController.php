@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Plan;
 use App\Foodtestkit;
 use App\Mapoffice;
+use App\Mapdistrict;
 use PDF;
 
 class PDFController extends Controller
@@ -81,7 +82,13 @@ class PDFController extends Controller
     //
     public function resultProvince()
     {
-        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $province = request()->province;
+        $plans = Mapdistrict::whereIn('map_district', function ($query) use ($province) {
+            $query->select('id')
+            ->from('districts')
+            ->where('province_id', $province)
+            ->get();
+        })->get();
         $testkits = Foodtestkit::all();
 
         $pdf = PDF::loadView('pdf.manager_inspectiondetail_province', compact('plans', 'testkits'));
@@ -93,10 +100,11 @@ class PDFController extends Controller
     //
     public function resultDistrict()
     {
-        $plans = Mapoffice::where('map_office', auth()->user()->office_id)->get();
+        $district = request()->district;
+        $plans = Mapdistrict::where('map_district', $district)->get();
         $testkits = Foodtestkit::all();
 
-        $pdf = PDF::loadView('pdf.member_plan', compact('plans', 'testkits'));
+        $pdf = PDF::loadView('pdf.manager_inspectiondetail_district', compact('plans', 'testkits'));
         $pdf->getDomPDF()->set_option("enable_php", true);
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream('รายงานตรวจสอบสารปนเปื้อนในระดับอำเภอ.pdf');

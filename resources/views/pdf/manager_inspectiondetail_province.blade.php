@@ -13,7 +13,7 @@
     <table class="table-bordered mt-2" style="table-layout:fixed; width:100%;">
         <thead>
             <tr>
-                <th class="text-left px-2 py-1" rowspan="2">{{ __('ร้านค้า') }}</th>
+                <th class="text-left px-2 py-1" rowspan="2">{{ __('อำเภอ') }}</th>
                 <th class="text-left px-2 py-1" rowspan="2">{{ __('ตัวอย่างอาหาร') }}</th>
                 <th class="text-center px-2 py-1" colspan="{{ $testkits->count() }}">{{ __('ชุดทดสอบสาร') }}</th>
                 <th class="text-center px-2 py-1" rowspan="2">{{ __('วันที่ตรวจบันทึก') }}</th>
@@ -27,11 +27,10 @@
             </tr>
         </thead>
         <tbody>
-            {{ dd($plans) }}
             @foreach ($plans as $plan)
             <tr>
                 <td class="text-left px-2 py-1" style="width:15%;">
-                    {{ $plan->inspectiondetail->inspection->plan->shops->fullname }}</td>
+                    {{ $plan->district->name }}</td>
                 <td class="text-left px-2 py-1" style="width:10%;">{{ $plan->inspectiondetail->foodsample->name }}</td>
                 @foreach ($testkits as $testkit)
                 <td class="text-center px-1 py-1">

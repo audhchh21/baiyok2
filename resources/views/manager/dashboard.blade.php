@@ -103,9 +103,68 @@
         </div>
         <div class="col-12 col-xl-7 mb-3">
             <div class="card h-100">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">{{ __('ชุดทดสอบ') }}</th>
+                            <th class="text-center">{{ __('ตรวจพบ') }}</th>
+                            <th class="text-center">{{ __('ตรวจพบปลอดภัย') }}</th>
+                            <th class="text-center">{{ __('ตรวจไม่พบ') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($foodtestkids as $testkid)
+                        <tr>
+                            <td class="text-center">{{ $testkid->name }}</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="4"></td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-xl-5 mb-3">
+            <div class="card h-100">
                 <div class="card-body">
                     {!! $FoodDistrict->render() !!}
                 </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-7 mb-3">
+            <div class="card h-100">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">{{ __('ชุดทดสอบ') }}</th>
+                            @foreach ($districts as $district)
+                            <th class="text-center">{{ $district->name }}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($foodtestkids as $testkid)
+                        <tr>
+                            <td class="text-center">{{ $testkid->name }}</td>
+                            @foreach ($districts as $district)
+                            <td class="text-center">{{ $district->name }}</td>
+                            @endforeach
+                        </tr>
+                        @empty
+                        <tr>
+                            <td class="text-center" colspan="4"></td>
+                        </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

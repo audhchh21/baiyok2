@@ -114,7 +114,9 @@ class HomeController extends Controller
             'plan_check' => $plan_check,
             'plan_un' => $plan_un,
             'FoodProvince' => $this->chartFoodProvince(),
+            'foodtestkids' => $this->getFoodtestkit(),
             'FoodDistrict' => $this->chartFoodDistrict(),
+            'districts' => $this->getDistrict()
         ]);
     }
 
@@ -219,7 +221,7 @@ class HomeController extends Controller
         return app()->chartjs
         ->name('district')
         ->type('bar')
-        ->size(['width' => 400, 'height' => 200])
+        ->size(['width' => 400, 'height' => 300])
         ->labels($label)
         ->datasets($dataset)
         ->options($options);
