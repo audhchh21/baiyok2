@@ -113,7 +113,14 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        @foreach ($testkids as $testkid)
+                        <tr>
+                            <td class="text-center">{{ $testkid->name }}</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -142,6 +149,9 @@
                         @forelse ($districts as $district)
                         <tr>
                             <td class="text-center">{{ $district->name }}</td>
+                            @foreach ($testkids as $testkid)
+                            <td class="text-center"></td>
+                            @endforeach
                         </tr>
                         @empty
                         <tr>

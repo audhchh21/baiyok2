@@ -13,6 +13,12 @@
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
         href="{{ asset('styles/shards-dashboards.1.1.0.min.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/extras.1.1.0.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Sarabun&display=swap" rel="stylesheet">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+        *{
+            font-family: 'Sarabun', sans-serif;
+        }
+    </style>
     @stack('style')
 </head>

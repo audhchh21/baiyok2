@@ -105,13 +105,8 @@ class HomeController extends Controller
         $testkids = $this->getFoodtestkit();
         $districts = $this->getDistrict();
 
-        $data = [];
-        foreach($testkids as $testkid){
-            $data = Arr::prepend($data, [
-                'name' => $testkid->name,
-            ]);
-        }
 
+        // dd($this->sumchart());
         return view('manager.dashboard', [
             'plan_all' => $plan_all,
             'plan_today' => $plan_today,
@@ -126,6 +121,65 @@ class HomeController extends Controller
 
 
         ]);
+    }
+
+    private function sumchart()
+    {
+        $datas = [];
+        foreach($this->getFoodtestkit() as $testkid) {
+            $testkid_id = $testkid->id;
+            $test1 = Mapdistrict::whereIn('map_district', function ($query){
+                $query->select('province')
+                ->from('offices')
+                ->where('id', auth()->user()->office_id)
+                ->get();
+            })
+            ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
+                $query->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', 1)
+                ->where('inspection_result','0')
+                ->get();
+            })
+            ->count();
+
+            $test2 = Mapdistrict::whereIn('map_district', function ($query) {
+                $query->select('province')
+                ->from('offices')
+                ->where('id', auth()->user()->office_id)
+                ->get();
+            })
+            ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
+                $query->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', 1)
+                ->where('inspection_result','1')
+                ->get();
+            })
+            ->count();
+
+            $test3 = Mapdistrict::whereIn('map_district', function ($query) use ($testkid_id) {
+                $query->select('province')
+                ->from('offices')
+                ->where('id', auth()->user()->office_id)
+                ->get();
+            })
+            ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
+                $query->select('id')
+                ->from('inspectiondetails')
+                ->where('foodtestkit_id', 1)
+                ->where('inspection_result','2')
+                ->get();
+            })
+            ->count();
+
+            $data = [
+                'status0' => $test1,
+                'status1' => $test2,
+                'status2' => $test3,
+            ];
+        }
+        return $datas;
     }
 
     public function managerPDF()
@@ -287,13 +341,49 @@ class HomeController extends Controller
 
     public function chartFoodProvince()
     {
-
-        $label = $this->getLabels($this->getFoodtestkit());
-        $color = $this->getColor(count($label));
-        $datas = [
-            'backgroundColor' => 'rgba(0,0,0,1)',
-            'data' => [1, 2, 3]
-        ];
+        $provinces = Province::where('id', function ($query) {
+            $query->select('province')
+            ->from('offices')
+            ->where('id', auth()->user()->office_id)
+            ->get();
+        })->get();
+        $label = $this->getLabels($provinces);
+        $dataset = [];
+        foreach($this->getFoodtestkit() as $testkitkey => $testkit){
+            $data = [];
+            $colors = $this->getColor(count($this->getFoodtestkit()));
+            foreach($provinces as $province){
+                $testkitid = $testkit->id;
+                $provinceid = $province->id;
+                $data = Arr::prepend($data, Mapdistrict::whereIn('map_district', function ($query) use ($provinceid) {
+                    $query->select('id')
+                    ->from('districts')
+                    ->whereIn('province_id', function ($query) use ($provinceid) {
+                        $query->select('id')
+                        ->from('provinces')
+                        ->where('id', $provinceid)
+                        ->get();
+                    })
+                    ->get();
+                })
+                ->whereIn('map_inspectiondetail', function ($query) use ($testkitid) {
+                    $query->select('id')
+                    ->from('inspectiondetails')
+                    ->where('foodtestkit_id', function ($query) use ($testkitid) {
+                        $query->select('id')
+                        ->from('foodtestkits')
+                        ->where('id', $testkitid);
+                    });
+                })
+                ->count());
+            }
+            $datas = [
+                'label' => $testkit->name,
+                'backgroundColor' => $colors[$testkitkey],
+                'data' => $data
+            ];
+            $dataset = Arr::prepend($dataset, $datas);
+        }
         $options = [
             'title' => [
                 'display' => true,
@@ -312,11 +402,11 @@ class HomeController extends Controller
         ];
 
         return app()->chartjs
-        ->name('province')
+        ->name('ChartProvince')
         ->type('bar')
         ->size(['width' => 400, 'height' => 300])
         ->labels($label)
-        ->datasets($datas)
+        ->datasets($dataset)
         ->options($options);
     }
 
@@ -366,7 +456,7 @@ class HomeController extends Controller
         ];
 
         return app()->chartjs
-        ->name('district')
+        ->name('ChartDistrict')
         ->type('bar')
         ->size(['width' => 400, 'height' => 300])
         ->labels($label)
@@ -393,15 +483,22 @@ class HomeController extends Controller
     {
         $hexcode = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
         $output = [];
-        for($i = 0; $i <= $count; $i++){
+        for($i = 0; $i < $count; $i++){
             $output = Arr::prepend($output, '#'.$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)].$hexcode[rand(0,15)]);
         }
+
+
         return $output;
     }
 
     private function getFoodtestkit()
     {
         return Foodtestkit::all();
+    }
+
+    private function getProvince()
+    {
+        return Province::all();
     }
 
     private function getDistrict()
