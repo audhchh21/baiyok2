@@ -94,71 +94,44 @@
     </div>
     <hr>
     <div class="row mb-3">
-        <div class="col-12 col-xl-5 mb-3">
+        <div class="col-12 col-xl-6 mb-3">
             <div class="card h-100">
                 <div class="card-body">
                     {!! $ChartProvince->render() !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-7 mb-3">
-            <div class="card h-100">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="text-center">{{ __('ชุดทดสอบ') }}</th>
-                            <th class="text-center">{{ __('ตรวจพบ') }}</th>
-                            <th class="text-center">{{ __('ตรวจพบปลอดภัย') }}</th>
-                            <th class="text-center">{{ __('ตรวจไม่พบ') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($testkids as $testkid)
-                        <tr>
-                            <td class="text-center">{{ $testkid->name }}</td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-12 col-xl-5 mb-3">
+        <div class="col-12 col-xl-6 mb-3">
             <div class="card h-100">
                 <div class="card-body">
                     {!! $ChartDistrict->render() !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-7 mb-3">
+
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 col-xl-12 mb-3">
             <div class="card h-100">
+                {{-- {{ dd($sumchart) }} --}}
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center">{{ __('อำเภอ') }}</th>
-                            @foreach ($testkids as $testkid)
-                            <th class="text-center">{{ $testkid->name }}</th>
-                            @endforeach
+                            <th class="text-center">{{ __('ชุดทดสอบ') }}</th>
+                            <th class="text-center">{{ __('ตรวจไม่พบ') }}</th>
+                            <th class="text-center">{{ __('ตรวจพบปลอดภัย') }}</th>
+                            <th class="text-center">{{ __('ตรวจพบไม่ปลอดภัย') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($districts as $district)
+                        @foreach ($sumchart as $testkid)
                         <tr>
-                            <td class="text-center">{{ $district->name }}</td>
-                            @foreach ($testkids as $testkid)
-                            <td class="text-center"></td>
-                            @endforeach
+                            <td class="text-center">{{ $testkid->name }}</td>
+                            <td class="text-center">{{ number_format($testkid->status1, 0, '.', ',').'%' }}</td>
+                            <td class="text-center">{{ number_format($testkid->status2, 0, '.', ',').'%' }}</td>
+                            <td class="text-center">{{ number_format($testkid->status3, 0, '.', ',').'%' }}</td>
                         </tr>
-                        @empty
-                        <tr>
-                            <td class="text-center" colspan="4"></td>
-                        </tr>
-                        @endforelse
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

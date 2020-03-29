@@ -106,7 +106,6 @@ class HomeController extends Controller
         $districts = $this->getDistrict();
 
 
-        // dd($this->sumchart());
         return view('manager.dashboard', [
             'plan_all' => $plan_all,
             'plan_today' => $plan_today,
@@ -119,6 +118,7 @@ class HomeController extends Controller
             'testkids' => $testkids,
             'districts' => $districts,
 
+            'sumchart' => $this->sumchart()
 
         ]);
     }
@@ -128,6 +128,17 @@ class HomeController extends Controller
         $datas = [];
         foreach($this->getFoodtestkit() as $testkid) {
             $testkid_id = $testkid->id;
+            $sumtest = Mapdistrict::whereIn('map_district', function ($query) use ($testkid_id) {
+                $query->select('province')
+                ->from('offices')
+                ->where('id', auth()->user()->office_id)
+                ->get();
+            })
+            ->count();
+            /**
+             *
+             * ไม่พบ
+             */
             $test1 = Mapdistrict::whereIn('map_district', function ($query){
                 $query->select('province')
                 ->from('offices')
@@ -137,12 +148,15 @@ class HomeController extends Controller
             ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
                 $query->select('id')
                 ->from('inspectiondetails')
-                ->where('foodtestkit_id', 1)
-                ->where('inspection_result','0')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','1')
                 ->get();
             })
             ->count();
-
+            /**
+             *
+             * พบ
+             */
             $test2 = Mapdistrict::whereIn('map_district', function ($query) {
                 $query->select('province')
                 ->from('offices')
@@ -152,12 +166,15 @@ class HomeController extends Controller
             ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
                 $query->select('id')
                 ->from('inspectiondetails')
-                ->where('foodtestkit_id', 1)
-                ->where('inspection_result','1')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','2')
                 ->get();
             })
             ->count();
-
+            /**
+             *
+             * พบไม่ปลอดภัย
+             */
             $test3 = Mapdistrict::whereIn('map_district', function ($query) use ($testkid_id) {
                 $query->select('province')
                 ->from('offices')
@@ -167,19 +184,21 @@ class HomeController extends Controller
             ->whereIn('map_inspectiondetail', function ($query) use ($testkid_id) {
                 $query->select('id')
                 ->from('inspectiondetails')
-                ->where('foodtestkit_id', 1)
-                ->where('inspection_result','2')
+                ->where('foodtestkit_id', $testkid_id)
+                ->where('inspection_result','3')
                 ->get();
             })
             ->count();
-
-            $data = [
-                'status0' => $test1,
-                'status1' => $test2,
-                'status2' => $test3,
-            ];
+            $sumfor = $test1+$test2+$test3;
+            $datas = Arr::prepend($datas, [
+                'name' => $testkid->name,
+                'status1' => ($test1 / $sumtest) * 100,
+                'status2' => ($test2 / $sumtest) * 100,
+                'status3' => ($test3 / $sumtest) * 100,
+            ]);
         }
-        return $datas;
+
+        return json_decode (json_encode ($datas), FALSE);
     }
 
     public function managerPDF()
@@ -235,7 +254,7 @@ class HomeController extends Controller
                 ->get();
             })
             ->count();
-            $datas1 = Arr::prepend($datas1, $mapoffice1);
+            //$datas1 = Arr::prepend($datas1, $mapoffice1);
 
             $mapoffice2 = Mapoffice::where('map_office', auth()->user()->office_id)
             ->whereIn('map_inspectiondetail', function ($query2) use ($testkid_id) {
@@ -246,7 +265,7 @@ class HomeController extends Controller
                 ->get();
             })
             ->count();
-            $datas2 = Arr::prepend($datas2, $mapoffice2);
+            //$datas2 = Arr::prepend($datas2, $mapoffice2);
 
             $mapoffice3 = Mapoffice::where('map_office', auth()->user()->office_id)
             ->whereIn('map_inspectiondetail', function ($query3) use ($testkid_id) {
@@ -257,7 +276,14 @@ class HomeController extends Controller
                 ->get();
             })
             ->count();
-            $datas3 = Arr::prepend($datas3, $mapoffice3);
+            //AddNew
+            $sumAmount =  $mapoffice1 + $mapoffice2 + $mapoffice3;
+
+            $datas1 = Arr::prepend($datas1, $sumAmount != 0 ? (($mapoffice1*100)/$sumAmount) : $mapoffice1);
+            $datas2 = Arr::prepend($datas2, $sumAmount != 0 ? (($mapoffice2*100)/$sumAmount) : $mapoffice2);
+            $datas3 = Arr::prepend($datas3, $sumAmount != 0 ? (($mapoffice3*100)/$sumAmount) : $mapoffice3);
+            //End-AddNew
+            //$datas3 = Arr::prepend($datas3, $mapoffice3);
         }
 
         // dd($datas3);
@@ -299,11 +325,33 @@ class HomeController extends Controller
             ]
         ])
         ->options([
+            //Start-AddNew-ConfigChart
+            'scales' => [
+                'yAxes'  => [
+                    'display' => true,
+                    'position' => 'left',
+                    'scaleLabel' => [
+                        'display' => true,
+                        'labelString' => 'percent'
+                    ],
+                    'ticks' => [
+                        'min' => 0,
+                        'max' => 100
+                    ],
+                    'labels' => [
+                        'fontColor' => '#000',
+                        'fontSize' => 16,
+                    ],
+
+                ],
+
+            ],
+            //End-AddNew-ConfigChart
             'title' => [
                 'display' => true,
                 'position' => 'top',
-                'text' => 'กราฟแสดงผลการตรวจพบสารปนเปื้อน',
-                'fontSize' => 18,
+                'text' => 'กราฟแสดงผลการตรวจพบสารปนเปื้อนในอาหาร',
+                'fontSize' => 20,
                 'fontStyle' => 'bold',
                 'fontColor' => '#000',
                 'padding' => 10,
@@ -315,14 +363,15 @@ class HomeController extends Controller
                 'titleFontSize' => 14,
                 'titleFontColor' => '#fff',
                 'titleAlign' => 'left',
-                'bodyFontSize' => 14
+                'bodyFontSize' => 16
             ],
             'legend' => [
                 'display' => 'true',
                 'position' => 'top',
                 'fullWidth' => true,
                 'labels' => [
-                    'fontColor' => '#000'
+                    'fontColor' => '#000',
+                    'fontSize' => 20,
                 ],
             ]
         ]);

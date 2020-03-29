@@ -45,19 +45,10 @@
     </div>
     @endif
     <div class="row mb-3">
-        <div class="col-12 col-xl-7">
+        <div class="col-12 col-xl-12">
             <div class="card h-100">
                 <div class="card-body">
                     {!! $testkidchart->render() !!}
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-xl-5">
-            <div class="card h-100">
-                <div class="card-header">
-                    <span class="h3">{{ __('แผนงานที่ต้องตรวจสอบ') }}</span>
-                </div>
-                <div class="card-body">
                 </div>
             </div>
         </div>
